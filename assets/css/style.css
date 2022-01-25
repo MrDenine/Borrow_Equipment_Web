@@ -45,3 +45,19 @@
     background-color: #174d84;
     color: #fff;
 }
+table.dataTable >thead >tr >th {
+    border-bottom-width: 0;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 15px 15px;
+    vertical-align: middle;
+    padding-left: 18px;
+    text-align: center;
+}
+table.dataTable.no-footer {
+    border-bottom: 1px solid rgb(228, 228, 228);
+}
+.dataTables_length {
+    margin-bottom: 1rem;
+}
+
