@@ -54,6 +54,15 @@ table.dataTable >thead >tr >th {
     padding-left: 18px;
     text-align: center;
 }
+table.dataTable >tbody td {
+    padding: 10px 15px 10px 15px;
+    color: #444444;
+    font-size: 16px;
+    word-break: break-word;
+    border-color: #e8e8e8;
+    text-align: center;
+    vertical-align: middle;
+}
 table.dataTable.no-footer {
     border-bottom: 1px solid rgb(228, 228, 228);
 }
@@ -61,3 +70,6 @@ table.dataTable.no-footer {
     margin-bottom: 1rem;
 }
 
+.row {
+    --bs-gutter-x: 0rem;
+}
