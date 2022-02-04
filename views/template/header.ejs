@@ -16,7 +16,7 @@
 
 
     <!-- title -->
-    <title>Document</title>
+    <title><%- title %></title>
 
 </head>
 <!-- begin body -->
@@ -27,34 +27,41 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-navy-blue shadow-lg">
             <div class="container-xl">
                 <a class="navbar-brand" href="#">
-                    <img src="../../assets/images/swu_icon.png" alt="" style="width: 30px">
+                    <img src="../../assets/images/swu_icon.svg" class="shadow-lg" style="width: 40px;">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item">
+                        <li class="nav-item" id="equipment">
                             <a class="nav-link active" href="#">ข้อมูลครุภัณฑ์</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" id="borrow">
                             <a class="nav-link active" href="#">ทำรายการยืม</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" id="un_borrow">
                             <a class="nav-link active" href="#">ทำรายการคืน</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" id="report">
                             <a class="nav-link active" href="#">รายงาน</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item" id="section">
+                            <a class="nav-link active" href="#">แจ้งเตือน
+                                <span class="position-absolute p-1 ms-1 bg-danger shadow-lg rounded-circle">
+                                     
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown" id="register">
                             <a class="nav-link active dropdown" id="dropdown" data-bs-toggle="dropdown">ลงทะเบียน</a>
                             <ul class="dropdown-menu shadow-sm" aria-labelledby="dropdown">
-                                <li><a class="dropdown-item" href="#">ครุภัณฑ์</a></li>
                                 <li><a class="dropdown-item" href="#">บุคลากร</a></li>
+                                <li><a class="dropdown-item" href="#">ครุภัณฑ์</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">ผู้ดูแลระบบแผนก</a>
+                        <li class="nav-item" id="section">
+                            <a class="nav-link active" href="#">แผนก</a>
                         </li>
                     </ul>
                     <div class="d-flex">
@@ -66,11 +73,16 @@
     </div>
     <!--end navbar -->
 
-    <!--begin background image -->
-    <div>
-        <img src="../../assets/images/bg_image.png" class="img-fluid shadow-sm">
+    <!--begin background cover image -->
+    <div class="position-relative text-center bg-cover-image shadow-sm" style="height: 400px;">
+        <div class="col-md-5">
+            <div class="position-absolute top-50 start-50 translate-middle bg-white p-3 px-4 rounded-3 border border-5 border-secondary shadow-lg" style="min-width: 450px;">
+                <h2 class="fst-italic me-2 my-3">ระบบยืม - คืนครุภัณฑ์ทางการแพทย์</h2>
+                <p class="fst-italic me-2" style="font-size: 17px;">ศูนย์การแพทย์สมเด็จพระเทพรัตนราชสุดา ฯ สยามบรมราชกุมารี</p>
+            </div>
+        </div>
     </div>
-    <!--end background image -->
+    <!--end background cover image -->
 
     <!-- begin container -->
     <div class="container-xl my-3">

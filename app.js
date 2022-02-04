@@ -16,12 +16,14 @@ try {
     var signinRoute = require('./routes/signinRoute');
     var equipmentRoute = require('./routes/equipmentRoute');
     var reportRoute = require('./routes/reportRoute');
+    var borrowRoute = require('./routes/borrowRoute');
 
     //Initial Routes
     app.use('/', indexRoute);
     app.use('/signin', signinRoute);
     app.use('/equipment', equipmentRoute);
     app.use('/report', reportRoute);
+    app.use('/borrow', borrowRoute);
 
     //Listen on port 3000
     app.listen(port, () => console.info(`[SERVER] Listening on port ${port}`));
