@@ -1,0 +1,119 @@
+<%- include('./template/header'); -%>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="row px-2 mb-4">
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5>แสดงข้อมูลการยืม</h5>
+                    <hr class="mb-4">
+                    <table class="table table-striped my-2" id="table_id" style="min-height: 428px;">
+                        <thead class="table-navy-blue">
+                            <tr>
+                                <th class="text-center">วัน / เดือน / ปี</th>
+                                <th class="text-center">รหัสพนักงาน</th>
+                                <th class="text-center">ชื่อ - นามสกุล</th>
+                                <th class="text-center">ยืม</th>
+                                <th class="text-center">เลขครุภัณฑ์</th>
+                                <th class="text-center">ยี่ห้อ</th>
+                                <th class="text-center">รุ่น</th>
+                                <th class="text-center">เวลายืม</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="row px-2 mb-1">
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5>ผู้เบิก</h5>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="col-form-label ms-4 mx-1 px-1">รหัส RFID : </label>
+                            <input type="text" class="form-control rounded-3 me-2">
+                            <div class="btn btn-warning rounded-3">เคลียร์ Tag</div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="col-form-label mx-2">รหัสพนักงาน : </label>
+                            <input type="text" class="form-control rounded-3">
+                        </div>
+                        <div class="input-group mb-2">
+                            <label class="col-form-label ms-1 me-2">ชื่อ - นามสกุล : </label>
+                            <input type="text" class="form-control rounded-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row px-2 mb-1">
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <h5>ข้อมูลครุภัณฑ์ที่เบิก</h5>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <div class="input-group mb-3">
+                            <label class="col-form-label ms-4 mx-1 px-1">รหัส RFID : </label>
+                            <input type="text" class="form-control rounded-3 me-2">
+                            <div class="btn btn-warning rounded-3">เคลียร์ Tag</div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="col-form-label ps-1 ms-3 me-2">ชื่อครุภัณฑ์ : </label>
+                            <input type="text" class="form-control rounded-3">
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="col-form-label ms-3 me-2">เลขครุภัณฑ์ : </label>
+                            <input type="text" class="form-control rounded-3">
+                            <label class="col-form-label mx-2">S/N : </label>
+                            <input type="text" class="form-control rounded-3">
+                        </div>
+                        <div class="input-group mb-2">
+                            <label class="col-form-label ms-5 ps-3 me-2">ยีห้อ : </label>
+                            <input type="text" class="form-control rounded-3">
+                            <label class="col-form-label ms-3 me-2">รุ่น : </label>
+                            <input type="text" class="form-control rounded-3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="btn btn-outline-dark"><i class="fas fa-times me-2"></i>ยกเลิก</div>
+                <div class="btn btn-success "><i class="fas fa-check me-2"></i>เบิกครุภัณฑ์</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./template/footer'); -%>
+
+<script>
+    var Feature = (function(){
+
+        var dataTable = $('#table_id').DataTable({
+            language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์ที่เบิก"},
+            searching: false,
+            lengthChange: false,
+            ordering:false,
+            // iDisplayLength: 10,
+        });
+
+        return {
+            init: function () {
+
+            }
+        }
+    })();
+  
+    jQuery(document).ready(function () {
+      Feature.init();
+      
+    });  
+</script>

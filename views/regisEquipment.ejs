@@ -1,0 +1,149 @@
+<%- include('./template/header'); -%>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="row px-2 mb-1">
+            <div class="row">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h5>ข้อมูลครุภัณฑ์</h5>
+                        <hr class="mb-4">
+                        <div class="row">
+                            <div class="input-group mb-3">
+                                <label class="col-form-label ms-4 mx-1 px-1">รหัส RFID : </label>
+                                <input type="text" class="form-control rounded-3 me-2">
+                                <div class="btn btn-warning rounded-3">เคลียร์ Tag</div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <label class="col-form-label ps-1 ms-3 me-2">ชื่อครุภัณฑ์ : </label>
+                                <input type="text" class="form-control rounded-3">
+                            </div>
+                            <div class="input-group mb-3">
+                                <label class="col-form-label ms-3 me-2">เลขครุภัณฑ์ : </label>
+                                <input type="text" class="form-control rounded-3">
+                                <label class="col-form-label mx-2">S/N : </label>
+                                <input type="text" class="form-control rounded-3">
+                            </div>
+                            <div class="input-group mb-1">
+                                <label class="col-form-label ms-5 ps-3 me-2">ยีห้อ : </label>
+                                <input type="text" class="form-control rounded-3">
+                                <label class="col-form-label ms-3 me-2">รุ่น : </label>
+                                <input type="text" class="form-control rounded-3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="row px-2 mb-1">
+            <div class="row">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h5>จัดการข้อมูล</h5>
+                        <hr class="mb-4">
+                        <div class="row text-center">
+                            <div class="col-lg-12 mb-2">
+                                <div class="btn btn-danger">ลบ</div>
+                                <div class="btn btn-success">บันทึก</div>
+                            </div>
+                            <div class="col-lg-12 mb-2">
+                                <div class="btn btn-warning">แก้ไข</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="row px-2 mb-1">
+            <div class="row">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <table class="table table-striped my-2" id="table_id" style="min-height: 428px;">
+                            <thead class="table-navy-blue">
+                                <tr>
+                                    <th class="text-center">ลำดับ</th>
+                                    <th class="text-center">รหัส RFID</th>
+                                    <th class="text-center">S/N</th>
+                                    <th class="text-center">เลขครุภัณฑ์</th>
+                                    <th class="text-center">ชื่อครุภัณฑ์</th>
+                                    <th class="text-center">ยี่ห้อ</th>
+                                    <th class="text-center">รุ่น</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="row px-2 mb-1">
+            <div class="row">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control rounded-3 me-2">
+                            <div class="btn btn-warning rounded-3">ดูทั้งหมด</div>
+                        </div>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Radios" id="Radios1" value="option1">
+                                <label class="form-check-label" for="Radios1">
+                                    ชื่อครุภัณฑ์
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Radios" id="Radios2" value="option2">
+                                <label class="form-check-label" for="Radios2">
+                                    เลขครุภัณฑ์
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="Radios" id="Radios3" value="option3">
+                                <label class="form-check-label" for="Radios3">
+                                    ยี่ห้อครุภัณฑ์
+                                </label>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./template/footer'); -%>
+
+<script>
+    var Feature = (function(){
+
+        var dataTable = $('#table_id').DataTable({
+            language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์"},
+            searching: false,
+            lengthChange: false,
+            ordering:false,
+            // iDisplayLength: 10,
+        });
+
+        return {
+            init: function () {
+
+            }
+        }
+    })();
+  
+    jQuery(document).ready(function () {
+      Feature.init();
+      
+    });  
+</script>
