@@ -35,6 +35,13 @@
     background-color: #0D3B66;
     color: #fff;
 }
+.bg-danger {
+    background-color: #fb402f !important;
+}
+
+.bg-cover-image {
+    background: url(/assets/images/bg_image.png);
+}
 
 /* button */
 .btn-danger { color: #fff; background-color: #fb402f; border-color: #fb402f; } .btn-danger:hover { color: #fff; background-color: #ad3823; border-color: #ad3823; }
@@ -66,10 +73,13 @@ table.dataTable >tbody td {
 table.dataTable.no-footer {
     border-bottom: 1px solid rgb(228, 228, 228);
 }
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    border-radius: .55rem;
+}
 .dataTables_length {
     margin-bottom: 1rem;
 }
 
 .row {
-    --bs-gutter-x: 0rem;
+    --bs-gutter-x: 0rem; 
 }
