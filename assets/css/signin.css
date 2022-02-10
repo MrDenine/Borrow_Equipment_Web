@@ -59,9 +59,13 @@ img {
     position: relative;
     height: 100vh;
     width: 1194px;
-    background: url("../images/bg-login.jpg") no-repeat center center scroll;
+    background: url("../images/bg-login.png") no-repeat center center scroll;
     background-size: cover;
     float: left;
+    box-shadow: 10px 10px 5px #ccc;
+    -moz-box-shadow: 10px 10px 5px #ccc;
+    -webkit-box-shadow: 10px 10px 5px #ccc;
+    -khtml-box-shadow: 10px 10px 5px #ccc;
     -webkit-animation: bgslide 2.3s forwards;
     animation: bgslide 2.3s forwards;
 }
@@ -238,12 +242,12 @@ img {
 
 @media only screen and (min-width: 1024px) and (max-width: 1680px) {
     .bg-illustration {
-        width: 50%;
+        width: 60%;
         -webkit-animation: none;
         animation: none;
     }
     .login {
-        width: 50%;
+        width: 40%;
     }
 }
 
