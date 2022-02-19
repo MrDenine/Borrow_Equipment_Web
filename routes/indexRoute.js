@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/',(req,res,next)=>{
-    res.render('index');
+    res.render('index',{title:'ข้อมูลครุภัณฑ์'});
 })
 
-router.get('/home',(req,res,next)=>{
-    res.render('home',{data:'home'});
+router.get('/regis', (req, res, next) => {
+    res.render('regisEquipment',{title:'ลงทะเบียนครุภัณฑ์'});
 })
 
 module.exports = router;
