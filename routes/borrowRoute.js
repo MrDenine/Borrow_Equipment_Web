@@ -5,8 +5,8 @@ router.get('/', (req, res, next) => {
     res.render('borrow',{title:'ทำรายการยืม'});
 })
 
-router.get('/un', (req, res, next) => {
-    res.render('un_borrow',{title:'ทำรายการคืน'});
+router.get('/return', (req, res, next) => {
+    res.render('return',{title:'ทำรายการคืน'});
 })
 
 module.exports = router;
