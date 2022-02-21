@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    res.render('member', { title: 'บุคลากร' });
+    res.render('section', { title: 'แผนก' });
 })
 
 module.exports = router;

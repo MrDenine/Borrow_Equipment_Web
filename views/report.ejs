@@ -18,8 +18,8 @@
                             </div>
 
                             <div class="col-xxl-4 mb-3 text-end ">
-                                <div class="btn btn-outline-dark " id=" "><i class="fas fa-times me-2 "></i>ยกเลิก</div>
-                                <div class="btn btn-success " id=" "><i class="fas fa-search me-2 "></i>ค้นหา</div>
+                                <div class="btn btn-outline-dark " id="clear"><i class="fas fa-times me-2 "></i>ยกเลิก</div>
+                                <div class="btn btn-success " id="search"><i class="fas fa-search me-2 "></i>ค้นหา</div>
                             </div>
                         </div>
                     </div>
@@ -176,8 +176,36 @@
                 });
 
                 return {
-                    init: function() {
+                    searchData: function() {
+                        $('#search').on('click', function(e) {
+                            var startData = $('#start_date').val();
+                            var endData = $('#end_date').val();
+                            console.log(startData);
+                            var sData = Date.parse(startData);
+                            var eData = Date.parse(endData);
+                            console.log(sData);
+                            if (sData < eData) {
+                                console.log("true");
+                                window.location = '/report?startDate=' + startData + '&endDate=' + endData;
 
+                            } else {
+                                console.log("false");
+                                Swal.fire({
+                                    title: "ไม่สามารถค้นหาได้",
+                                    text: "กรุณาใส่วันที่ค้นหาให้ถูกต้อง",
+                                    icon: "warning"
+                                });
+                            }
+                            // window.location = '/?startDate=' + startData + '&endDate=' + endData;
+
+                        });
+                        $('#clear').on('click', function(e) {
+                            $('#start_date').val('');
+                            $('#end_date').val('');
+                        });
+                    },
+                    init: function() {
+                        Feature.searchData();
                     }
                 }
             })();
