@@ -12,7 +12,7 @@
     border-radius: .25rem;
 }
 /* form input */
-.form-control:disabled, .form-control[readonly] {
+.form-control:disabled, .form-select:disabled, .form-control[readonly] {
     background-color: #ffffff;
     opacity: 1;
 }
