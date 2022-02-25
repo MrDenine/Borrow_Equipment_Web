@@ -5,5 +5,4 @@ module.exports = {
         const {cookies} = req;
         return JSON.parse(encrypt_decrypt_tools.decrypt(cookies.UDT));
     }
-    
 }

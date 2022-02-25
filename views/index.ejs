@@ -9,11 +9,11 @@
                 <div class="card-body pb-0">
                     <div class="row">
                         <div class="col-xxl-8 mb-3">
-                            <input type="text" class="form-control" placeholder="ค้นหาข้อมูลครุภัณฑ์">
+                            <input type="text" class="form-control" id="equipmentSearch" placeholder="ค้นหาข้อมูลครุภัณฑ์">
                         </div>
                         <div class="col-xxl-4 mb-3 text-end">
-                            <div class="btn btn-outline-dark" id=""><i class="fas fa-times me-2"></i>ยกเลิก</div>
-                            <div class="btn btn-success" id=""><i class="fas fa-search me-2"></i>ค้นหา</div>
+                            <div class="btn btn-outline-secondary" id="clear"><i class="fas fa-times me-2"></i>ยกเลิก</div>
+                            <div class="btn btn-success" id="search"><i class="fas fa-search me-2"></i>ค้นหา</div>
                         </div>
                     </div>
                 </div>
@@ -143,8 +143,17 @@
         });
 
         return {
+            searchData: function () {
+                $('#search').on('click', function (e) {
+                    var equipmentSearch = $('#equipmentSearch').val();
+                        window.location = '/?search=' + equipmentSearch;
+                });
+                $('#clear').on('click', function (e) {
+                    $('#equipmentSearch').val('');
+                });
+            },
             init: function () {
-
+                Feature.searchData();
             }
         }
     })();

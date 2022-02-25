@@ -11,7 +11,11 @@
 .dropdown-menu .dropdown-item {
     border-radius: .25rem;
 }
-
+/* form input */
+.form-control:disabled, .form-select:disabled, .form-control[readonly] {
+    background-color: #ffffff;
+    opacity: 1;
+}
 /* navbar */
 .nav-item {
     margin-left: 10px;
