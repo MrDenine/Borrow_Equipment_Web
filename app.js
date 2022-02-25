@@ -20,6 +20,7 @@ try {
     var regisEquipmentRoute = require('./routes/regisEquipmentRoute');
     var regisMemberRoute = require('./routes/regisMemberRoute');
     var departmentRoute = require('./routes/departmentRoute');
+    var notificationRoute = require('./routes/notificationRoute');
 
     //Initial Routes
     app.use('/', indexRoute);
@@ -29,7 +30,8 @@ try {
     app.use('/return', returnRoute);
     app.use('/regisEquipment', regisEquipmentRoute);
     app.use('/regisMember', regisMemberRoute);
-    app.use('/department',departmentRoute)
+    app.use('/department', departmentRoute);
+    app.use('/notification', notificationRoute);
 
     //Listen on port [config.port = 8000]
     app.listen(config.port, () => console.info(`[SERVER] Listening on port ${config.port}`));
