@@ -1,6 +1,6 @@
 const express = require('express');
+const config = require('./config');
 const app = express();
-const port = 8000;
 
 try {
     //Static File
@@ -17,9 +17,9 @@ try {
     var reportRoute = require('./routes/reportRoute');
     var borrowRoute = require('./routes/borrowRoute');
     var returnRoute = require('./routes/returnRoute');
-    var sectionRoute = require('./routes/sectionRoute');
-    var regisEquipment = require('./routes/regisEquipmentRoute');
-    var regisMember = require('./routes/regisMemberRoute');
+    var regisEquipmentRoute = require('./routes/regisEquipmentRoute');
+    var regisMemberRoute = require('./routes/regisMemberRoute');
+    var departmentRoute = require('./routes/departmentRoute');
 
     //Initial Routes
     app.use('/', indexRoute);
@@ -27,12 +27,12 @@ try {
     app.use('/report', reportRoute);
     app.use('/borrow', borrowRoute);
     app.use('/return', returnRoute);
-    app.use('/section', sectionRoute);
-    app.use('/regisEquipment', regisEquipment);
-    app.use('/regisMember', regisMember);
+    app.use('/regisEquipment', regisEquipmentRoute);
+    app.use('/regisMember', regisMemberRoute);
+    app.use('/department',departmentRoute)
 
-    //Listen on port 3000
-    app.listen(port, () => console.info(`[SERVER] Listening on port ${port}`));
+    //Listen on port [config.port = 8000]
+    app.listen(config.port, () => console.info(`[SERVER] Listening on port ${config.port}`));
 
     module.exports = app;
 } catch (e) {

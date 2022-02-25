@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const algorithm = 'aes-256-ctr';
-const key = "6fa979f20126cb08aa645a8f495f6d85";
-const iv = '77895ad36a5d0126';
+const key = "9fa979f20196cb09aa695a8f995f6d85";
+const iv = '15785ad36a5d9485';
 // const iv = crypto.randomBytes(16);
 
 
