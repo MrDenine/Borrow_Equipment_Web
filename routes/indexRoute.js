@@ -14,18 +14,18 @@ router.get('/',(req,res,next)=>{
     res.render('index',{title:'ข้อมูลครุภัณฑ์'});
 })
 
-// router.post('/search',(req,res,next)=>{
-//     axios
-//       .post(config.servurl +'',{
-
-//       })    
-//       .then((response)=>{
-//         res.status(200).send(response); 
-//         return;
-//       })
-//       .catch(function (error) {
-//         res.status(400).send(error); 
-//         return;
-//     });
-// })
+router.post('/search/:id',(req,res,next)=>{
+    var post_index = req.params.id;
+    axios.get(config.servurl+'/GetData/DataEquipAll/'+post_index
+      )
+      .then(function (response) {
+        res.send(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });  
+})
 module.exports = router;
