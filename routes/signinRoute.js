@@ -17,34 +17,35 @@ router.get('/',accessCookieExist, (req, res, next) => {
 })
 
 router.post('/PostSignin',function(req,res,next){
-    var username = req.body.Username; 
-    var password = req.body.Password;
+    var username = 'admin116'; 
+    var password = '12345';
+    // var username = req.body.Username; 
+    // var password = req.body.Password;
     if(username && password){
         //call postLogin
         axios
         .post(config.servurl + '/Login/PostLogin',{
-            email : username,
+            username : username,
             password : password,
         })
         .then(function (response) {
             if(response.data.status == "Succeed"){
-                //call getUserdata
-                axios
-                .get(config.servurl + '/GetDataUser/'+ response.data.data[0].id)
-                .then(function(response){
-                    //get userdata
-                    userdata = response.data.data[0];
-                    userdata_enc = encrypt_decrypt_tools.encrypt(JSON.stringify(response.data.data[0]));
-                    
-                    // //setCookie
-                    res.cookie('UDT', userdata_enc, config.cookie_options);
-                    res.status(200).send(response.data);
-                    return;
-                })
-                .catch(function(response){
-                    res.status(400).send(response.data);
-                    return;
-                });
+                //get userdata
+                userdata = response.data.data[0];
+                
+                if(response.data.data[0].username.includes("admin")){
+                    userdata.role = 'admin';
+                }else if(response.data.data[0].username.includes("dpm")){
+                    userdata.role = 'dpm';
+                }else{
+                    userdata.role = 'member';
+                }
+                userdata_enc = encrypt_decrypt_tools.encrypt(JSON.stringify(userdata));
+                //setCookie
+                res.cookie('UDT', userdata_enc, config.cookie_options);
+                
+                res.status(200).send(response.data);
+                return;
             } else {
                 res.status(200).send(response.data); //echo
                 return;
