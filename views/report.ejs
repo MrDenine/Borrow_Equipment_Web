@@ -1,14 +1,15 @@
 <%- include('./template/header'); -%>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
 
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <div class="col-lg-12">
                 <div class="card shadow-sm mb-3">
                     <div class="card-body pb-0">
                         <div class="row">
+
                             <div class="col-xxl-8 mb-3">
                                 <div class="input-group ">
                                     <input type="datetime" id="start_date" class="form-control " placeholder="เริมต้น " aria-label="start-date ">
@@ -18,9 +19,36 @@
                             </div>
 
                             <div class="col-xxl-4 mb-3 text-end ">
-                                <div class="btn btn-outline-dark " id="clear"><i class="fas fa-times me-2 "></i>ยกเลิก</div>
+                                <div class="btn btn-outline-secondary " id="clear"><i class="fas fa-times me-2 "></i>ยกเลิก</div>
                                 <div class="btn btn-success " id="search"><i class="fas fa-search me-2 "></i>ค้นหา</div>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xxl-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      รายการทั้งหมด
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xxl-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      รายการยืม
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xxl-2 mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                      รายการคืน
+                                    </label>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
