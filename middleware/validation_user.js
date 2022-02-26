@@ -14,7 +14,27 @@ module.exports = {
     validateAdminRoute:function(req,res,next){
         const {cookies} = req;
         var user_data = JSON.parse(encrypt_decrypt_tools.decrypt(cookies.UDT));
-        if(user_data.role == 2){
+        if(user_data.role === 'admin'){
+            next();
+        }else{
+            res.status(404).send('404');
+            return;
+        }
+    },
+    validateDpmRoute:function(req,res,next){
+        const {cookies} = req;
+        var user_data = JSON.parse(encrypt_decrypt_tools.decrypt(cookies.UDT));
+        if(user_data.role === 'dpm'){
+            next();
+        }else{
+            res.status(404).send('404');
+            return;
+        }
+    },
+    validateMemberRoute:function(req,res,next){
+        const {cookies} = req;
+        var user_data = JSON.parse(encrypt_decrypt_tools.decrypt(cookies.UDT));
+        if(user_data.role === 'member'){
             next();
         }else{
             res.status(404).send('404');
