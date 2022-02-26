@@ -8,6 +8,9 @@ const encrypt_decrypt_tools = require('../utils/encrypt_decrypt_tools');
 const { response } = require('../app');
 const {validateCookieExist} = require('../middleware/validation_user');
 const {validateAdminRoute} = require('../middleware/validation_user');
+const {validateDpmRoute} = require('../middleware/validation_user');
+const {validateMemberRoute} = require('../middleware/validation_user');
+
 
 router.use(bodyParser.urlencoded({extended : false}));
 router.use(bodyParser.json());
