@@ -5,7 +5,7 @@ module.exports = {
     accessCookieExist : function (req,res,next){
         const {cookies} = req;
         if(Object.keys(cookies).length > 0){
-            res.status(200).redirect(config.weburl + 'dashboard');
+            res.status(200).redirect(config.weburl);
             return;
         }else{
             next();
@@ -26,7 +26,7 @@ module.exports = {
         if(Object.keys(cookies).length > 0){
             next();
         }else{
-            res.status(200).redirect(config.weburl);
+            res.status(200).redirect(config.weburl + 'signin');
             return;
         }
     }
