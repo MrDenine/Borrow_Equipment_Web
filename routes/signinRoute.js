@@ -17,10 +17,10 @@ router.get('/',accessCookieExist, (req, res, next) => {
 })
 
 router.post('/PostSignin',function(req,res,next){
-    var username = 'admin116'; 
-    var password = '12345';
-    // var username = req.body.Username; 
-    // var password = req.body.Password;
+    // var username = 'admin116'; 
+    // var password = '12345';
+    var username = req.body.Username; 
+    var password = req.body.Password;
     if(username && password){
         //call postLogin
         axios
