@@ -21,6 +21,8 @@ router.post('/PostSignin',function(req,res,next){
     // var password = '12345';
     var username = req.body.Username; 
     var password = req.body.Password;
+
+
     if(username && password){
         //call postLogin
         axios
@@ -55,6 +57,9 @@ router.post('/PostSignin',function(req,res,next){
             res.status(400).send(error); 
             return;
         });
+    } else {
+        res.status(400).send('bad request'); //echo
+        return;
     }
 })
 
