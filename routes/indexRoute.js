@@ -23,7 +23,7 @@ router.get('/',validateCookieExist,validateMemberRoute,(req,res,next)=>{
 router.post('/search',(req,res,next)=>{
     var search = req.body.search;
     if(!search || search === '' ){
-      axios.get(config.servurl+'/GetData/DataEquipAll/'
+      axios.get(config.servurl+'/GetData/DataEquipRemain/'
       )
       .then(function (response) {
         res.send(response.data.data);
@@ -33,7 +33,7 @@ router.post('/search',(req,res,next)=>{
         console.log(error);
       })
     } else {
-      axios.post(config.servurl+'/GetData/DataEquipAll/',{
+      axios.post(config.servurl+'/Search/EquipRemain/',{
         search_value : search
       })
       .then(function (response) {
