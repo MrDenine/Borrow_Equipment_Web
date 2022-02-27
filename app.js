@@ -3,38 +3,43 @@ const config = require('./config');
 const app = express();
 
 try {
-    //Static File
-    app.use(express.static('public'));
-    app.use('/', express.static(__dirname));
-
-    //Set Views engine
-    app.set('views', './views');
-    app.set('view engine', 'ejs');
-
-    //Setup Routes
-    var indexRoute = require('./routes/indexRoute');
-    var signinRoute = require('./routes/signinRoute');
-    var reportRoute = require('./routes/reportRoute');
-    var borrowRoute = require('./routes/borrowRoute');
-    var returnRoute = require('./routes/returnRoute');
-    var regisEquipmentRoute = require('./routes/regisEquipmentRoute');
-    var regisMemberRoute = require('./routes/regisMemberRoute');
-    var departmentRoute = require('./routes/departmentRoute');
-    var notificationRoute = require('./routes/notificationRoute');
-
-    //Initial Routes
-    app.use('/', indexRoute);
-    app.use('/signin', signinRoute);
-    app.use('/report', reportRoute);
-    app.use('/borrow', borrowRoute);
-    app.use('/return', returnRoute);
-    app.use('/regisEquipment', regisEquipmentRoute);
-    app.use('/regisMember', regisMemberRoute);
-    app.use('/department', departmentRoute);
-    app.use('/notification', notificationRoute);
-
     //Listen on port [config.port = 8000]
-    app.listen(config.port, () => console.info(`[SERVER] Listening on port ${config.port}`));
+    app.listen(config.port, 
+        function(){
+            console.info(`[SERVER] Listening on port ${config.port}`)
+
+            //Static File
+            app.use(express.static('public'));
+            app.use('/', express.static(__dirname));
+
+            //Set Views engine
+            app.set('views', './views');
+            app.set('view engine', 'ejs');
+
+            //Setup Routes
+            var indexRoute = require('./routes/indexRoute');
+            var signinRoute = require('./routes/signinRoute');
+            var reportRoute = require('./routes/reportRoute');
+            var borrowRoute = require('./routes/borrowRoute');
+            var returnRoute = require('./routes/returnRoute');
+            var regisEquipmentRoute = require('./routes/regisEquipmentRoute');
+            var regisMemberRoute = require('./routes/regisMemberRoute');
+            var departmentRoute = require('./routes/departmentRoute');
+            var notificationRoute = require('./routes/notificationRoute');
+
+            //Initial Routes
+            app.use('/', indexRoute);
+            app.use('/signin', signinRoute);
+            app.use('/report', reportRoute);
+            app.use('/borrow', borrowRoute);
+            app.use('/return', returnRoute);
+            app.use('/regisEquipment', regisEquipmentRoute);
+            app.use('/regisMember', regisMemberRoute);
+            app.use('/department', departmentRoute);
+            app.use('/notification', notificationRoute);
+
+        }
+    );
 
     module.exports = app;
 } catch (e) {
