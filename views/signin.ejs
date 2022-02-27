@@ -55,8 +55,8 @@
             login: function() {
 
                 $('#login').on('click', function(e) {
-                    var username = $("#username ").val();
-                    var password = $("#password ").val();
+                    var username = $("#username").val();
+                    var password = $("#password").val();
                     // Checking for blank fields.
                     if (username == '' || password == '') {
                         $('input[type="text "],input[type="password "]').css("border ", "2px solid red ");
@@ -69,23 +69,23 @@
                                 type: 'POST',
                                 url: url,
                                 data: {
-                                    Username: $("#username ").val(),
-                                    Password: $("#password ").val()
+                                    Username: $("#username").val(),
+                                    Password: $("#password").val()
                                 },
 
                             })
                             .done(function(response) {
-                                if (response["status "] == "Succeed ") {
+                                if (response["status"] == "Succeed") {
                                     console.log(response);
                                     window.location = '/';
-                                } else if (response["status "] == "Failed ") {
-                                    if (response["data "] == "Incorrect username ") {
+                                } else if (response["status"] == "Failed") {
+                                    if (response["data"] == "Incorrect username") {
                                         Swal.fire({
-                                            title: "ไม่สามารถเข้าสู่ระบบได้ ",
+                                            title: "ไม่สามารถเข้าสู่ระบบได้",
                                             text: "ชื่อผู้ใช้ของท่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง ",
                                             icon: "warning "
                                         });
-                                    } else if (response["data "] == "Incorrect password ") {
+                                    } else if (response["data"] == "Incorrect password") {
                                         Swal.fire({
                                             title: "ไม่สามารถเข้าสู่ระบบได้ ",
                                             text: "รหัสผ่านของท่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง ",
