@@ -78,9 +78,18 @@
                     bAutoWidth: false,
                     columns: [{
                         data: function(data) {
-                            return data['borrow_date'];
+                            var date_data = data['borrow_date'];
+                            var date = new Date(date_data);
+                            var day = new Date().toLocaleString('th', {
+                                timeZone: 'Asia/Jakarta'
+                            });
+
+                            var _day = day.split(" ");
+                            return _day[0];
+                            console.log(str);
+
                         },
-                        className: 'text-center',
+                        className: '',
                     }, {
                         data: function(data) {
                             return data['id'];
@@ -103,7 +112,18 @@
                         className: 'text-center',
                     }, {
                         data: function(data) {
-                            return data['return_date'];
+                            var date_data = data['borrow_date'];
+                            var date = new Date(date_data);
+                            var day = new Date().toLocaleString('th', {
+                                timeZone: 'Asia/Jakarta'
+                            });
+
+                            var _day = day.split(" ");
+                            var time = _day[1];
+                            var timer = time.split(":");
+                            return timer[0] + ":" + timer[1] + " น.";
+
+                            console.log(str);
                         },
                         className: 'text-center',
                     }, {
@@ -113,6 +133,11 @@
                         className: 'text-center',
                     }, {
                         data: function(data) {
+                            if (data['status'] == "1") {
+                                return "คืนเเล้ว";
+                            } else if (data['status'] == "0") {
+                                return "กำลังยืม";
+                            }
                             return data['status'];
                         },
                         className: 'text-center',
