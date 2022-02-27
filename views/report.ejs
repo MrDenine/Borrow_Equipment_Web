@@ -1,27 +1,36 @@
 <%- include('./template/header'); -%>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
 
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <div class="col-lg-12">
                 <div class="card shadow-sm mb-3">
                     <div class="card-body pb-0">
                         <div class="row">
+
                             <div class="col-xxl-8 mb-3">
-                                <div class="input-group ">
-                                    <input type="datetime" id="start_date" class="form-control " placeholder="เริมต้น " aria-label="start-date ">
+
+                                <div class="input-group rounded">
+                                    <select class="form-select me-3 rounded" aria-label=".form-select-sm example">
+                                        <option selected>เลือก...</option>
+                                        <option value="1">รายการทั้งหมด</option>
+                                        <option value="2">รายการยืม</option>
+                                        <option value="3">รายการคืน</option>
+                                    </select>
+                                    <input type="datetime" id="start_date" class="form-control rounded" placeholder="เริมต้น " aria-label="start-date ">
                                     <span class="input-group-text ">ถึง</span>
                                     <input type="datetime " id="end_date" class="form-control " placeholder="สิ้นสุด " aria-label="enddate ">
                                 </div>
                             </div>
 
                             <div class="col-xxl-4 mb-3 text-end ">
-                                <div class="btn btn-outline-dark " id="clear"><i class="fas fa-times me-2 "></i>ยกเลิก</div>
+                                <div class="btn btn-outline-secondary " id="clear"><i class="fas fa-times me-2 "></i>ยกเลิก</div>
                                 <div class="btn btn-success " id="search"><i class="fas fa-search me-2 "></i>ค้นหา</div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -46,116 +55,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="text-center ">1/01/2022</td>
-                                <td class="text-center ">00001</td>
-                                <td class="text-center ">สมพง ทองดี</td>
-                                <td class="text-center ">1</td>
-                                <td class="text-center ">JUL-882</td>
-                                <td class="text-center ">00:00:00</td>
-                                <td class="text-center ">ชื่อแผลก</td>
-                                <!-- <td class="text-center ">alert</td> -->
-                                <td class="text-center ">กำลังยืม</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">1/01/2022</td>
-                                <td class="text-center ">00002</td>
-                                <td class="text-center ">สมพง ทองดำ</td>
-                                <td class="text-center ">1</td>
-                                <td class="text-center ">JUL-882</td>
-                                <td class="text-center ">00:00:00</td>
-                                <td class="text-center ">ชื่อแผลก</td>
-                                <!-- <td class="text-center ">alert</td> -->
-                                <td class="text-center ">กำลังยืม</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">1/01/2022</td>
-                                <td class="text-center ">00003</td>
-                                <td class="text-center ">สมพง ทองคำ</td>
-                                <td class="text-center ">1</td>
-                                <td class="text-center ">JUL-882</td>
-                                <td class="text-center ">00:00:00</td>
-                                <td class="text-center ">ชื่อแผลก</td>
-                                <!-- <td class="text-center ">alert</td> -->
-                                <td class="text-center ">กำลังยืม</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">1/01/2022</td>
-                                <td class="text-center ">00004</td>
-                                <td class="text-center ">สมพง ทองแดง</td>
-                                <td class="text-center ">1</td>
-                                <td class="text-center ">JUL-882</td>
-                                <td class="text-center ">00:00:00</td>
-                                <td class="text-center ">ชื่อแผลก</td>
-                                <!-- <td class="text-center ">alert</td> -->
-                                <td class="text-center ">กำลังยืม</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">1/01/2022</td>
-                                <td class="text-center ">00005</td>
-                                <td class="text-center ">สมพง ทองเดือด</td>
-                                <td class="text-center ">1</td>
-                                <td class="text-center ">JUL-882</td>
-                                <td class="text-center ">00:00:00</td>
-                                <td class="text-center ">ชื่อแผลก</td>
-                                <!-- <td class="text-center ">alert</td> -->
-                                <td class="text-center ">กำลังยืม</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">1/01/2022</td>
-                                <td class="text-center ">00006</td>
-                                <td class="text-center ">สมพง ทองแท้</td>
-                                <td class="text-center ">1</td>
-                                <td class="text-center ">JUL-882</td>
-                                <td class="text-center ">00:00:00</td>
-                                <td class="text-center ">ชื่อแผลก</td>
-                                <!-- <td class="text-center ">alert</td> -->
-                                <td class="text-center ">กำลังยืม</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">1/01/2022</td>
-                                <td class="text-center ">00007</td>
-                                <td class="text-center ">สมพง ทองม้วน</td>
-                                <td class="text-center ">1</td>
-                                <td class="text-center ">JUL-882</td>
-                                <td class="text-center ">00:00:00</td>
-                                <td class="text-center ">ชื่อแผลก</td>
-                                <!-- <td class="text-center ">alert</td> -->
-                                <td class="text-center ">กำลังยืม</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">1/01/2022</td>
-                                <td class="text-center ">00008</td>
-                                <td class="text-center ">สมพง ทองหยิบ</td>
-                                <td class="text-center ">1</td>
-                                <td class="text-center ">JUL-882</td>
-                                <td class="text-center ">00:00:00</td>
-                                <td class="text-center ">ชื่อแผลก</td>
-                                <!-- <td class="text-center ">alert</td> -->
-                                <td class="text-center ">กำลังยืม</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">1/01/2022</td>
-                                <td class="text-center ">00009</td>
-                                <td class="text-center ">สมพง ทองหยอด</td>
-                                <td class="text-center ">1</td>
-                                <td class="text-center ">JUL-882</td>
-                                <td class="text-center ">00:00:00</td>
-                                <td class="text-center ">ชื่อแผลก</td>
-                                <!-- <td class="text-center ">alert</td> -->
-                                <td class="text-center ">กำลังยืม</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">1/01/2022</td>
-                                <td class="text-center ">00010</td>
-                                <td class="text-center ">สมพง ทองประกาย</td>
-                                <td class="text-center ">1</td>
-                                <td class="text-center ">JUL-882</td>
-                                <td class="text-center ">00:00:00</td>
-                                <td class="text-center ">ชื่อแผลก</td>
-                                <!-- <td class="text-center ">alert</td> -->
-                                <td class="text-center ">กำลังยืม</td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -171,8 +71,81 @@
                 var endDate = $('#end_date').datepicker();
                 var dataTable = $('#table_id').DataTable({
                     searching: false,
+                    responsive: true,
+                    ordering: false,
                     lengthChange: false,
                     iDisplayLength: 10,
+                    bAutoWidth: false,
+                    columns: [{
+                        data: function(data) {
+                            return data['borrow_date'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['id'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['firstname'] + '  ' + data['lastname'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['equipment_name'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['equipment_number'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['return_date'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['department_name'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['status'];
+                        },
+                        className: 'text-center',
+                    }],
+                    serverSide: true,
+                    ajaxSource: '/report/search',
+                    serverData: function(sSource, aaData, fnCallback, oSettings) {
+                        aaData.push({
+                            "name": "typeSearch",
+                            "value": ""
+                        });
+                        aaData.push({
+                            "name": "firstDate",
+                            "value": ""
+                        });
+                        aaData.push({
+                            "name": "untilDate",
+                            "value": ""
+                        });
+                        oSettings.jqXHR = $.ajax({
+                            dataType: 'json',
+                            type: "POST",
+                            url: sSource,
+                            data: aaData,
+                            success: function(response) {
+                                console.log(response);
+
+                                fnCallback(response);
+
+                            }
+                        });
+                    },
+                    createdRow: function(row, data, index) {}
                 });
 
                 return {
