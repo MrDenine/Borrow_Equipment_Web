@@ -12,7 +12,7 @@ const {validateMemberRoute} = require('../middleware/validation_user');
 const {getUserRole} = require('../utils/initial_data_tools');
 const {getUserData} = require('../utils/initial_data_tools');
 
-router.use(bodyParser.urlencoded({extended : false}));
+router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.use(cookieParser());
 
@@ -20,7 +20,7 @@ router.get('/',validateCookieExist,(req,res,next)=>{
     res.render('index',{title:'ข้อมูลครุภัณฑ์' ,udt : getUserData(req) , role : getUserRole(req)});
 })
 
-router.post('/search',(req,res,next)=>{
+router.post('/search', (req, res, next) => {
     var search = req.body.search;
     if(search){
       axios.post(config.servurl+'/GetData/DataEquipRemain',{

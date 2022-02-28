@@ -12,7 +12,7 @@ const {validateMemberRoute} = require('../middleware/validation_user');
 const {getUserRole} = require('../utils/initial_data_tools');
 const {getUserData} = require('../utils/initial_data_tools');
 
-router.use(bodyParser.urlencoded({extended : false}));
+router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.use(cookieParser());
 
