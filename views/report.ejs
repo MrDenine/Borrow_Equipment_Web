@@ -13,8 +13,8 @@
                             <div class="col-xxl-8 mb-3">
 
                                 <div class="input-group rounded">
-                                    <select class="form-select me-3 rounded" aria-label=".form-select-sm example">
-                                        <option selected>เลือก...</option>
+                                    <select class="form-select me-3 rounded" aria-label=".form-select-sm example" name="typeSearch" id="typeSearch">
+                                        <option selected value="0">เลือก...</option>
                                         <option value="1">รายการทั้งหมด</option>
                                         <option value="2">รายการยืม</option>
                                         <option value="3">รายการคืน</option>
@@ -69,6 +69,10 @@
             var Feature = (function() {
                 var startDate = $('#start_date').datepicker();
                 var endDate = $('#end_date').datepicker();
+                var type_search = "0";
+                var start_data = "";
+                var end_data = "";
+                console.log(end_data);
                 var dataTable = $('#table_id').DataTable({
                     searching: false,
                     responsive: true,
@@ -147,15 +151,15 @@
                     serverData: function(sSource, aaData, fnCallback, oSettings) {
                         aaData.push({
                             "name": "typeSearch",
-                            "value": ""
+                            "value": type_search
                         });
                         aaData.push({
                             "name": "firstDate",
-                            "value": ""
+                            "value": start_data
                         });
                         aaData.push({
                             "name": "untilDate",
-                            "value": ""
+                            "value": end_data
                         });
                         oSettings.jqXHR = $.ajax({
                             dataType: 'json',
@@ -176,17 +180,30 @@
                 return {
                     searchData: function() {
                         $('#search').on('click', function(e) {
+                            var select_search = $('#typeSearch').val();
+                            // console.log(select_search);
                             var startData = $('#start_date').val();
                             var endData = $('#end_date').val();
-                            console.log(startData);
+                            // console.log(startData);
                             var sData = Date.parse(startData);
                             var eData = Date.parse(endData);
-                            console.log(sData);
+                            // console.log(sData);
                             if (sData < eData) {
                                 console.log("true");
-                                window.location = '/report?startDate=' + startData + '&endDate=' + endData;
+                                type_search = select_search;
+                                var s_data = startData.split("/");
+                                start_data = s_data[2] + "-" + s_data[0] + "-" + s_data[1] + " " + "00:00:00"
+                                    // console.log(start_data);
+                                var e_data = endData.split("/");
+                                end_data = e_data[2] + "-" + e_data[0] + "-" + e_data[1] + " " + "00:00:00"
+                                    // console.log(end_data);
 
+                                // window.location = '/report?startDate=' + startData + '&endDate=' + endData;
+                                dataTable.ajax.reload();
                             } else {
+                                type_search = select_search;
+                                start_data = "";
+                                end_data = "";
                                 console.log("false");
                                 Swal.fire({
                                     title: "ไม่สามารถค้นหาได้",
