@@ -52,8 +52,12 @@
 
         <script>
             var Feature = (function() {
-                var startDate = $('#start_date').datepicker();
-                var endDate = $('#end_date').datepicker();
+
+                var today = new Date();
+                var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var dateTime = date + " " + time;
+                console.log(dateTime);
                 var dataTable = $('#table_id').DataTable({
                     searching: false,
                     responsive: true,
@@ -98,15 +102,15 @@
                     serverData: function(sSource, aaData, fnCallback, oSettings) {
                         aaData.push({
                             "name": "rfid",
-                            "value": "3"
+                            "value": "1234567890"
                         });
                         aaData.push({
                             "name": "dpmID",
-                            "value": "1"
+                            "value": "2"
                         });
                         aaData.push({
                             "name": "datetime",
-                            "value": "2022-02-24 11:27:16"
+                            "value": dateTime
                         });
                         oSettings.jqXHR = $.ajax({
                             dataType: 'json',
