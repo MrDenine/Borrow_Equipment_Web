@@ -82,14 +82,11 @@
                     bAutoWidth: false,
                     columns: [{
                         data: function(data) {
-                            var date_data = data['borrow_date'];
-                            var date = new Date(date_data);
-                            var day = new Date().toLocaleString('th', {
-                                timeZone: 'Asia/Jakarta'
-                            });
-
-                            var _day = day.split(" ");
-                            return _day[0];
+                            var date_data = data['update_at'];
+                            var time = new Date(date_data).toLocaleDateString();
+                            console.log(date_data);
+                            console.log(time);
+                            return time;
                             console.log(str);
 
                         },
@@ -116,17 +113,14 @@
                         className: 'text-center',
                     }, {
                         data: function(data) {
-                            var date_data = data['borrow_date'];
-                            var date = new Date(date_data);
-                            var day = new Date().toLocaleString('th', {
-                                timeZone: 'Asia/Jakarta'
+                            var date_data = data['update_at'];
+                            var time = new Date(date_data).toLocaleTimeString('th', {
+                                timeStyle: 'short',
+                                hour12: false,
+                                timeZone: 'UTC'
                             });
-
-                            var _day = day.split(" ");
-                            var time = _day[1];
-                            var timer = time.split(":");
-                            return timer[0] + ":" + timer[1] + " น.";
-
+                            var date_string = time;
+                            return date_string + " " + "น.";
                             console.log(str);
                         },
                         className: 'text-center',
