@@ -22,37 +22,22 @@ router.get('/', validateCookieExist, (req, res, next) => {
 
 router.post('/search', (req, res, next) => {
     var Post_typeSearch = req.body.typeSearch;
-    console.log(Post_typeSearch);
     var Post_firstDate = req.body.firstDate;
     var Post_untilDate = req.body.untilDate;
-    if (Post_typeSearch && Post_firstDate && Post_untilDate) {
-        axios.post(config.servurl + '/GetData/DataReport', {
-                typeSearch: Post_typeSearch,
-                firstDate: Post_firstDate,
-                untilDate: Post_untilDate
-            })
-            .then(function(response) {
-                res.send(response.data);
-                return;
-            })
-            .catch(function(error) {
-                console.log(error);
-            })
-    } else if (Post_typeSearch && Post_firstDate != null && Post_untilDate != null) {
-        console.log("case 2");
-        axios.post(config.servurl + '/GetData/DataReport', {
-                typeSearch: Post_typeSearch,
-                firstDate: "",
-                untilDate: ""
-            })
-            .then(function(response) {
-                res.send(response.data);
-                return;
-            })
-            .catch(function(error) {
-                console.log(error);
-            })
-    } else {
+    if(post_equipment_id != null && post_admin_approve_return != null && post_return_date != null){ 
+    axios.post(config.servurl + '/GetData/DataReport', {
+            typeSearch: Post_typeSearch,
+            firstDate: Post_firstDate,
+            untilDate: Post_untilDate
+        })
+        .then(function(response) {
+            res.send(response.data);
+            return;
+        })
+        .catch(function(error) {
+            console.log(error);
+        })
+    }else{
         res.status(400).send('This request is not complete.'); //echo
         return;
     }

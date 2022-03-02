@@ -22,7 +22,7 @@ router.get('/',validateCookieExist,(req,res,next)=>{
 
 router.post('/search', (req, res, next) => {
     var search = req.body.search;
-    if(search){
+    if(search != null){
       axios.post(config.servurl+'/GetData/DataEquipRemain',{
         search_value : search
       })
