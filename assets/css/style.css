@@ -50,6 +50,7 @@
 /* button */
 .btn-danger { color: #fff; background-color: #fb402f; border-color: #fb402f; } .btn-danger:hover { color: #fff; background-color: #ad3823; border-color: #ad3823; }
 .btn-success { color: #fff; background-color: #0fae00; border-color: #0fae00; } .btn-success:hover { color: #fff; background-color: #0c8601; border-color: #0c8601; }
+.btn-outline-secondary { color: #6c757d; background-color: #ffffff; border-color: #6c757d; }
 
 /* table */
 .table-navy-blue {
@@ -66,7 +67,7 @@ table.dataTable >thead >tr >th {
     text-align: center;
 }
 table.dataTable >tbody td {
-    padding: 10px 15px 10px 15px;
+    padding: 20px 15px 20px 15px;
     color: #444444;
     font-size: 16px;
     word-break: break-word;
@@ -83,7 +84,15 @@ table.dataTable.no-footer {
 .dataTables_length {
     margin-bottom: 1rem;
 }
+.dataTables_scrollBody{
+    min-height: 392px;
+    max-height: 392px;
+}
 
 .row {
     --bs-gutter-x: 0rem; 
+}
+
+.swal2-popup {
+    border-radius: 20px !important; 
 }
