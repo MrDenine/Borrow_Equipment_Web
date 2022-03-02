@@ -8,7 +8,7 @@
                     <h5>แสดงข้อมูลการคืน</h5>
                     <hr class="mb-4">
                     <div class="table-responsive">
-                        <table class="table table-striped my-2" id="table_id" style="min-height: 420px;">
+                        <table class="table table-striped display nowrap" id="table_id">
                             <thead class="table-navy-blue">
                                 <tr>
                                     <th class="text-center">วัน / เดือน / ปี</th>
@@ -39,24 +39,24 @@
                     <div class="row">
                         <div class="input-group mb-3">
                             <label class="col-form-label ms-4 mx-1 px-1">รหัส RFID : </label>
-                            <input type="text" class="form-control rounded-3 me-2">
-                            <div class="btn btn-warning rounded-3">เคลียร์ Tag</div>
+                            <input type="text" class="form-control rounded-3 me-2" id="equipment_rfid" maxlength="10" >
+                            <div class="btn btn-warning shadow-sm rounded-3" id="equipment_clear">เคลียร์ Tag</div>
                         </div>
                         <div class="input-group mb-3">
                             <label class="col-form-label ps-1 ms-3 me-2">ชื่อครุภัณฑ์ : </label>
-                            <input type="text" class="form-control rounded-3">
+                            <input type="text" class="form-control rounded-3" id="equipment_name" disabled>
                         </div>
                         <div class="input-group mb-3">
                             <label class="col-form-label ms-3 me-2">เลขครุภัณฑ์ : </label>
-                            <input type="text" class="form-control rounded-3">
+                            <input type="text" class="form-control rounded-3" id="equipment_number" disabled>
                             <label class="col-form-label mx-2">S/N : </label>
-                            <input type="text" class="form-control rounded-3">
+                            <input type="text" class="form-control rounded-3" id="equipment_sn" disabled>
                         </div>
                         <div class="input-group mb-2">
                             <label class="col-form-label ms-5 ps-3 me-2">ยีห้อ : </label>
-                            <input type="text" class="form-control rounded-3">
+                            <input type="text" class="form-control rounded-3" id="equipment_brand" disabled>
                             <label class="col-form-label ms-3 me-2">รุ่น : </label>
-                            <input type="text" class="form-control rounded-3">
+                            <input type="text" class="form-control rounded-3" id="equipment_model" disabled>
                         </div>
                     </div>
                 </div>
@@ -64,8 +64,8 @@
         </div>
         <div class="row">
             <div class="col-lg-12 text-center">
-                <div class="btn btn-outline-secondary"><i class="fas fa-times me-2"></i>ยกเลิก</div>
-                <div class="btn btn-success "><i class="fas fa-check me-2"></i>คืนครุภัณฑ์</div>
+                <div class="btn btn-outline-secondary shadow-sm" id="cancel_return"><i class="fas fa-times me-2"></i>ยกเลิก</div>
+                <div class="btn btn-success shadow-sm" id="submit_return"><i class="fas fa-check me-2"></i>คืนครุภัณฑ์</div>
             </div>
         </div>
     </div>
@@ -75,18 +75,225 @@
 
 <script>
     var Feature = (function(){
+        var equipment_id = "";
+        var keyup_equipment = 0;
+        
+        var user = JSON.parse('<%- JSON.stringify(udt) %>');
+            user = user.id;
 
-        var dataTable = $('#table_id').DataTable({
-            language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์ที่คืน"},
+            var dataTable = $('#table_id').DataTable({
+            language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์"},
             searching: false,
+            responsive: true,
+            scrollX: true,
+            scrollY: "392px",
+            scrollCollapse: true,
+            paging: false,
+            ordering: false,
             lengthChange: false,
-            ordering:false,
-            responsive: true
-            // iDisplayLength: 10,
+            iDisplayLength: 10,
+            bAutoWidth: false,
+            columns:[
+                        { 
+                            data: function (data) {
+                                var date = ""
+                                    date = data['return_date'];
+                                    date = new Date(date).toLocaleDateString();
+                                    date = date.split("/")
+                                    date = date[1] + "/" + date[0] + "/" + date[2]; // set format
+                                return date;
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['username'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['firstname'] + ' ' + data['lastname'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['equipment_name'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['equipment_number'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['brand'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['model'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                var date = ""
+                                    date = data['return_date'];
+                                    date = new Date(date).toLocaleTimeString();
+                                return date;
+                            },
+                            className : 'text-center',
+                        },
+                    ],
+            serverSide: true,
+            ajaxSource: '/return/search',
+            serverData: function (sSource, aaData, fnCallback, oSettings) {
+                oSettings.jqXHR = $.ajax({
+                    dataType: 'json',
+                    type: "POST",
+                    url: sSource,
+                    data: aaData,
+                    success: function (response) {
+                        if (response.status === "Succeed") {
+                            if (response.data === "No Reverting information") {
+                                response = {"aaData":[], "iTotalRecords": 0, "iTotalDisplayRecords": 0};
+                            } else {
+                                var response = response.data;
+                                    response = {"aaData": response, "iTotalRecords": response.length, "iTotalDisplayRecords": response.length};
+                            }
+                        } else {
+                            response = {"aaData":[], "iTotalRecords": 0, "iTotalDisplayRecords": 0};
+                        }
+
+                        fnCallback(response);
+                    }
+                });
+            },
+            createdRow: function (row, data, index) {
+            }
         });
 
         return {
+            initInput: function () {
+                $("#equipment_rfid").keyup( function (e) {
+                    if (e.target.value.length == 10){
+                        var equipment_rfid = $("#equipment_rfid").val();
+                        var url = '/return/PostReceiveEquip';
+                        $.ajax({
+                                type: 'POST',
+                                url: url,
+                                data: { equip_rfid: equipment_rfid, }
+                            })
+                        .done(function(response) {
+                            if (response.status == "Succeed") {
+                                var response = response.data[0];
+                                    $("#equipment_name").val(response.equipment_name);
+                                    $("#equipment_number").val(response.equipment_number);
+                                    $("#equipment_sn").val(response.serial_number);
+                                    $("#equipment_brand").val(response.brand);
+                                    $("#equipment_model").val(response.model);
+                                    equipment_id = response.id;
+                                    keyup_equipment = 10; // set keyup
+
+                            } else if (response.status == "Failed") {
+                                Swal.fire({
+                                    title: "ไม่พบข้อมูล",
+                                    text: "ไม่พบข้อมูลรหัส RFID นี้ กรุณาลองใหม่อีกครั้ง ",
+                                    icon: "warning",
+                                });
+                            }
+                        });
+                    }
+                    else if (keyup_equipment == 10) {
+                        $("#equipment_rfid").val('');
+                        $("#equipment_name").val('');
+                        $("#equipment_number").val('');
+                        $("#equipment_sn").val('');
+                        $("#equipment_brand").val('');
+                        $("#equipment_model").val('');
+                        keyup_equipment = 0; // set keyup
+                    }
+                });
+            },
+            initButton: function () {
+                $('#equipment_clear').on('click', function (e) {
+                    $("#equipment_rfid").val('');
+                    $("#equipment_name").val('');
+                    $("#equipment_number").val('');
+                    $("#equipment_sn").val('');
+                    $("#equipment_brand").val('');
+                    $("#equipment_model").val('');
+                });
+                $('#submit_return').on('click', function (e) {
+                    if (($("#equipment_rfid").val() && $("#equipment_name").val() && $("#equipment_number").val() && $("#equipment_sn").val() && $("#equipment_brand").val() && $("#equipment_model").val()) != "" ) { //equipment
+                            Feature.submitReturn();
+                    } else {
+                        Swal.fire({
+                            title: "ผิดพลาด",
+                            text: 'กรุณาตรวจสอบข้อมูลให้ครบก่อนกดปุ่ม "คืนครุภัณฑ์"',
+                            icon: "warning",
+                        });
+                    }
+                });
+                $('#cancel_return').on('click', function (e) {
+                    // equipment
+                    $("#equipment_rfid").val('');
+                    $("#equipment_name").val('');
+                    $("#equipment_number").val('');
+                    $("#equipment_sn").val('');
+                    $("#equipment_brand").val('');
+                    $("#equipment_model").val('');
+                });
+            },
+            submitReturn: function () {
+                var getDate = new Date().toLocaleString().split(",");
+                    // Date
+                    dateDay = getDate[0].split("/");
+                    // Time
+                    dateTime = getDate[1].split(" ");
+                    // Date Now
+                    dateNow = dateDay[2] + '-' + dateDay[1] + '-' + dateDay[0] + ' ' + dateTime[1];
+
+                var url = '/return/PostReturn';
+                    $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: { 
+                                    equipment_id: equipment_id, 
+                                    admin_approve_return : user, 
+                                    return_date: dateNow 
+                                  } 
+                        })
+                    .done(function(response) {
+                        if (response.status == "Succeed") {
+                            Swal.fire({
+                                title: "สำเร็จ",
+                                text: "บันทึกข้อมูลการคืนครุภัณฑ์สำเร็จ ",
+                                icon: "success",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                            
+                        } else if (response.status == "Failed") {
+                            Swal.fire({
+                                title: "ผิดพลาด",
+                                text: "ไม่สามารถบันทึกข้อมูลการคืนครุภัณฑ์ได้ กรุณาลองใหม่อีกครั้ง ",
+                                icon: "success",
+                            });
+                        }
+                    });
+            },
             init: function () {
+                Feature.initInput();
+                Feature.initButton();
 
             }
         }
