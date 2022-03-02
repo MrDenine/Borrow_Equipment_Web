@@ -27,7 +27,7 @@ router.post('/PostEquipDmp', (req, res, next) => {
     console.log(post_rfid);
     console.log(post_dpmID);
     console.log(post_datetime);
-    if (post_rfid && post_dpmID && post_datetime) {
+    if (post_rfid != null && post_dpmID != null && post_datetime != null) {
         axios
             .post(config.servurl + '/SetData/setDpmID', {
                 rfid: post_rfid,
