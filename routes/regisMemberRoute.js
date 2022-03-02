@@ -28,7 +28,6 @@ router.post('/PostRegisterMember',(req,res,next)=>{
     var post_firstname = req.body.firstname;
     var post_lastname = req.body.lastname;
     var post_gender = req.body.gender;
-    var post_image_file = req.body.image_file;
     var post_datetime = req.body.datetime;
     var post_create_by = req.body.create_by;
 

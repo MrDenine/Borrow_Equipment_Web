@@ -87,5 +87,15 @@ router.post('/PostBorrow',(req,res,next)=>{
         return;
     }
 })
+router.post('/search', (req, res, next) => {
+    axios.post(config.servurl + '/GetData/DataBorrowing')
+        .then(function(response) {
+            res.send(response.data);
+            return;
+        })
+        .catch(function(error) {
+            console.log(error);
+        })
+})
 
 module.exports = router;

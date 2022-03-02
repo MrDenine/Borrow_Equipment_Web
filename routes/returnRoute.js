@@ -67,5 +67,15 @@ router.post('/PostReturn',(req,res,next)=>{
     }
 })
 
+router.post('/search', (req, res, next) => {
+    axios.post(config.servurl + '/GetData/DataReverting')
+        .then(function(response) {
+            res.send(response.data);
+            return;
+        })
+        .catch(function(error) {
+            console.log(error);
+        })
+})
 
 module.exports = router;

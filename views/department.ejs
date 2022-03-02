@@ -9,15 +9,14 @@
                 <div class="card shadow-sm mb-3">
                     <div class="card-body pb-0">
                         <div class="row">
-                            <div class="col-xxl-8 mb-3">
-                                <div class="input">
-                                    <input type="text" id="idSearch" class="form-control " placeholder="เริมต้น " aria-label="start-date ">
+                            <div class="col-xxl-8 mb-3 me-4">
+                                <div class="input me-2">
+                                    <input type="text" id="rfid" name="rfid" class="form-control " placeholder="RFID " aria-label="rfid ">
                                 </div>
                             </div>
 
-                            <div class="col-xxl-4 mb-3 text-end ">
-                                <div class="btn btn-outline-dark " id="clear"><i class="fas fa-times me-2 "></i>ยกเลิก</div>
-                                <div class="btn btn-success " id="search"><i class="fas fa-search me-2 "></i>ค้นหา</div>
+                            <div class="col-xxl-3 mb-3 text-end">
+                                <button class="btn btn-warning w-100" id="searchRfid" type="button" disabled><i class="fas fa-key me-2 "></i>RFID</button>
                             </div>
                         </div>
                     </div>
@@ -41,86 +40,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="text-center ">019283</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">1728349450</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">ray X</td>
-                                <td class="text-center ">JUL-882</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">019283</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">1728349450</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">ray X</td>
-                                <td class="text-center ">JUL-882</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">019283</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">1728349450</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">ray X</td>
-                                <td class="text-center ">JUL-882</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">019283</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">1728349450</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">ray X</td>
-                                <td class="text-center ">JUL-882</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">019283</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">1728349450</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">ray X</td>
-                                <td class="text-center ">JUL-882</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">019283</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">1728349450</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">ray X</td>
-                                <td class="text-center ">JUL-882</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">019283</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">1728349450</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">ray X</td>
-                                <td class="text-center ">JUL-882</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">019283</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">1728349450</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">ray X</td>
-                                <td class="text-center ">JUL-882</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">019283</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">1728349450</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">ray X</td>
-                                <td class="text-center ">JUL-882</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">019283</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">1728349450</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">ray X</td>
-                                <td class="text-center ">JUL-882</td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -132,12 +52,80 @@
 
         <script>
             var Feature = (function() {
-                var startDate = $('#start_date').datepicker();
-                var endDate = $('#end_date').datepicker();
+
+                var today = new Date();
+                var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                var dateTime = date + " " + time;
+                console.log(dateTime);
                 var dataTable = $('#table_id').DataTable({
                     searching: false,
+                    responsive: true,
+                    ordering: false,
                     lengthChange: false,
                     iDisplayLength: 10,
+                    bAutoWidth: false,
+                    columns: [{
+                        data: function(data) {
+                            return data['rfid'];
+
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['serial_number'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['equipment_number'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['equipment_name'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['brand'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['model'];
+                        },
+                        className: 'text-center',
+                    }, ],
+                    serverSide: true,
+                    ajaxSource: '/department/PostEquipDmp',
+                    serverData: function(sSource, aaData, fnCallback, oSettings) {
+                        aaData.push({
+                            "name": "rfid",
+                            "value": "1234567890"
+                        });
+                        aaData.push({
+                            "name": "dpmID",
+                            "value": "2"
+                        });
+                        aaData.push({
+                            "name": "datetime",
+                            "value": dateTime
+                        });
+                        oSettings.jqXHR = $.ajax({
+                            dataType: 'json',
+                            type: "POST",
+                            url: sSource,
+                            data: aaData,
+                            success: function(response) {
+                                console.log(response);
+
+                                fnCallback(response);
+
+                            }
+                        });
+                    },
+                    createdRow: function(row, data, index) {}
                 });
 
                 return {
