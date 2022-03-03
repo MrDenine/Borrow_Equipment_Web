@@ -83,7 +83,9 @@
                     columns: [{
                         data: function(data) {
                             var date_data = data['update_at'];
-                            var time = new Date(date_data).toLocaleDateString();
+                            var time = new Date(date_data).toLocaleDateString('th', {
+                                timeZone: 'Asia/Jakarta'
+                            });
                             console.log(date_data);
                             console.log(time);
                             return time;
@@ -117,7 +119,7 @@
                             var time = new Date(date_data).toLocaleTimeString('th', {
                                 timeStyle: 'short',
                                 hour12: false,
-                                timeZone: 'UTC'
+                                timeZone: 'Asia/Jakarta'
                             });
                             var date_string = time;
                             return date_string + " " + "น.";

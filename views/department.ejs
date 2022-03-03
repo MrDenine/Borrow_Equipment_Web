@@ -52,7 +52,11 @@
 
         <script>
             var Feature = (function() {
-
+                var user = '<%- JSON.stringify(udt) %>';
+                var user_data = JSON.parse(user);
+                console.log("user_id" +
+                    user_data["id"]);
+                console.log(user);
                 var today = new Date();
                 var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
                 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -102,11 +106,11 @@
                     serverData: function(sSource, aaData, fnCallback, oSettings) {
                         aaData.push({
                             "name": "rfid",
-                            "value": "1234567890"
+                            "value": user_data["id"]
                         });
                         aaData.push({
                             "name": "dpmID",
-                            "value": "2"
+                            "value": user_data["id"]
                         });
                         aaData.push({
                             "name": "datetime",
@@ -119,7 +123,23 @@
                             data: aaData,
                             success: function(response) {
                                 console.log(response);
+                                console.log(response);
+                                if (response.status === "Succeed") {
+                                    var response = response.data;
+                                    response = {
+                                        "aaData": response,
+                                        "iTotalRecords": response.length,
+                                        "iTotalDisplayRecords": response.length
+                                    };
+                                } else {
 
+                                    response = {
+                                        "aaData": [],
+                                        "iTotalRecords": 0,
+                                        "iTotalDisplayRecords": 0
+                                    };
+
+                                }
                                 fnCallback(response);
 
                             }
@@ -129,6 +149,45 @@
                 });
 
                 return {
+                    initInput: function() {
+                        $("#rfid").keyup(function(e) {
+                            if (e.target.value.length == 10) {
+                                var rfid_data = $("#rfid").val();
+                                var url = '/department/PostEquipDmp';
+                                $.ajax({
+                                        type: 'POST',
+                                        url: url,
+                                        data: {
+                                            rfid: rfid_data,
+                                            dpmID: user_data["id"],
+                                            datetime: dateTime
+
+                                        }
+                                    })
+                                    .done(function(response) {
+                                        if (response["status"] == "Succeed") {
+                                            console.log(response);
+                                            window.location = '/department';
+                                        } else if (response["status"] == "Failed") {
+                                            if (response["data"] == "Incorrect username") {
+                                                Swal.fire({
+                                                    title: "ไม่สามารถเข้าสู่ระบบได้",
+                                                    text: "ชื่อผู้ใช้ของท่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง ",
+                                                    icon: "warning "
+                                                });
+                                            } else if (response["data"] == "Incorrect password") {
+                                                Swal.fire({
+                                                    title: "ไม่สามารถเข้าสู่ระบบได้ ",
+                                                    text: "รหัสผ่านของท่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง ",
+                                                    icon: "warning "
+                                                });
+                                            }
+
+                                        }
+                                    })
+                            }
+                        });
+                    },
                     searchData: function() {
                         $('#search').on('click', function(e) {
                             var textSearch = $('#idSearch').val();
@@ -141,6 +200,7 @@
                     },
                     init: function() {
                         Feature.searchData();
+                        Feature.initInput();
                     }
                 }
             })();
