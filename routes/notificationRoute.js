@@ -22,30 +22,11 @@ router.get('/', validateCookieExist, (req, res, next) => {
 router.post('/PostReadNotify', (req, res, next) => {
     var post_reportID = req.body.reportID;
 
-    if (post_reportID != null) {
+    if (post_reportID) {
         axios
             .post(config.servurl + '/SetData/setReadNoti', {
                 reportID: post_reportID,
             })
-            .then(function(response) {
-                res.status(200).send(response.data);
-                return;
-            })
-            .catch(function(error) {
-                res.send(error);
-                return;
-            });
-    } else {
-        res.status(400).send('This request is not complete.'); //echo
-        return;
-    }
-})
-
-router.post('/GetReadNotify', (req, res, next) => {
-    var post_reportID = req.body.reportID;
-    if (post_reportID != null) {
-        axios
-            .post(config.servurl + '/GetData/DataNoti')
             .then(function(response) {
                 res.status(200).send(response.data);
                 return;
