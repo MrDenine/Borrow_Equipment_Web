@@ -9,11 +9,11 @@
                 <div class="card-body pb-0">
                     <div class="row">
                         <div class="col-xxl-8 mb-3">
-                            <input type="text" class="form-control" id="equipmentSearch" placeholder="ค้นหาข้อมูลครุภัณฑ์">
+                            <input type="text" class="form-control shadow-sm" id="equipmentSearch" placeholder="ค้นหาข้อมูลครุภัณฑ์">
                         </div>
                         <div class="col-xxl-4 mb-3 text-end">
-                            <div class="btn btn-outline-secondary" id="clear"><i class="fas fa-times me-2"></i>ยกเลิก</div>
-                            <div class="btn btn-success" id="search"><i class="fas fa-search me-2"></i>ค้นหา</div>
+                            <div class="btn btn-outline-secondary shadow-sm" id="clear"><i class="fas fa-times me-2"></i>ยกเลิก</div>
+                            <div class="btn btn-success shadow-sm" id="search"><i class="fas fa-search me-2"></i>ค้นหา</div>
                         </div>
                     </div>
                 </div>
@@ -28,21 +28,19 @@
     <div class="col-lg-12">
         <div class="card shadow-sm">
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped my-2" id="table_id">
-                        <thead class="table-navy-blue">
-                            <tr>
-                                <th class="text-center">ลำดับ</th>
-                                <th class="text-center">ชื่อครุภัณฑ์</th>
-                                <th class="text-center">รุ่น</th>
-                                <th class="text-center">คงเหลือ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                        </tbody>
-                    </table>
-                </div>
+                <table class="table table-striped display nowrap mt-1 mb-3" id="table_id">
+                    <thead class="table-navy-blue">
+                        <tr>
+                            <th class="text-center">ลำดับ</th>
+                            <th class="text-center">ชื่อครุภัณฑ์</th>
+                            <th class="text-center">รุ่น</th>
+                            <th class="text-center">คงเหลือ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -59,7 +57,9 @@
         var dataTable = $('#table_id').DataTable({
             language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์"},
             searching: false,
-            responsive: true,
+            initComplete: function (settings, json) {  
+                $("#table_id").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+            },
             ordering: false,
             lengthChange: false,
             iDisplayLength: 10,

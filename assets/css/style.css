@@ -84,14 +84,12 @@ table.dataTable.no-footer {
 .dataTables_length {
     margin-bottom: 1rem;
 }
-.dataTables_scrollBody{
-    min-height: 392px;
-    max-height: 392px;
-}
-
-.row {
-    --bs-gutter-x: 0rem; 
-}
+.dataTables_scrollBody {
+    min-height: 371px;
+    max-height: 371px;
+    background-color: rgba(207, 207, 207, 0.1);
+    margin-bottom: 10px;
+} 
 
 .swal2-popup {
     border-radius: 20px !important; 
