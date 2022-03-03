@@ -3,6 +3,7 @@ const router = express.Router();
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const axios = require('axios');
+const fileupload = require('express-fileupload');
 const config = require('../config');
 const encrypt_decrypt_tools = require('../utils/encrypt_decrypt_tools');
 const {validateCookieExist} = require('../middleware/validation_user');
@@ -11,6 +12,7 @@ const {validateDpmRoute} = require('../middleware/validation_user');
 const {validateMemberRoute} = require('../middleware/validation_user');
 const {getUserRole} = require('../utils/initial_data_tools');
 const {getUserData} = require('../utils/initial_data_tools');
+
 
 router.use(bodyParser.urlencoded({extended : false}));
 router.use(bodyParser.json());
@@ -60,25 +62,35 @@ router.post('/PostRegisterMember',(req,res,next)=>{
 })
 
 router.post('/PostUploadImageProfile',(req,res,next)=>{
-    var post_rfid = req.body.rfid;
-    var post_file = req.body.file;
-    if(search){
-      axios.post(config.servurl+'/UploadFiles/uploadImageProfile',{
-        rfid : post_rfid,
-        file : post_file
-      })
-      .then(function (response) {
-        res.status(200).send(response.data);
+  
+    var file;
+    if(!req.files)
+    {
+        res.send("File was not found");
         return;
-      })
-      .catch(function (error) {
-        res.send(error); 
-        return;
-      })
-    }else{
-      res.status(400).send('This request is not complete.'); //echo
-      return;
     }
+    file = req.files.file;  // here is the field name of the form
+    res.send("File Uploaded");
+    
+    // var post_rfid = req.body.rfid;
+    // var post_file = req.file;
+    // if(post_rfid && post_file){
+    //   axios.post(config.servurl+'/UploadFiles/uploadImageProfile',{
+    //     rfid : post_rfid,
+    //     file : post_file
+    //   })
+    //   .then(function (response) {
+    //     res.status(200).send(response.data);
+    //     return;
+    //   })
+    //   .catch(function (error) {
+    //     res.send(error); 
+    //     return;
+    //   })
+    // }else{
+    //   res.status(400).send('This request is not complete.'); //echo
+    //   return;
+    // }
 })
 
 router.post('/PostDeleteMember',(req,res,next)=>{

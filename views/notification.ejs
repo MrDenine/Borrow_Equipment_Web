@@ -41,84 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="text-center ">25/2/2565</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">ไชยะ สมพร</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">000001</td>
-                                <td class="text-center ">11:00</td>
-                                <td class="text-center ">ห้อง X-ray</td>
-                                <td class="text-center ">ยืม</td>
-                                <td class="text-center ">
-                                    <button class="btn btn-success " id="search"><i class="fas fa-check me-2 "></i>ยอมรับ</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">25/2/2565</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">ไชยะ สมพร</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">000001</td>
-                                <td class="text-center ">11:00</td>
-                                <td class="text-center ">ห้อง X-ray</td>
-                                <td class="text-center ">ยืม</td>
-                                <td class="text-center ">
-                                    <button class="btn btn-success " id="search"><i class="fas fa-check me-2 "></i>ยอมรับ</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">25/2/2565</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">ไชยะ สมพร</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">000001</td>
-                                <td class="text-center ">11:00</td>
-                                <td class="text-center ">ห้อง X-ray</td>
-                                <td class="text-center ">ยืม</td>
-                                <td class="text-center ">
-                                    <button class="btn btn-success " id="search"><i class="fas fa-check me-2 "></i>ยอมรับ</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">25/2/2565</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">ไชยะ สมพร</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">000001</td>
-                                <td class="text-center ">11:00</td>
-                                <td class="text-center ">ห้อง X-ray</td>
-                                <td class="text-center ">ยืม</td>
-                                <td class="text-center ">
-                                    <button class="btn btn-success " id="search"><i class="fas fa-check me-2 "></i>ยอมรับ</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">25/2/2565</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">ไชยะ สมพร</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">000001</td>
-                                <td class="text-center ">11:00</td>
-                                <td class="text-center ">ห้อง X-ray</td>
-                                <td class="text-center ">ยืม</td>
-                                <td class="text-center ">
-                                    <button class="btn btn-success " id="search"><i class="fas fa-check me-2 "></i>ยอมรับ</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center ">25/2/2565</td>
-                                <td class="text-center ">65748390</td>
-                                <td class="text-center ">ไชยะ สมพร</td>
-                                <td class="text-center ">เครื่อง X ray</td>
-                                <td class="text-center ">000001</td>
-                                <td class="text-center ">11:00</td>
-                                <td class="text-center ">ห้อง X-ray</td>
-                                <td class="text-center ">ยืม</td>
-                                <td class="text-center ">
-                                    <button class="btn btn-success " id="search"><i class="fas fa-check me-2 "></i>ยอมรับ</button>
-                                </td>
-                            </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -134,8 +57,105 @@
                 var endDate = $('#end_date').datepicker();
                 var dataTable = $('#table_id').DataTable({
                     searching: false,
+                    responsive: true,
+                    ordering: false,
                     lengthChange: false,
                     iDisplayLength: 10,
+                    bAutoWidth: false,
+                    columns: [{
+                        data: function(data) {
+                            var date_data = data['borrow_date'];
+                            var time = new Date(date_data).toLocaleDateString('th', {
+                                timeZone: 'Asia/Jakarta'
+                            });
+                            console.log(date_data);
+                            console.log(time);
+                            return time;
+                            console.log(str);
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['username'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['firstname'] + " " + data['lastname'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['equipment_name'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['equipment_number'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            var date_data = data['borrow_date'];
+                            var time = new Date(date_data).toLocaleTimeString('th', {
+                                timeStyle: 'short',
+                                hour12: false,
+                                timeZone: 'Asia/Jakarta'
+                            });
+                            var date_string = time;
+                            return date_string + " " + "น.";
+                            console.log(str);
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['department_name'];
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            return data['status'];
+                        },
+                        className: 'text-center',
+                    }, ],
+                    serverSide: true,
+                    ajaxSource: '/notification/GetReadNotify',
+                    serverData: function(sSource, aaData, fnCallback, oSettings) {
+                        aaData.push({
+                            "name": "reportID",
+                            "value": ""
+                        });
+
+                        oSettings.jqXHR = $.ajax({
+                            dataType: 'json',
+                            type: "POST",
+                            url: sSource,
+                            data: aaData,
+                            success: function(response) {
+                                console.log(response);
+                                console.log(response);
+                                if (response.status === "Succeed") {
+                                    var response = response.data;
+                                    response = {
+                                        "aaData": response,
+                                        "iTotalRecords": response.length,
+                                        "iTotalDisplayRecords": response.length
+                                    };
+                                } else {
+
+                                    response = {
+                                        "aaData": [],
+                                        "iTotalRecords": 0,
+                                        "iTotalDisplayRecords": 0
+                                    };
+
+                                }
+                                fnCallback(response);
+
+                            }
+                        });
+                    },
+                    createdRow: function(row, data, index) {}
                 });
 
                 return {
