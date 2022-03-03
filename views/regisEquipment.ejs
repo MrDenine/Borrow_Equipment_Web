@@ -2,166 +2,134 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <div class="row px-2 mb-1">
-            <div class="row">
-                <div class="card shadow-sm mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h5 class="pt-2">ข้อมูลครุภัณฑ์</h5>
-                            </div>
-                            <div class="col-lg-6 text-end">
-                                <div class="btn btn-primary shadow-sm"><i class="fas fa-plus me-2"></i>เพิ่มข้อมูลครุภัณฑ์</div>
+        <div class="row">
+            <div class="col-lg-12 text-end mb-3">
+                <div class="btn btn-primary shadow-sm" id="add_NewEquipment"><i class="fas fa-plus me-2"></i>เพิ่มข้อมูลครุภัณฑ์</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow-sm mb-3 collapse" id="equipmentForm">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h5 class="pt-2">ข้อมูลครุภัณฑ์</h5>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <div class="row mx-3" id="equipment_validate">
+                    <div class="col-lg-6">
+                        <div class="col-lg-12 mb-2">
+                            <label class="form-label">รหัส RFID </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control shadow-sm rounded-3 me-2" id="equipment_rfid" maxlength="10" required>
+                                <div class="btn btn-warning shadow-sm rounded-3">เคลียร์ Tag</div>
+                                <div class="invalid-feedback">
+                                    กรุณาระบุ รหัส RFID 
+                                </div>
                             </div>
                         </div>
-                        <hr class="mb-4">
-                        <div class="row me-3">
-                            <div class="col-lg-12">
-                                <div class="col-lg-6">
-                                    <div class="input-group mb-3">
-                                        <label class="col-form-label ms-4 mx-1 px-1">รหัส RFID : </label>
-                                        <input type="text" class="form-control rounded-3 me-2">
-                                        <div class="btn btn-warning shadow-sm rounded-3">เคลียร์ Tag</div>
+                        <div class="col-lg-12 mb-2">
+                            <label class="form-label">ชื่อครุภัณฑ์ </label>
+                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_name" required>
+                            <div class="invalid-feedback">
+                                กรุณาระบุ ชื่อครุภัณฑ์ 
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mb-2">
+                            <div class="row">
+                                <div class="col-lg-6 mb-2">
+                                    <label class="form-label">เลขครุภัณฑ์ </label>
+                                    <input type="text" class="form-control shadow-sm rounded-3" id="equipment_number" required>
+                                    <div class="invalid-feedback">
+                                        กรุณาระบุ เลขครุภัณฑ์ 
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="col-lg-6">
-                                    <div class="input-group mb-3">
-                                        <label class="col-form-label ps-1 ms-3 me-2">ชื่อครุภัณฑ์ : </label>
-                                        <input type="text" class="form-control rounded-3" disabled>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-3">
-                                            <label class="col-form-label ms-3 me-2">เลขครุภัณฑ์ : </label>
-                                            <input type="text" class="form-control rounded-3" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-3">
-                                            <label class="col-form-label ms-5 ps-3 me-2">S/N : </label>
-                                            <input type="text" class="form-control rounded-3" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-3">
-                                            <label class="col-form-label ms-5 ps-3 me-2">ยี่ห้อ : </label>
-                                            <input type="text" class="form-control rounded-3" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="input-group mb-3">
-                                            <label class="col-form-label ms-5 ps-4 me-2">รุ่น : </label>
-                                            <input type="text" class="form-control rounded-3" disabled>
-                                        </div>
+                                <div class="col-lg-6 mb-2">
+                                    <label class="form-label">S/N </label>
+                                    <input type="text" class="form-control shadow-sm rounded-3" id="equipment_sn" required>
+                                    <div class="invalid-feedback">
+                                        กรุณาระบุ S/N 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <hr class="mb-3">
-                        <div class="row">
-                            <div class="col-lg-12 text-end">
-                                <div class="btn btn-outline-secondary"><i class="fas fa-times me-2"></i>ยกเลิก</div>
-                                <div class="btn btn-success"><i class="fas fa-save me-2"></i>บันทึก</div>
+                        <div class="col-lg-12 mb-2">
+                            <div class="row">
+                                <div class="col-lg-6 mb-2">
+                                    <label class="form-label">ยี่ห้อ </label>
+                                    <input type="text" class="form-control shadow-sm rounded-3" id="equipment_brand" required>
+                                    <div class="invalid-feedback">
+                                        กรุณาระบุ ยี่ห้อ 
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 mb-2">
+                                    <label class="form-label">รุ่น </label>
+                                    <input type="text" class="form-control shadow-sm rounded-3" id="equipment_model" required>
+                                    <div class="invalid-feedback">
+                                        กรุณาระบุ รุ่น 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-lg-12">
+                            <label for="" class="form-label">หมายเหตุ</label>
+                            <textarea class="form-control shadow-sm" id="equipment_description" rows="5" style="height: 280px;" required></textarea>
+                            <div class="invalid-feedback">
+                                กรุณาระบุ หมายเหตุ 
                             </div>
                         </div>
                     </div>
                 </div>
-
-               
-
-                <div class="card shadow-sm mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <h5 class="pt-2">ตารางข้อมูลครุภัณฑ์</h5>
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="input-group shadow-sm mb-2">
-                                   <input type="text" class="form-control" placeholder="ชื่อครุภัณฑ์, เลขครุภัณฑ์, ยี่ห้อ">
-                                    <div class="btn btn-secondary" id=""><i class="fas fa-search me-2"></i>ค้นหา</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-striped my-2" id="table_id" style="min-height: 428px;">
-                                <thead class="table-navy-blue">
-                                    <tr>
-                                        <th class="text-center">ลำดับ</th>
-                                        <th class="text-center">รหัส RFID</th>
-                                        <th class="text-center">S/N</th>
-                                        <th class="text-center">เลขครุภัณฑ์</th>
-                                        <th class="text-center">ชื่อครุภัณฑ์</th>
-                                        <th class="text-center">ยี่ห้อ</th>
-                                        <th class="text-center">รุ่น</th>
-                                        <th class="text-center">จัดการข้อมูล</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">4312341234</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">AAAA</td>
-                                        <td class="text-center">B</td>
-                                        <td class="text-center">20</td>
-                                        <td class="text-center"><div class="btn btn-danger btn-sm"><i class="fas fa-trash me-2"></i>ลบ</div> <div class="btn btn-warning btn-sm"><i class="fas fa-pen me-2"></i></i>แก้ไข</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">2</td>
-                                        <td class="text-center">4312341234</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">AAAA</td>
-                                        <td class="text-center">B</td>
-                                        <td class="text-center">20</td>
-                                        <td class="text-center"><div class="btn btn-danger btn-sm"><i class="fas fa-trash me-2"></i>ลบ</div> <div class="btn btn-warning btn-sm"><i class="fas fa-pen me-2"></i></i>แก้ไข</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">3</td>
-                                        <td class="text-center">4312341234</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">AAAA</td>
-                                        <td class="text-center">B</td>
-                                        <td class="text-center">20</td>
-                                        <td class="text-center"><div class="btn btn-danger btn-sm"><i class="fas fa-trash me-2"></i>ลบ</div> <div class="btn btn-warning btn-sm"><i class="fas fa-pen me-2"></i></i>แก้ไข</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">4</td>
-                                        <td class="text-center">4312341234</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">AAAA</td>
-                                        <td class="text-center">B</td>
-                                        <td class="text-center">20</td>
-                                        <td class="text-center"><div class="btn btn-danger btn-sm"><i class="fas fa-trash me-2"></i>ลบ</div> <div class="btn btn-warning btn-sm"><i class="fas fa-pen me-2"></i></i>แก้ไข</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">5</td>
-                                        <td class="text-center">4312341234</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">AAAA</td>
-                                        <td class="text-center">B</td>
-                                        <td class="text-center">20</td>
-                                        <td class="text-center"><div class="btn btn-danger btn-sm"><i class="fas fa-trash me-2"></i>ลบ</div> <div class="btn btn-warning btn-sm"><i class="fas fa-pen me-2"></i></i>แก้ไข</div></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <hr class="mb-3">
+                <div class="row">
+                    <div class="col-lg-12 text-end">
+                        <div class="btn btn-outline-secondary shadow-sm" id="cancel_addEquipment"><i class="fas fa-times me-2"></i>ยกเลิก</div>
+                        <div class="btn btn-success shadow-sm" id="submit_addEquipment"><i class="fas fa-save me-2"></i>บันทึก</div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow-sm mb-3">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-lg-7">
+                        <h5 class="pt-2">ตารางข้อมูลครุภัณฑ์</h5>
+                    </div>
+                    <div class="col-lg-5 text-end">
+                        <div class="input-group mb-1">
+                            <input type="text" class="form-control me-2 shadow-sm rounded-3" id="equipmentSearch" placeholder="ชื่อครุภัณฑ์, เลขครุภัณฑ์, ยี่ห้อ">
+                            <div class="btn btn-secondary shadow-sm rounded-3" id="search"><i class="fas fa-search me-2"></i>ค้นหา</div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped display nowrap mb-3" id="table_id">
+                    <thead class="table-navy-blue">
+                        <tr>
+                            <th class="text-center">ลำดับ</th>
+                            <th class="text-center">รหัส RFID</th>
+                            <th class="text-center">S/N</th>
+                            <th class="text-center">เลขครุภัณฑ์</th>
+                            <th class="text-center">ชื่อครุภัณฑ์</th>
+                            <th class="text-center">ยี่ห้อ</th>
+                            <th class="text-center">รุ่น</th>
+                            <th class="text-center">จัดการข้อมูล</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        
         </div>
     </div>
 </div>
@@ -170,19 +138,327 @@
 
 <script>
     var Feature = (function(){
+        var countOrder = 0;
+        
+        var aaRfid = "";
+        var aaSearch = "";
+
+        var id_update = 0;
+        var id_remove = 0;
+
+        var user = JSON.parse('<%- JSON.stringify(udt) %>');
+            user = user.id;
 
         var dataTable = $('#table_id').DataTable({
             language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์"},
             searching: false,
+            initComplete: function (settings, json) {  
+                $("#table_id").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+            },
+            ordering: false,
             lengthChange: false,
-            ordering:false,
-            responsive: true
-            // iDisplayLength: 10,
+            iDisplayLength: 10,
+            bAutoWidth: false,
+            columns:[
+                        { 
+                            data: function (data) {
+                                countOrder++
+                                return countOrder;
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['rfid'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['serial_number'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['equipment_number'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['equipment_name'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['brand'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['model'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                var setButton = ""
+                                    setButton = '<a class="btn btn-danger btn-sm shadow-sm" name="delete_data" data-id="' + data['id'] + '"><i class="fas fa-trash me-2"></i>ลบ</a>\
+                                                 <a class="btn btn-warning btn-sm shadow-sm" name="edit_data"\
+                                                    data-id="' + data['id'] + '" data-rfid="' + data['rfid'] + '" data-serial_number="' + data['serial_number'] + '"\
+                                                    data-equipment_number="' + data['equipment_number'] + '" data-equipment_name="' + data['equipment_name'] + '"\
+                                                    data-brand="' + data['brand'] + '"data-model="' + data['model'] + '"data-description="' + data['description'] + '">\
+                                                 <i class="fas fa-pen me-2"></i>แก้ไข</a>'; 
+                                return setButton;
+                            },
+                            className : 'text-center',
+                        },
+                    ],
+            serverSide: true,
+            ajaxSource: '/regisEquipment/search',
+            serverData: function (sSource, aaData, fnCallback, oSettings) {
+                aaData.push({ "name": "rfid", "value": aaRfid});
+                aaData.push({ "name": "search", "value": aaSearch});
+                oSettings.jqXHR = $.ajax({
+                    dataType: 'json',
+                    type: "POST",
+                    url: sSource,
+                    data: aaData,
+                    success: function (response) {
+                        if (response.status === "Succeed") {
+                            if (response.data === "No Reverting information") {
+                                response = {"aaData":[], "iTotalRecords": 0, "iTotalDisplayRecords": 0};
+                            } else {
+                                var response = response.data;
+                                    response = {"aaData": response, "iTotalRecords": response.length, "iTotalDisplayRecords": response.length};
+                            }
+                        } else {
+                            response = {"aaData":[], "iTotalRecords": 0, "iTotalDisplayRecords": 0};
+                        }
+                      
+                        fnCallback(response);
+
+                    }
+                });
+            },
+            createdRow: function (row, data, index) {
+            }
         });
 
         return {
-            init: function () {
+            searchData: function () {
+                $('#search').on('click', function (e) {
+                    var equipmentSearch = $('#equipmentSearch').val();
+                        aaSearch = equipmentSearch.trim();
+                        countOrder = 0;
+                        dataTable.ajax.reload();
+                });
+            },
+            initButton: function () {
+                // in dataTable
+                $('#table_id').on('click', '[name="edit_data"]', function () {
+                    var data = $(this).data();
+                        if ($('#equipmentForm').is('.collapse:not(.show)')) { // not show
+                            $('#equipmentForm').collapse("toggle");
+                        }
+                            // set value
+                            id_update = data.id;
+                            $('#equipment_rfid').val(data.rfid);
+                            $('#equipment_name').val(data.equipment_name);
+                            $('#equipment_number').val(data.equipment_number);
+                            $('#equipment_sn').val(data.serial_number);
+                            $('#equipment_brand').val(data.brand);
+                            $('#equipment_model').val(data.model);
+                            $('#equipment_description').val(data.description);
+                });
+                $('#table_id').on('click', '[name="delete_data"]', function () {
+                    var data = $(this).data();
+                        id_remove = data.id;
+                    Feature.submitRemoveEquipment();
+                });
+                // add new equipment
+                $('#add_NewEquipment').on('click', function (e) {
+                    if ($('#equipmentForm').is('.collapse:not(.show)')) { // not show
+                            $('#equipmentForm').collapse("toggle");
+                    }
+                        id_update = 0;
+                        // clear value
+                        $('#equipment_rfid').val('');
+                        $('#equipment_name').val('');
+                        $('#equipment_number').val('');
+                        $('#equipment_sn').val('');
+                        $('#equipment_brand').val('');
+                        $('#equipment_model').val('');
+                        $('#equipment_description').val('');
+                });
+                // in form 
+                $('#submit_addEquipment').on('click', function (e) {
+                    if (($('#equipment_rfid').val() && $('#equipment_name').val() && $('#equipment_number').val() && $('#equipment_sn').val() && $('#equipment_brand').val() && $('#equipment_model').val() && $('#equipment_description').val()) != "" ) {
+                        if (id_update == 0) {
+                            Feature.submitAddEquipment();
+                        } 
+                        else if (id_update > 0) {
+                            Feature.submitUpdateEquipment();
+                        }
+                    } else {
+                        $("#equipment_validate").addClass("was-validated");
+                    }
+                });
+                $('#cancel_addEquipment').on('click', function (e) {
+                    if ($('#equipmentForm').is('.collapse.show')) { // show
+                            $("#equipment_validate").removeClass("was-validated");
+                            $('#equipmentForm').collapse("toggle"); 
+                    }
+                        // clear value
+                        $('#equipment_rfid').val('');
+                        $('#equipment_name').val('');
+                        $('#equipment_number').val('');
+                        $('#equipment_sn').val('');
+                        $('#equipment_brand').val('');
+                        $('#equipment_model').val('');
+                        $('#equipment_description').val('');
+                });
+            },
+            submitAddEquipment: function () {
+                var getDate = new Date().toLocaleString().split(",");
+                    // Date
+                    dateDay = getDate[0].split("/");
+                    // Time
+                    dateTime = getDate[1].split(" ");
+                    // Date Now
+                    dateNow = dateDay[2] + '-' + dateDay[1] + '-' + dateDay[0] + ' ' + dateTime[1];
 
+                var url = '/regisEquipment/PostRegisterEquip';
+                    $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: { 
+                                    rfid : $('#equipment_rfid').val(),
+                                    equipment_name : $('#equipment_name').val(),
+                                    brand : $('#equipment_brand').val(),
+                                    model : $('#equipment_model').val(),
+                                    equipment_number : $('#equipment_number').val(),
+                                    serial_number : $('#equipment_sn').val(),
+                                    description : $('#equipment_description').val(),
+                                    datetime : dateNow,
+                                    create_by : user
+                                  } 
+                        })
+                    .done(function(response) {
+                        if (response.status == "Succeed") {
+                            Swal.fire({
+                                title: "สำเร็จ",
+                                text: "บันทึกข้อมูลการเพิ่มข้อมูลครุภัณฑ์สำเร็จ ",
+                                icon: "success",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                            
+                        } else if (response.status == "Failed") {
+                            Swal.fire({
+                                title: "ผิดพลาด",
+                                text: "ไม่สามารถบันทึกการเพิ่มข้อมูลครุภัณฑ์ได้ กรุณาลองใหม่อีกครั้ง ",
+                                icon: "error",
+                            });
+                        }
+                    });
+            },
+            submitUpdateEquipment: function () {
+                var getDate = new Date().toLocaleString().split(",");
+                    // Date
+                    dateDay = getDate[0].split("/");
+                    // Time
+                    dateTime = getDate[1].split(" ");
+                    // Date Now
+                    dateNow = dateDay[2] + '-' + dateDay[1] + '-' + dateDay[0] + ' ' + dateTime[1];
+
+                var url = '/regisEquipment/PostEditEquip';
+                    $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: { 
+                                    id : id_update,
+                                    rfid : $('#equipment_rfid').val(),
+                                    equipment_name : $('#equipment_name').val(),
+                                    brand : $('#equipment_brand').val(),
+                                    model : $('#equipment_model').val(),
+                                    equipment_number : $('#equipment_number').val(),
+                                    serial_number : $('#equipment_sn').val(),
+                                    description : $('#equipment_description').val(),
+                                    datetime : dateNow,
+                                    create_by : user
+                                  } 
+                        })
+                    .done(function(response) {
+                        if (response.status == "Succeed") {
+                            Swal.fire({
+                                title: "สำเร็จ",
+                                text: "บันทึกข้อมูลการแก้ไขข้อมูลครุภัณฑ์สำเร็จ ",
+                                icon: "success",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                            
+                        } else if (response.status == "Failed") {
+                            if (response.data.DuplicateData == "rfid") {
+                                Swal.fire({
+                                    title: "ผิดพลาด",
+                                    text: "มีรหัส RFID ของครุภัณฑ์นี้ในระบบแล้ว กรุณาลองใหม่อีกครั้ง ",
+                                    icon: "error",
+                                });
+                            }
+                        }
+                    });
+            },
+            submitRemoveEquipment: function () {
+                var getDate = new Date().toLocaleString().split(",");
+                    // Date
+                    dateDay = getDate[0].split("/");
+                    // Time
+                    dateTime = getDate[1].split(" ");
+                    // Date Now
+                    dateNow = dateDay[2] + '-' + dateDay[1] + '-' + dateDay[0] + ' ' + dateTime[1];
+
+                var url = '/regisEquipment/PostEditEquip';
+                    $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: { 
+                                    id : id_remove,
+                                    datetime : dateNow
+                                  } 
+                        })
+                    .done(function(response) {
+                        if (response.status == "Succeed") {
+                            Swal.fire({
+                                title: "สำเร็จ",
+                                text: "บันทึกข้อมูลการลบข้อมูลครุภัณฑ์สำเร็จ ",
+                                icon: "success",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                            
+                        } else if (response.status == "Failed") {
+                            Swal.fire({
+                                title: "ผิดพลาด",
+                                text: "ไม่สามารถบันทึกการลบข้อมูลครุภัณฑ์ได้ กรุณาลองใหม่อีกครั้ง ",
+                                icon: "error",
+                            });
+                        }
+                    });
+            },
+            init: function () {
+                Feature.searchData();
+                Feature.initButton();
             }
         }
     })();
