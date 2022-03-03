@@ -124,9 +124,11 @@ router.post('/PostDeleteEquip',(req,res,next)=>{
 })
 
 router.post('/search',(req,res,next)=>{
+    var rfid = req.body.rfid;
     var search = req.body.search;
-    if(search){
-      axios.post(config.servurl+'/GetData/DataMember',{
+    if(search != null){
+      axios.post(config.servurl+'/GetData/DataEquip',{
+        rfid : rfid,
         search_value : search
       })
       .then(function (response) {

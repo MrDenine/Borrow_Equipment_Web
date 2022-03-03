@@ -7,25 +7,23 @@
                 <div class="card-body">
                     <h5>แสดงข้อมูลการยืม</h5>
                     <hr class="mb-4">
-                    <div class="table-responsive">
-                        <table class="table table-striped display nowrap" id="table_id">
-                            <thead class="table-navy-blue">
-                                <tr>
-                                    <th class="text-center">วัน / เดือน / ปี</th>
-                                    <th class="text-center">รหัสพนักงาน</th>
-                                    <th class="text-center">ชื่อ - นามสกุล</th>
-                                    <th class="text-center">ยืม</th>
-                                    <th class="text-center">เลขครุภัณฑ์</th>
-                                    <th class="text-center">ยี่ห้อ</th>
-                                    <th class="text-center">รุ่น</th>
-                                    <th class="text-center">เวลายืม</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <table class="table table-striped display nowrap" id="table_id">
+                        <thead class="table-navy-blue">
+                            <tr>
+                                <th class="text-center">วัน / เดือน / ปี</th>
+                                <th class="text-center">รหัสพนักงาน</th>
+                                <th class="text-center">ชื่อ - นามสกุล</th>
+                                <th class="text-center">ยืม</th>
+                                <th class="text-center">เลขครุภัณฑ์</th>
+                                <th class="text-center">ยี่ห้อ</th>
+                                <th class="text-center">รุ่น</th>
+                                <th class="text-center">เวลายืม</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             
-                            </tbody>
-                        </table>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -39,16 +37,16 @@
                     <div class="row">
                         <div class="input-group mb-3">
                             <label class="col-form-label ms-4 mx-1 px-1">รหัส RFID : </label>
-                            <input type="text" class="form-control rounded-3 me-2" id="member_rfid" maxlength="10" >
+                            <input type="text" class="form-control shadow-sm rounded-3 me-2" id="member_rfid" maxlength="10" >
                             <div class="btn btn-warning shadow-sm rounded-3" id="member_clear">เคลียร์ Tag</div>
                         </div>
                         <div class="input-group mb-3">
                             <label class="col-form-label mx-2">รหัสพนักงาน : </label>
-                            <input type="text" class="form-control rounded-3" id="member_number" disabled>
+                            <input type="text" class="form-control shadow-sm rounded-3" id="member_number" disabled>
                         </div>
                         <div class="input-group mb-2">
                             <label class="col-form-label ms-1 me-2">ชื่อ - นามสกุล : </label>
-                            <input type="text" class="form-control rounded-3" id="member_name" disabled>
+                            <input type="text" class="form-control shadow-sm rounded-3" id="member_name" disabled>
                         </div>
                     </div>
                 </div>
@@ -62,24 +60,24 @@
                     <div class="row">
                         <div class="input-group mb-3">
                             <label class="col-form-label ms-4 mx-1 px-1">รหัส RFID : </label>
-                            <input type="text" class="form-control rounded-3 me-2" id="equipment_rfid" maxlength="10" >
+                            <input type="text" class="form-control shadow-sm rounded-3 me-2" id="equipment_rfid" maxlength="10" >
                             <div class="btn btn-warning shadow-sm rounded-3" id="equipment_clear">เคลียร์ Tag</div>
                         </div>
                         <div class="input-group mb-3">
                             <label class="col-form-label ps-1 ms-3 me-2">ชื่อครุภัณฑ์ : </label>
-                            <input type="text" class="form-control rounded-3" id="equipment_name" disabled>
+                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_name" disabled>
                         </div>
                         <div class="input-group mb-3">
                             <label class="col-form-label ms-3 me-2">เลขครุภัณฑ์ : </label>
-                            <input type="text" class="form-control rounded-3" id="equipment_number" disabled>
+                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_number" disabled>
                             <label class="col-form-label mx-2">S/N : </label>
-                            <input type="text" class="form-control rounded-3" id="equipment_sn" disabled>
+                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_sn" disabled>
                         </div>
                         <div class="input-group mb-2">
                             <label class="col-form-label ms-5 ps-3 me-2">ยีห้อ : </label>
-                            <input type="text" class="form-control rounded-3" id="equipment_brand" disabled>
+                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_brand" disabled>
                             <label class="col-form-label ms-3 me-2">รุ่น : </label>
-                            <input type="text" class="form-control rounded-3" id="equipment_model" disabled>
+                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_model" disabled>
                         </div>
                     </div>
                 </div>
@@ -110,11 +108,8 @@
         var dataTable = $('#table_id').DataTable({
             language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์"},
             searching: false,
-            responsive: true,
             scrollX: true,
-            scrollY: "392px",
-            scrollCollapse: true,
-            paging: false,
+            scrollY: true,
             ordering: false,
             lengthChange: false,
             iDisplayLength: 10,
@@ -356,7 +351,7 @@
                             Swal.fire({
                                 title: "ผิดพลาด",
                                 text: "ไม่สามารถบันทึกข้อมูลการเบิกครุภัณฑ์ได้ กรุณาลองใหม่อีกครั้ง ",
-                                icon: "success",
+                                icon: "error",
                             });
                         }
                     });
