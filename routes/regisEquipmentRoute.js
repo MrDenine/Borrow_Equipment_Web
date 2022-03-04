@@ -103,7 +103,7 @@ router.post('/PostEditEquip',(req,res,next)=>{
 router.post('/PostDeleteEquip',(req,res,next)=>{
     var post_id = req.body.id;
     var post_datetime = req.body.datetime;
-    if(search){
+    if(post_id != null && post_datetime != null){
       axios.post(config.servurl+'/DeleteData/',{
         type_user : 4,
         id : post_id,

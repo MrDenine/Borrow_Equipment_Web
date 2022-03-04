@@ -1,135 +1,147 @@
 <%- include('./template/header'); -%>
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="row">
-            <div class="col-lg-12 text-end mb-3">
-                <div class="btn btn-primary shadow-sm" id="add_NewEquipment"><i class="fas fa-plus me-2"></i>เพิ่มข้อมูลครุภัณฑ์</div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card shadow-sm mb-3 collapse" id="equipmentForm">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h5 class="pt-2">ข้อมูลครุภัณฑ์</h5>
-                    </div>
-                </div>
-                <hr class="mb-4">
-                <div class="row mx-3" id="equipment_validate">
-                    <div class="col-lg-6">
-                        <div class="col-lg-12 mb-2">
-                            <label class="form-label">รหัส RFID </label>
-                            <div class="input-group">
-                                <input type="text" class="form-control shadow-sm rounded-3 me-2" id="equipment_rfid" maxlength="10" required>
-                                <div class="btn btn-warning shadow-sm rounded-3">เคลียร์ Tag</div>
-                                <div class="invalid-feedback">
-                                    กรุณาระบุ รหัส RFID 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 mb-2">
-                            <label class="form-label">ชื่อครุภัณฑ์ </label>
-                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_name" required>
-                            <div class="invalid-feedback">
-                                กรุณาระบุ ชื่อครุภัณฑ์ 
-                            </div>
-                        </div>
-                        <div class="col-lg-12 mb-2">
-                            <div class="row">
-                                <div class="col-lg-6 mb-2">
-                                    <label class="form-label">เลขครุภัณฑ์ </label>
-                                    <input type="text" class="form-control shadow-sm rounded-3" id="equipment_number" required>
-                                    <div class="invalid-feedback">
-                                        กรุณาระบุ เลขครุภัณฑ์ 
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-2">
-                                    <label class="form-label">S/N </label>
-                                    <input type="text" class="form-control shadow-sm rounded-3" id="equipment_sn" required>
-                                    <div class="invalid-feedback">
-                                        กรุณาระบุ S/N 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12 mb-2">
-                            <div class="row">
-                                <div class="col-lg-6 mb-2">
-                                    <label class="form-label">ยี่ห้อ </label>
-                                    <input type="text" class="form-control shadow-sm rounded-3" id="equipment_brand" required>
-                                    <div class="invalid-feedback">
-                                        กรุณาระบุ ยี่ห้อ 
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-2">
-                                    <label class="form-label">รุ่น </label>
-                                    <input type="text" class="form-control shadow-sm rounded-3" id="equipment_model" required>
-                                    <div class="invalid-feedback">
-                                        กรุณาระบุ รุ่น 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="col-lg-12">
-                            <label for="" class="form-label">หมายเหตุ</label>
-                            <textarea class="form-control shadow-sm" id="equipment_description" rows="5" style="height: 280px;" required></textarea>
-                            <div class="invalid-feedback">
-                                กรุณาระบุ หมายเหตุ 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr class="mb-3">
-                <div class="row">
-                    <div class="col-lg-12 text-end">
-                        <div class="btn btn-outline-secondary shadow-sm" id="cancel_addEquipment"><i class="fas fa-times me-2"></i>ยกเลิก</div>
-                        <div class="btn btn-success shadow-sm" id="submit_addEquipment"><i class="fas fa-save me-2"></i>บันทึก</div>
-                    </div>
+<div class="container-xl">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12 text-end mb-3">
+                    <div class="btn btn-primary shadow-sm" id="add_NewEquipment"><i class="fas fa-plus me-2"></i>เพิ่มข้อมูลครุภัณฑ์</div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card shadow-sm mb-3">
-            <div class="card-body">
-                <div class="row mb-2">
-                    <div class="col-lg-7">
-                        <h5 class="pt-2">ตารางข้อมูลครุภัณฑ์</h5>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow-sm mb-3 collapse" id="equipmentForm">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h5 class="pt-2">ข้อมูลครุภัณฑ์</h5>
+                        </div>
                     </div>
-                    <div class="col-lg-5 text-end">
-                        <div class="input-group mb-1">
-                            <input type="text" class="form-control me-2 shadow-sm rounded-3" id="equipmentSearch" placeholder="ชื่อครุภัณฑ์, เลขครุภัณฑ์, ยี่ห้อ">
-                            <div class="btn btn-secondary shadow-sm rounded-3" id="search"><i class="fas fa-search me-2"></i>ค้นหา</div>
+                    <hr class="mb-4">
+                    <div class="row mx-5" id="equipment_validate">
+                        <div class="col-lg-8">
+                            <div class="row mb-3">
+                                <div class="col-lg-12">
+                                    <label class="form-label">รหัส RFID </label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control shadow-sm rounded-3 me-2" id="equipment_rfid" maxlength="10" required>
+                                        <div class="btn btn-warning shadow-sm rounded-3">เคลียร์ Tag</div>
+                                        <div class="invalid-feedback">
+                                            กรุณาระบุ รหัส RFID 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-12">
+                                    <label class="form-label">ชื่อครุภัณฑ์ </label>
+                                    <input type="text" class="form-control shadow-sm rounded-3" id="equipment_name" required>
+                                    <div class="invalid-feedback">
+                                        กรุณาระบุ ชื่อครุภัณฑ์ 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-6 mb-3">
+                                            <label class="form-label">เลขครุภัณฑ์ </label>
+                                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_number" required>
+                                            <div class="invalid-feedback">
+                                                กรุณาระบุ เลขครุภัณฑ์ 
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <label class="form-label">S/N </label>
+                                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_sn" required>
+                                            <div class="invalid-feedback">
+                                                กรุณาระบุ S/N 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-lg-6 mb-3">
+                                            <label class="form-label">ยี่ห้อ </label>
+                                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_brand" required>
+                                            <div class="invalid-feedback">
+                                                กรุณาระบุ ยี่ห้อ 
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <label class="form-label">รุ่น </label>
+                                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_model" required>
+                                            <div class="invalid-feedback">
+                                                กรุณาระบุ รุ่น 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="row mb-3">
+                                <div class="col-lg-12">
+                                    <label for="" class="form-label">คำอธิบาย</label>
+                                    <textarea class="form-control shadow-sm" id="equipment_description" rows="5" style="height: 296px;" required></textarea>
+                                    <div class="invalid-feedback">
+                                        กรุณาระบุ คำอธิบาย
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mb-3">
+                    <div class="row">
+                        <div class="col-lg-12 text-end">
+                            <div class="btn btn-outline-secondary shadow-sm" id="cancel_addEquipment"><i class="fas fa-times me-2"></i>ยกเลิก</div>
+                            <div class="btn btn-success shadow-sm" id="submit_addEquipment"><i class="fas fa-save me-2"></i>บันทึก</div>
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped display nowrap mb-3" id="table_id">
-                    <thead class="table-navy-blue">
-                        <tr>
-                            <th class="text-center">ลำดับ</th>
-                            <th class="text-center">รหัส RFID</th>
-                            <th class="text-center">S/N</th>
-                            <th class="text-center">เลขครุภัณฑ์</th>
-                            <th class="text-center">ชื่อครุภัณฑ์</th>
-                            <th class="text-center">ยี่ห้อ</th>
-                            <th class="text-center">รุ่น</th>
-                            <th class="text-center">จัดการข้อมูล</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
             </div>
-        
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-lg-7">
+                            <h5 class="pt-2">ตารางข้อมูลครุภัณฑ์</h5>
+                        </div>
+                        <div class="col-lg-5 text-end">
+                            <div class="input-group mb-1">
+                                <input type="text" class="form-control me-2 shadow-sm rounded-3" id="equipmentSearch" placeholder="ชื่อครุภัณฑ์, เลขครุภัณฑ์, ยี่ห้อ">
+                                <div class="btn btn-secondary shadow-sm rounded-3" id="search"><i class="fas fa-search me-2"></i>ค้นหา</div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped display nowrap mb-3" id="table_id">
+                        <thead class="table-navy-blue">
+                            <tr>
+                                <th class="text-center">ลำดับ</th>
+                                <th class="text-center">รหัส RFID</th>
+                                <th class="text-center">S/N</th>
+                                <th class="text-center">เลขครุภัณฑ์</th>
+                                <th class="text-center">ชื่อครุภัณฑ์</th>
+                                <th class="text-center">ยี่ห้อ</th>
+                                <th class="text-center">รุ่น</th>
+                                <th class="text-center">จัดการข้อมูล</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            
+            </div>
         </div>
     </div>
 </div>
@@ -153,7 +165,7 @@
             language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์"},
             searching: false,
             initComplete: function (settings, json) {  
-                $("#table_id").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+                $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative;'></div>");            
             },
             ordering: false,
             lengthChange: false,
@@ -277,7 +289,20 @@
                 $('#table_id').on('click', '[name="delete_data"]', function () {
                     var data = $(this).data();
                         id_remove = data.id;
-                    Feature.submitRemoveEquipment();
+                        Swal.fire ({
+                                icon: 'warning',
+                                title: 'กรุณายืนยันการลบ',
+                                text: 'เมื่อกด "ยืนยัน" ระบบจะทำการลบข้อมูลครุภัณฑ์',
+                                showCancelButton: true,
+                                confirmButtonText: "ยืนยัน",
+                                cancelButtonText: "ยกเลิก",
+                            }) .then((result) => {
+                            if (result.isConfirmed) {
+                                Feature.submitRemoveEquipment();
+                            } else {
+                                swal.close()
+                            }
+                        });
                 });
                 // add new equipment
                 $('#add_NewEquipment').on('click', function (e) {
@@ -329,7 +354,7 @@
                     // Time
                     dateTime = getDate[1].split(" ");
                     // Date Now
-                    dateNow = dateDay[2] + '-' + dateDay[1] + '-' + dateDay[0] + ' ' + dateTime[1];
+                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
 
                 var url = '/regisEquipment/PostRegisterEquip';
                     $.ajax({
@@ -351,8 +376,9 @@
                         if (response.status == "Succeed") {
                             Swal.fire({
                                 title: "สำเร็จ",
-                                text: "บันทึกข้อมูลการเพิ่มข้อมูลครุภัณฑ์สำเร็จ ",
+                                text: "บันทึกข้อมูลการเพิ่มข้อมูลครุภัณฑ์สำเร็จ",
                                 icon: "success",
+                                confirmButtonText: "ตกลง",
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     window.location.reload();
@@ -364,6 +390,7 @@
                                 title: "ผิดพลาด",
                                 text: "ไม่สามารถบันทึกการเพิ่มข้อมูลครุภัณฑ์ได้ กรุณาลองใหม่อีกครั้ง ",
                                 icon: "error",
+                                confirmButtonText: "ตกลง",
                             });
                         }
                     });
@@ -375,7 +402,7 @@
                     // Time
                     dateTime = getDate[1].split(" ");
                     // Date Now
-                    dateNow = dateDay[2] + '-' + dateDay[1] + '-' + dateDay[0] + ' ' + dateTime[1];
+                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
 
                 var url = '/regisEquipment/PostEditEquip';
                     $.ajax({
@@ -398,8 +425,9 @@
                         if (response.status == "Succeed") {
                             Swal.fire({
                                 title: "สำเร็จ",
-                                text: "บันทึกข้อมูลการแก้ไขข้อมูลครุภัณฑ์สำเร็จ ",
+                                text: "บันทึกข้อมูลการแก้ไขข้อมูลครุภัณฑ์สำเร็จ",
                                 icon: "success",
+                                confirmButtonText: "ตกลง",
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     window.location.reload();
@@ -412,6 +440,7 @@
                                     title: "ผิดพลาด",
                                     text: "มีรหัส RFID ของครุภัณฑ์นี้ในระบบแล้ว กรุณาลองใหม่อีกครั้ง ",
                                     icon: "error",
+                                    confirmButtonText: "ตกลง",
                                 });
                             }
                         }
@@ -424,9 +453,9 @@
                     // Time
                     dateTime = getDate[1].split(" ");
                     // Date Now
-                    dateNow = dateDay[2] + '-' + dateDay[1] + '-' + dateDay[0] + ' ' + dateTime[1];
+                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
 
-                var url = '/regisEquipment/PostEditEquip';
+                var url = '/regisEquipment/PostDeleteEquip';
                     $.ajax({
                             type: 'POST',
                             url: url,
@@ -439,8 +468,9 @@
                         if (response.status == "Succeed") {
                             Swal.fire({
                                 title: "สำเร็จ",
-                                text: "บันทึกข้อมูลการลบข้อมูลครุภัณฑ์สำเร็จ ",
+                                text: "บันทึกข้อมูลการลบข้อมูลครุภัณฑ์สำเร็จ",
                                 icon: "success",
+                                confirmButtonText: "ตกลง",
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     window.location.reload();
@@ -452,6 +482,7 @@
                                 title: "ผิดพลาด",
                                 text: "ไม่สามารถบันทึกการลบข้อมูลครุภัณฑ์ได้ กรุณาลองใหม่อีกครั้ง ",
                                 icon: "error",
+                                confirmButtonText: "ตกลง",
                             });
                         }
                     });

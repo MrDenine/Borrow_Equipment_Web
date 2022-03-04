@@ -85,8 +85,8 @@ table.dataTable.no-footer {
     margin-bottom: 1rem;
 }
 .dataTables_scrollBody {
-    min-height: 371px;
-    max-height: 371px;
+    min-height: 660px;
+    max-height: 660px;
     background-color: rgba(207, 207, 207, 0.1);
     margin-bottom: 10px;
 } 
