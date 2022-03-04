@@ -1,49 +1,42 @@
 <%- include('./template/header'); -%>
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-lg-10">
 
-    <div class="row">
-        <div class="col-lg-10">
+            </div>
 
         </div>
-        <!-- <div class="col-lg-2">
+        <div class="row">
             <div class="col-lg-12">
-                <div class="card-body pb-0">
-                    <div class="col-xxl-12 mb-3 text-end ">
-                        <div class="btn btn-success " id="search"><i class="fas fa-check me-2 "></i>ยอมรับ</div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-    </div>
-    </div>
-    </div>
-    <div class="row ">
-        <div class="col-lg-12 ">
-            <div class="card shadow-sm " style="min-height: 400px; ">
-                <div class="card-head">
-                    <div class="text-center">
-                        <h3>แจ้งเตือนการยืมและคืนอุปกรณ์</h3>
-                    </div>
+                <div class="card shadow-sm ">
+                    <div class="card-head">
+                        <div class="text-center">
+                            <br>
+                            <br>
+                            <h3>แจ้งเตือนการยืมอุปกรณ์</h3>
+                        </div>
 
-                </div>
-                <div class="card-body ">
-                    <table class="table table-striped " id="table_id">
-                        <thead class="table-navy-blue ">
-                            <tr>
-                                <th class="text-center ">วันที่</th>
-                                <th class="text-center ">รหัสพนักงาน</th>
-                                <th class="text-center ">ชื่อ-นามสกุล</th>
-                                <th class="text-center ">รายการยืม</th>
-                                <th class="text-center ">เลขครุภัณฑ์</th>
-                                <th class="text-center ">เวลา</th>
-                                <th class="text-center ">ตำแหน่ง</th>
-                                <th class="text-center ">สถานะ</th>
-                                <th class="text-center ">ยอมรับ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    </div>
+                    <div class="card-body ">
+                        <table class="table table-striped display nowrap" id="table_id">
+                            <thead class="table-navy-blue ">
+                                <tr>
+                                    <th class="text-center ">วัน/เดือน/ปี</th>
+                                    <th class="text-center ">รหัสพนักงาน</th>
+                                    <th class="text-center ">ชื่อ-นามสกุล</th>
+                                    <th class="text-center ">รายการยืม</th>
+                                    <th class="text-center ">เลขครุภัณฑ์</th>
+                                    <th class="text-center ">เวลา</th>
+                                    <th class="text-center ">ตำแหน่ง</th>
+                                    <th class="text-center ">สถานะ</th>
+                                    <th class="text-center ">ยอมรับ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,6 +51,9 @@
                 var dataTable = $('#table_id').DataTable({
                     searching: false,
                     responsive: true,
+                    initComplete: function(settings, json) {
+                        $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative;'></div>");
+                    },
                     ordering: false,
                     lengthChange: false,
                     iDisplayLength: 10,
@@ -114,17 +110,29 @@
                         className: 'text-center',
                     }, {
                         data: function(data) {
-                            return data['status'];
+                            if (data['status'] == "0") {
+                                return "ไม่ยืนยัน";
+                            } else {
+                                return "ยืนยันเเล้ว";
+                            }
+
+                        },
+                        className: 'text-center',
+                    }, {
+                        data: function(data) {
+                            var setButton = ""
+                            setButton = '<div class="btn btn-success" id="accept" name="accept" data-id="' + data['report_id'] + '" > <i class = "fas fa-check me-2 "> </i>ยอมรับ</div > ';
+                            return setButton;
                         },
                         className: 'text-center',
                     }, ],
                     serverSide: true,
-                    ajaxSource: '/notification/GetReadNotify',
+                    ajaxSource: '/notification/search',
                     serverData: function(sSource, aaData, fnCallback, oSettings) {
-                        aaData.push({
-                            "name": "reportID",
-                            "value": ""
-                        });
+                        // aaData.push({
+                        //     "name": "reportID",
+                        //     "value": ""
+                        // });
 
                         oSettings.jqXHR = $.ajax({
                             dataType: 'json',
@@ -134,13 +142,23 @@
                             success: function(response) {
                                 console.log(response);
                                 console.log(response);
+                                var response = response.data;
                                 if (response.status === "Succeed") {
-                                    var response = response.data;
-                                    response = {
-                                        "aaData": response,
-                                        "iTotalRecords": response.length,
-                                        "iTotalDisplayRecords": response.length
-                                    };
+
+                                    if (response.data === "No Reverting information") {
+                                        response = {
+                                            "aaData": [],
+                                            "iTotalRecords": 0,
+                                            "iTotalDisplayRecords": 0
+                                        };
+                                    } else {
+                                        var response = response.data;
+                                        response = {
+                                            "aaData": response,
+                                            "iTotalRecords": response.length,
+                                            "iTotalDisplayRecords": response.length
+                                        };
+                                    }
                                 } else {
 
                                     response = {
@@ -159,15 +177,54 @@
                 });
 
                 return {
-                    searchData: function() {
-                        $('#search').on('click', function(e) {
+                    initButton: function() {
 
-                            window.location = '/notification?search=' + textSearch;
-
+                        $('#table_id').on('click', '[name="accept"]', function() {
+                            var data = $(this).data();
+                            report_id = data.id;
+                            Feature.submitNotification();
                         });
+
                     },
+
+
+
+                    submitNotification: function() {
+                        var url = '/notification/PostReadNotify';
+                        $.ajax({
+                                type: 'POST',
+                                url: url,
+                                data: {
+                                    reportID: report_id
+                                }
+                            })
+                            .done(function(response) {
+                                if (response.status == "Succeed") {
+                                    Swal.fire({
+                                        title: "สำเร็จ",
+                                        text: "บันทึกข้อมูลการลบข้อมูลครุภัณฑ์สำเร็จ ",
+                                        icon: "success",
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.reload();
+                                        }
+                                    });
+
+                                } else if (response.status == "Failed") {
+                                    Swal.fire({
+                                        title: "ผิดพลาด",
+                                        text: "ไม่สามารถบันทึกการลบข้อมูลครุภัณฑ์ได้ กรุณาลองใหม่อีกครั้ง ",
+                                        icon: "error",
+                                    });
+                                }
+                            });
+                    },
+
+
                     init: function() {
-                        Feature.searchData();
+                        Feature.initButton();
+                        Feature.initComplete();
+
                     }
                 }
             })();
