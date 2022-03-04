@@ -1,7 +1,7 @@
 <%- include('./template/header'); -%>
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-9">
         <div class="row px-2 mb-4">
             <div class="card shadow-sm mb-3">
                 <div class="card-body">
@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
         <div class="row px-2 mb-1">
             <div class="card shadow-sm mb-3">
                 <div class="card-body">
@@ -95,7 +95,9 @@
                                     date = data['return_date'];
                                     date = new Date(date).toLocaleDateString();
                                     date = date.split("/")
-                                    date = date[1] + "/" + date[0] + "/" + date[2]; // set format
+
+                                var dateYear = parseInt(date[2]);
+                                    date = date[1] + "/" + date[0] + "/" + (dateYear + 543); // set format
                                 return date;
                             },
                             className : 'text-center',
@@ -140,8 +142,12 @@
                             data: function (data) {
                                 var date = ""
                                     date = data['return_date'];
-                                    date = new Date(date).toLocaleTimeString();
-                                return date;
+                                var time_return = new Date(date).toLocaleTimeString('th', {
+                                        timeZone: 'Asia/Jakarta',
+                                        timeStyle: 'short',
+                                        hour12: false,
+                                    });
+                                return time_return + ' น.';
                             },
                             className : 'text-center',
                         },
@@ -201,6 +207,7 @@
                                     title: "ไม่พบข้อมูล",
                                     text: "ไม่พบข้อมูลรหัส RFID นี้ กรุณาลองใหม่อีกครั้ง ",
                                     icon: "warning",
+                                    confirmButtonText: "ตกลง",
                                 });
                             }
                         });
@@ -233,6 +240,7 @@
                             title: "ผิดพลาด",
                             text: 'กรุณาตรวจสอบข้อมูลให้ครบก่อนกดปุ่ม "คืนครุภัณฑ์"',
                             icon: "warning",
+                            confirmButtonText: "ตกลง",
                         });
                     }
                 });
@@ -253,7 +261,7 @@
                     // Time
                     dateTime = getDate[1].split(" ");
                     // Date Now
-                    dateNow = dateDay[2] + '-' + dateDay[1] + '-' + dateDay[0] + ' ' + dateTime[1];
+                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
 
                 var url = '/return/PostReturn';
                     $.ajax({
@@ -271,6 +279,7 @@
                                 title: "สำเร็จ",
                                 text: "บันทึกข้อมูลการคืนครุภัณฑ์สำเร็จ ",
                                 icon: "success",
+                                confirmButtonText: "ตกลง",
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     window.location.reload();
@@ -282,6 +291,7 @@
                                 title: "ผิดพลาด",
                                 text: "ไม่สามารถบันทึกข้อมูลการคืนครุภัณฑ์ได้ กรุณาลองใหม่อีกครั้ง ",
                                 icon: "error",
+                                confirmButtonText: "ตกลง",
                             });
                         }
                     });

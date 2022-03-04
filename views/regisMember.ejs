@@ -1,215 +1,288 @@
 <%- include('./template/header'); -%>
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="row px-2 mb-1">
+<div class="container-xl">
+    <div class="row">
+        <div class="col-lg-12">
             <div class="row">
-                <div class="card shadow-sm mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h5 class="pt-2">ข้อมูลบุคลากร</h5>
-                            </div>
-                            <div class="col-lg-6 text-end">
-                                <div class="btn btn-primary shadow-sm" ><i class="fas fa-plus me-2"></i>เพิ่มข้อมูลบุคลากร</div>
-                            </div>
-                        </div>
-                        <hr class="mb-4">
-                        <!-- non req -->
-                        <div class="row non-req">
-                            <span class="text-center my-5">
-                                <span style="font-size:20px; color: rgba(0, 0, 0, 0.4);">
-                                    <i class="fas fa-user-tie mb-2" style="margin-top: 20px; font-size:50px;"></i>
-                                    <p>ยังไม่ได้ระบุ " บุคลากร "</p>
-                                </span>
-                            </span>
-                        </div>
-                        <!-- end non req -->
-
-                        <!-- begin form -->
-                        <div class="row form-data">
-                            <div class="col-lg-8 py-4 pe-2">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="input-group ps-1 mb-3">
-                                            <label class="col-form-label ps-4 ms-3 me-2">รหัส RFID : </label>
-                                            <input type="text" class="form-control rounded-3 me-2">
-                                            <div class="btn btn-warning shadow-sm rounded-3">เคลียร์ Tag</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="input-group mb-3">
-                                            <label class="col-form-label ps-2 ms-3 me-2">รหัสพนักงาน : </label>
-                                            <input type="text" class="form-control rounded-3" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="row">
-                                            <div class="col-sm-8">
-                                                <div class="input-group mb-3">
-                                                    <label class="col-form-label ps-1 ms-3 me-2">ชื่อ - นามสกุล : </label>
-                                                    <input type="text" class="form-control rounded-3" disabled>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="input-group mb-3">
-                                                    <label class="col-form-label ps-1 ms-3 me-2">เพศ : </label>
-                                                    <select class="form-select rounded-3" disabled>
-                                                        <option value=""> </option>
-                                                        <option value="ชาย">ชาย</option>
-                                                        <option value="หญิง">หญิง</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="input-group mb-2">
-                                            <label class="col-form-label ps-1 ms-3 me-2">เบอร์โทรศัพท์ : </label>
-                                            <input type="text" class="form-control rounded-3" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="px-5">
-                                    <div name="member_image" class="dropzone text-center shadow-sm mx-4" style="background-color:#ffff; border-color:#ced4da; border-radius: 1.25rem;">
-                                        <div class="dz-default dz-message" style="height: 110px;">
-                                            <span>
-                                                <span style="font-size:15px;">
-                                                    <i class="fas fa-cloud-upload-alt" style="margin-top: 20px; font-size:50px;"></i>
-                                                    <p>เพิ่มรูปภาพบุคลากร</p>
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="my-3">
-                            <div class="row">
-                                <div class="col-lg-12 text-end">
-                                    <div class="btn btn-outline-secondary"><i class="fas fa-times me-2"></i>ยกเลิก</div>
-                                    <div class="btn btn-success"><i class="fas fa-save me-2"></i>บันทึก</div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end form -->
-                        
-                    </div>
+                <div class="col-lg-12 text-end mb-3">
+                    <div class="btn btn-primary shadow-sm" id="add_NewMember"><i class="fas fa-plus me-2"></i>เพิ่มข้อมูลบุคลากร</div>
                 </div>
-
-               
-
-                <div class="card shadow-sm mb-3">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <h5 class="pt-2">ตารางข้อมูลบุคลากร</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow-sm mb-3 collapse" id="MemberForm">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h5 class="pt-2">ข้อมูลบุคลากร</h5>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <div class="row mx-5" id="Member_validate">
+                        <div class="col-lg-8">
+                            <div class="row mb-3">
+                                <div class="col-lg-12">
+                                    <label class="form-label">รหัส RFID</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control shadow-sm rounded-3 me-2" id="member_rfid" maxlength="10" required>
+                                        <div class="btn btn-warning shadow-sm rounded-3">เคลียร์ Tag</div>
+                                        <div class="invalid-feedback">
+                                            กรุณาระบุ รหัส RFID 
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-lg-5">
-                                <div class="input-group shadow-sm mb-2">
-                                   <input type="text" class="form-control" placeholder="ชื่อ, รหัสพนักงาน, เบอร์โทรศัพท์">
-                                    <div class="btn btn-secondary" id=""><i class="fas fa-search me-2"></i>ค้นหา</div>
+                            <div class="row mb-3">
+                                <div class="col-lg-6">
+                                    <label class="form-label">รหัสพนักงาน</label>
+                                    <input type="text" class="form-control shadow-sm rounded-3" id="member_username" required>
+                                    <div class="invalid-feedback">
+                                        กรุณาระบุ รหัสพนักงาน
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-label">รหัสผ่าน</label>
+                                    <input type="password" class="form-control shadow-sm rounded-3" id="member_password" required>
+                                    <div class="invalid-feedback">
+                                        กรุณาระบุ รหัสผ่าน
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-12">
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <label class="form-label">ชื่อ</label>
+                                            <input type="text" class="form-control shadow-sm rounded-3" id="member_firstname" required>
+                                            <div class="invalid-feedback">
+                                                กรุณาระบุ ชื่อพนักงาน
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <label class="form-label">นามสกุล</label>
+                                            <input type="text" class="form-control shadow-sm rounded-3" id="member_lastname" required>
+                                            <div class="invalid-feedback">
+                                                กรุณาระบุ นามสกุล
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <label class="form-label">เพศ</label>
+                                            <select class="form-select shadow-sm rounded-3" id="member_gender" required>
+                                                <option value=""></option>
+                                                <option value="0">ชาย</option>
+                                                <option value="1">หญิง</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                กรุณาระบุ เพศ
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-12">
+                                    <label class="form-label">เบอร์โทรศัพท์</label>
+                                    <input type="text" class="form-control shadow-sm rounded-3" id="member_tel" required>
+                                    <div class="invalid-feedback">
+                                        กรุณาระบุ เบอร์โทรศัพท์
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-striped my-2" id="table_id" style="min-height: 428px;">
-                                <thead class="table-navy-blue">
-                                    <tr>
-                                        <th class="text-center">ลำดับ</th>
-                                        <th class="text-center">รหัส RFID</th>
-                                        <th class="text-center">รหัสพนักงาน</th>
-                                        <th class="text-center">ชื่อ</th>
-                                        <th class="text-center">เพศ</th>
-                                        <th class="text-center">เบอร์โทรศัพท์</th>
-                                        <th class="text-center">จัดการข้อมูล</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">4312341234</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">AAAA</td>
-                                        <td class="text-center">B</td>
-                                        <td class="text-center"><div class="btn btn-danger btn-sm"><i class="fas fa-trash me-2"></i>ลบ</div> <div class="btn btn-warning btn-sm"><i class="fas fa-pen me-2"></i></i>แก้ไข</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">2</td>
-                                        <td class="text-center">4312341234</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">AAAA</td>
-                                        <td class="text-center">B</td>
-                                        <td class="text-center"><div class="btn btn-danger btn-sm"><i class="fas fa-trash me-2"></i>ลบ</div> <div class="btn btn-warning btn-sm"><i class="fas fa-pen me-2"></i></i>แก้ไข</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">3</td>
-                                        <td class="text-center">4312341234</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">AAAA</td>
-                                        <td class="text-center">B</td>
-                                        <td class="text-center"><div class="btn btn-danger btn-sm"><i class="fas fa-trash me-2"></i>ลบ</div> <div class="btn btn-warning btn-sm"><i class="fas fa-pen me-2"></i></i>แก้ไข</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">4</td>
-                                        <td class="text-center">4312341234</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">AAAA</td>
-                                        <td class="text-center">B</td>
-                                        <td class="text-center"><div class="btn btn-danger btn-sm"><i class="fas fa-trash me-2"></i>ลบ</div> <div class="btn btn-warning btn-sm"><i class="fas fa-pen me-2"></i></i>แก้ไข</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">5</td>
-                                        <td class="text-center">4312341234</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">00001</td>
-                                        <td class="text-center">AAAA</td>
-                                        <td class="text-center">B</td>
-                                        <td class="text-center"><div class="btn btn-danger btn-sm"><i class="fas fa-trash me-2"></i>ลบ</div> <div class="btn btn-warning btn-sm"><i class="fas fa-pen me-2"></i></i>แก้ไข</div></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="col-lg-4">
+                            <div class="row mx-2 mb-3">
+                                <label class="form-label">รูปภาพบุคลากร</label>
+                                <div name="Member_image" id="file" class="dropzone text-center shadow-sm" style="background-color:#ffff; border-color:#ced4da; border-radius: 1.25rem;">
+                                    <div class="dz-default dz-message" style="height: 158px;">
+                                        <span>
+                                            <span style="font-size:15px;">
+                                                <i class="fas fa-cloud-upload-alt" style="margin-top: 43px; font-size:50px;"></i>
+                                                <p>เพิ่มรูปภาพบุคลากร</p>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mb-3">
+                    <div class="row">
+                        <div class="col-lg-12 text-end">
+                            <div class="btn btn-outline-secondary shadow-sm" id="cancel_addMember"><i class="fas fa-times me-2"></i>ยกเลิก</div>
+                            <div class="btn btn-success shadow-sm" id="submit_addMember"><i class="fas fa-save me-2"></i>บันทึก</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow-sm mb-3">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-lg-7">
+                            <h5 class="pt-2">ตารางข้อมูลบุคลากร</h5>
+                        </div>
+                        <div class="col-lg-5 text-end">
+                            <div class="input-group mb-1">
+                                <input type="text" class="form-control me-2 shadow-sm rounded-3" id="MemberSearch" placeholder="ชื่อ, รหัสพนักงาน, เบอร์โทรศัพท์">
+                                <div class="btn btn-secondary shadow-sm rounded-3" id="search"><i class="fas fa-search me-2"></i>ค้นหา</div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped display nowrap mb-3" id="table_id">
+                        <thead class="table-navy-blue">
+                            <tr>
+                                <th class="text-center">ลำดับ</th>
+                                <th class="text-center">รหัส RFID</th>
+                                <th class="text-center">รหัสพนักงาน</th>
+                                <th class="text-center">ชื่อ</th>
+                                <th class="text-center">เพศ</th>
+                                <th class="text-center">เบอร์โทรศัพท์</th>
+                                <th class="text-center">จัดการข้อมูล</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            
+            </div>
+        </div>
+    </div>
 </div>
 
 <%- include('./template/footer'); -%>
-
 <script>
     var Feature = (function(){
         Dropzone.autoDiscover = false;
 
+        var countOrder = 0;
+        var member_password = "1234";
+        var image_file = "";
+
+        var aaRfid = "";
+        var aaSearch = "";
+
+        var id_update = 0;
+        var id_remove = 0;
+
+        var user = JSON.parse('<%- JSON.stringify(udt) %>');
+            user = user.id;
+
         var dataTable = $('#table_id').DataTable({
             language: {emptyTable: "ไม่พบข้อมูลบุคลากร"},
             searching: false,
+            initComplete: function (settings, json) {  
+                $("#table_id").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+            },
+            ordering: false,
             lengthChange: false,
-            ordering:false,
-            responsive: true
-            // iDisplayLength: 10,
+            iDisplayLength: 10,
+            bAutoWidth: false,
+            columns:[
+                        { 
+                            data: function (data) {
+                                countOrder++
+                                return countOrder;
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['rfid'];
+                            },
+                            className : 'text-center',
+                        },
+                        
+                        { 
+                            data: function (data) {
+                                return data['username'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['firstname'] + ' ' + data['lastname'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                var gender = "";
+                                    gender = data['gender'];
+                                        if ( gender == 0 ) {
+                                            gender = "ชาย"
+                                        } 
+                                        else if ( gender == 1 ) {
+                                            gender = "หญิง"
+                                        }
+                                return gender;
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['telephone'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                var setButton = ""
+                                    setButton = '<a class="btn btn-danger btn-sm shadow-sm" name="delete_data" data-id="' + data['id'] + '"><i class="fas fa-trash me-2"></i>ลบ</a>\
+                                                 <a class="btn btn-warning btn-sm shadow-sm" name="edit_data"\
+                                                    data-id="' + data['id'] + '" data-rfid="' + data['rfid'] + '" data-username="' + data['username'] + '"\
+                                                    data-firstname="' + data['firstname'] + '"data-lastname="' + data['lastname'] + '"data-gender="' + data['gender'] + '" data-telephone="' + data['telephone'] + '">\
+                                                 <i class="fas fa-pen me-2"></i>แก้ไข</a>'; 
+                                return setButton;
+                            },
+                            className : 'text-center',
+                        },
+                    ],
+            serverSide: true,
+            ajaxSource: '/regisMember/search',
+            serverData: function (sSource, aaData, fnCallback, oSettings) {
+                aaData.push({ "name": "rfid", "value": aaRfid});
+                aaData.push({ "name": "search", "value": aaSearch});
+                oSettings.jqXHR = $.ajax({
+                    dataType: 'json',
+                    type: "POST",
+                    url: sSource,
+                    data: aaData,
+                    success: function (response) {
+                        if (response.status === "Succeed") {
+                            if (response.data === "No Reverting information") {
+                                response = {"aaData":[], "iTotalRecords": 0, "iTotalDisplayRecords": 0};
+                            } else {
+                                var response = response.data;
+                                    response = {"aaData": response, "iTotalRecords": response.length, "iTotalDisplayRecords": response.length};
+                            }
+                        } else {
+                            response = {"aaData":[], "iTotalRecords": 0, "iTotalDisplayRecords": 0};
+                        }
+                      
+                        fnCallback(response);
+
+                    }
+                });
+            },
+            createdRow: function (row, data, index) {
+            }
         });
             
         return {
+            
             initDropzone: function () {
-                dropzoneAdd = new Dropzone('[name=member_image]', {
+                dropzoneAdd = new Dropzone('[name=Member_image]', {
                     url: function () {
-                        return '';
+                        return '/regisMember/PostUploadImageProfile';
                         },
-                    paramName: "upload",
+                    paramName: "file",
                     maxFiles: 1,
                     maxFilesize: 25, // Max file size 25 mb
                     addRemoveLinks: true,
@@ -297,13 +370,243 @@
                     }
                 });        
             },
-            initRequest: function () {
-                $('.form-data').hide()
-                // $('.non-req').hide()
+            searchData: function () {
+                $('#search').on('click', function (e) {
+                    var MemberSearch = $('#MemberSearch').val();
+                        aaSearch = MemberSearch.trim();
+                        countOrder = 0;
+                        dataTable.ajax.reload();
+                });
+            },
+            initButton: function () {
+                // in dataTable
+                $('#table_id').on('click', '[name="edit_data"]', function () {
+                    var data = $(this).data();
+                        if ($('#MemberForm').is('.collapse:not(.show)')) { // not show
+                            $('#MemberForm').collapse("toggle");
+                        }
+                            // set value
+                            id_update = data.id;
+                            $('#member_rfid').val(data.rfid);
+                            $('#member_firstname').val(data.firstname);
+                            $('#member_lastname').val( data.lastname);
+                            $('#member_username').val(data.username);
+                            $("#member_password").val('password');
+                            $("#member_password").prop( "disabled", true );
+                            $('#member_gender').val(data.gender);
+                            $('#member_tel').val(data.telephone);
+                });
+                $('#table_id').on('click', '[name="delete_data"]', function () {
+                    var data = $(this).data();
+                        id_remove = data.id;
+                        Swal.fire ({
+                                icon: 'warning',
+                                title: 'กรุณายืนยันการลบ',
+                                text: 'เมื่อกด "ยืนยัน" ระบบจะทำการลบข้อมูลบุคลากร',
+                                showCancelButton: true,
+                                confirmButtonText: "ยืนยัน",
+                                cancelButtonText: "ยกเลิก",
+                            }) .then((result) => {
+                            if (result.isConfirmed) {
+                                Feature.submitRemoveMember();
+                            } else {
+                                swal.close()
+                            }
+                        });
+                });
+                // add new Member
+                $('#add_NewMember').on('click', function (e) {
+                    if ($('#MemberForm').is('.collapse:not(.show)')) { // not show
+                            $('#MemberForm').collapse("toggle");
+                    }
+                        id_update = 0;
+                        // clear value
+                        $('#member_rfid').val('');
+                        $('#member_firstname').val('');
+                        $('#member_lastname').val('');
+                        $('#member_username').val('');
+                        $("#member_password").val('');
+                        $("#member_password").prop( "disabled", false );
+                        $('#member_gender').val('');
+                        $('#member_tel').val('');
+                });
+                // in form 
+                $('#submit_addMember').on('click', function (e) {
+                    if (id_update == 0) {
+                        if (($('#member_rfid').val() && $('#member_fristname').val() && $('#member_lastname').val() && $('#member_username').val() && $('#member_password').val() && $('#member_gender').val() && $('#member_tel').val()) != "" ) {
+                            member_password = $('#member_password').val();
+                            Feature.submitAddMember();
+                        } else {
+                            $("#Member_validate").addClass("was-validated");
+                        }
+                    } 
+                    else if (id_update > 0) {
+                        if (($('#member_rfid').val() && $('#member_fristname').val() && $('#member_lastname').val() && $('#member_username').val() && $('#member_gender').val() && $('#member_tel').val()) != "" ) {
+                            member_password = "";
+                            Feature.submitUpdateMember();
+                        } else {
+                            $("#Member_validate").addClass("was-validated");
+                        }
+                    }
+                });
+                $('#cancel_addMember').on('click', function (e) {
+                    if ($('#MemberForm').is('.collapse.show')) { // show
+                            $("#Member_validate").removeClass("was-validated");
+                            $('#MemberForm').collapse("toggle"); 
+                    }
+                        // clear value
+                        $('#member_rfid').val('');
+                        $('#member_firstname').val('');
+                        $('#member_lastname').val('');
+                        $('#member_username').val('');
+                        $('#member_gender').val('');
+                        $('#member_tel').val('');
+                });
+            },
+            submitAddMember: function () {
+                var getDate = new Date().toLocaleString().split(",");
+                    // Date
+                    dateDay = getDate[0].split("/");
+                    // Time
+                    dateTime = getDate[1].split(" ");
+                    // Date Now
+                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
+                
+                var url = '/regismember/PostRegisterMember';
+                    $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: { 
+                                    rfid : $('#member_rfid').val(),
+                                    username : $('#member_username').val(),
+                                    password : member_password,
+                                    firstname : $('#member_firstname').val(),
+                                    lastname : $('#member_lastname').val(),
+                                    gender : $('#member_gender').val(),
+                                    image_file : image_file,
+                                    datetime : dateNow,
+                                    create_by : user,
+                                  } 
+                        })
+                    .done(function(response) {
+                        if (response.status == "Succeed") {
+                            Swal.fire({
+                                title: "สำเร็จ",
+                                text: "บันทึกการเพิ่มข้อมูลบุคลากร ",
+                                icon: "success",
+                                confirmButtonText: "ตกลง",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                            
+                        } else if (response.status == "Failed") {
+                            Swal.fire({
+                                title: "ผิดพลาด",
+                                text: "ไม่สามารถบันทึกการเพิ่มข้อมูลบุคลากรได้ กรุณาลองใหม่อีกครั้ง ",
+                                icon: "error",
+                                confirmButtonText: "ตกลง",
+                            });
+                        }
+                    });
+            },
+            submitUpdateMember: function () {
+                var getDate = new Date().toLocaleString().split(",");
+                    // Date
+                    dateDay = getDate[0].split("/");
+                    // Time
+                    dateTime = getDate[1].split(" ");
+                    // Date Now
+                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
+
+                var url = '/regismember/PostEditMember';
+                    $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: { 
+                                    id : id_update,
+                                    rfid : $('#member_rfid').val(),
+                                    username : $('#member_username').val(),
+                                    password : member_password,
+                                    firstname : $('#member_firstname').val(),
+                                    lastname : $('#member_lastname').val(),
+                                    gender : $('#member_gender').val(),
+                                    image_file : image_file,
+                                    datetime : dateNow,
+                                    update_by : user,
+                                  } 
+                        })
+                    .done(function(response) {
+                        if (response.status == "Succeed") {
+                            Swal.fire({
+                                title: "สำเร็จ",
+                                text: "บันทึกการแก้ไขข้อมูลบุคลากรสำเร็จ ",
+                                icon: "success",
+                                confirmButtonText: "ตกลง",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                            
+                        } else if (response.status == "Failed") {
+                            if (response.data.DuplicateData == "rfid") {
+                                Swal.fire({
+                                    title: "ผิดพลาด",
+                                    text: "มีรหัส RFID ของบุคลากรนี้ในระบบแล้ว กรุณาลองใหม่อีกครั้ง ",
+                                    icon: "error",
+                                    confirmButtonText: "ตกลง",
+                                });
+                            }
+                        }
+                    });
+            },
+            submitRemoveMember: function () {
+                var getDate = new Date().toLocaleString().split(",");
+                    // Date
+                    dateDay = getDate[0].split("/");
+                    // Time
+                    dateTime = getDate[1].split(" ");
+                    // Date Now
+                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
+
+                var url = '/regismember/PostUploadImageProfile';
+                    $.ajax({
+                            type: 'POST',
+                            url: url,
+                            data: { 
+                                    id : id_remove,
+                                    datetime : dateNow
+                                  } 
+                        })
+                    .done(function(response) {
+                        if (response.status == "Succeed") {
+                            Swal.fire({
+                                title: "สำเร็จ",
+                                text: "บันทึกข้อมูลการลบข้อมูลบุคลากรสำเร็จ",
+                                icon: "success",
+                                confirmButtonText: "ตกลง",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                            
+                        } else if (response.status == "Failed") {
+                            Swal.fire({
+                                title: "ผิดพลาด",
+                                text: "ไม่สามารถบันทึกการลบข้อมูลบุคลากรได้ กรุณาลองใหม่อีกครั้ง ",
+                                icon: "error",
+                                confirmButtonText: "ตกลง",
+                            });
+                        }
+                    });
             },
             init: function () {
                 Feature.initDropzone();
-                Feature.initRequest();
+                Feature.searchData();
+                Feature.initButton();
             }
         }
     })();

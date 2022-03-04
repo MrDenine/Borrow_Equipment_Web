@@ -1,7 +1,7 @@
 <%- include('./template/header'); -%>
 
 <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-9">
         <div class="row px-2 mb-4">
             <div class="card shadow-sm mb-3">
                 <div class="card-body">
@@ -13,7 +13,7 @@
                                 <th class="text-center">วัน / เดือน / ปี</th>
                                 <th class="text-center">รหัสพนักงาน</th>
                                 <th class="text-center">ชื่อ - นามสกุล</th>
-                                <th class="text-center">ยืม</th>
+                                <th class="text-center">ครุภัณฑ์ที่ยืม</th>
                                 <th class="text-center">เลขครุภัณฑ์</th>
                                 <th class="text-center">ยี่ห้อ</th>
                                 <th class="text-center">รุ่น</th>
@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
         <div class="row px-2 mb-1">
             <div class="card shadow-sm mb-3">
                 <div class="card-body">
@@ -121,7 +121,9 @@
                                     date = data['borrow_date'];
                                     date = new Date(date).toLocaleDateString();
                                     date = date.split("/")
-                                    date = date[1] + "/" + date[0] + "/" + date[2]; // set format
+
+                                var dateYear = parseInt(date[2]);
+                                    date = date[1] + "/" + date[0] + "/" + (dateYear + 543); // set format
                                 return date;
                             },
                             className : 'text-center',
@@ -166,8 +168,12 @@
                             data: function (data) {
                                 var date = ""
                                     date = data['borrow_date'];
-                                    date = new Date(date).toLocaleTimeString();
-                                return date;
+                                var time_borrow = new Date(date).toLocaleTimeString('th', {
+                                        timeZone: 'Asia/Jakarta',
+                                        timeStyle: 'short',
+                                        hour12: false,
+                                    });
+                                return time_borrow + ' น.';
                             },
                             className : 'text-center',
                         },
@@ -225,6 +231,7 @@
                                     title: "ไม่พบข้อมูล",
                                     text: "ไม่พบข้อมูลรหัส RFID นี้ กรุณาลองใหม่อีกครั้ง ",
                                     icon: "warning",
+                                    confirmButtonText: "ตกลง",
                                 });
                             }
                         });
@@ -261,6 +268,7 @@
                                     title: "ไม่พบข้อมูล",
                                     text: "ไม่พบข้อมูลรหัส RFID นี้ กรุณาลองใหม่อีกครั้ง ",
                                     icon: "warning",
+                                    confirmButtonText: "ตกลง",
                                 });
                             }
                         });
@@ -299,6 +307,7 @@
                             title: "ผิดพลาด",
                             text: 'กรุณาตรวจสอบข้อมูลให้ครบก่อนกดปุ่ม "เบิกครุภัณฑ์"',
                             icon: "warning",
+                            confirmButtonText: "ตกลง",
                         });
                     }
                 });
@@ -323,7 +332,7 @@
                     // Time
                     dateTime = getDate[1].split(" ");
                     // Date Now
-                    dateNow = dateDay[2] + '-' + dateDay[1] + '-' + dateDay[0] + ' ' + dateTime[1];
+                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
 
                 var url = '/borrow/PostBorrow';
                     $.ajax({
@@ -352,6 +361,7 @@
                                 title: "ผิดพลาด",
                                 text: "ไม่สามารถบันทึกข้อมูลการเบิกครุภัณฑ์ได้ กรุณาลองใหม่อีกครั้ง ",
                                 icon: "error",
+                                confirmButtonText: "ตกลง",
                             });
                         }
                     });
