@@ -1,51 +1,42 @@
 <%- include('./template/header'); -%>
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-lg-10">
 
-    <div class="row">
-        <div class="col-lg-10">
+            </div>
 
         </div>
-        <!-- <div class="col-lg-2">
+        <div class="row">
             <div class="col-lg-12">
-                <div class="card-body pb-0">
-                    <div class="col-xxl-12 mb-3 text-end ">
-                        <div class="btn btn-success " id="search"><i class="fas fa-check me-2 "></i>ยอมรับ</div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-    </div>
-    </div>
-    </div>
-    <div class="row ">
-        <div class="col-lg-12 ">
-            <div class="card shadow-sm " style="min-height: 400px; ">
-                <div class="card-head">
-                    <div class="text-center">
-                        <br>
-                        <br>
-                        <h3>แจ้งเตือนการยืมอุปกรณ์</h3>
-                    </div>
+                <div class="card shadow-sm ">
+                    <div class="card-head">
+                        <div class="text-center">
+                            <br>
+                            <br>
+                            <h3>แจ้งเตือนการยืมอุปกรณ์</h3>
+                        </div>
 
-                </div>
-                <div class="card-body ">
-                    <table class="table table-striped " id="table_id">
-                        <thead class="table-navy-blue ">
-                            <tr>
-                                <th class="text-center ">วันที่</th>
-                                <th class="text-center ">รหัสพนักงาน</th>
-                                <th class="text-center ">ชื่อ-นามสกุล</th>
-                                <th class="text-center ">รายการยืม</th>
-                                <th class="text-center ">เลขครุภัณฑ์</th>
-                                <th class="text-center ">เวลา</th>
-                                <th class="text-center ">ตำแหน่ง</th>
-                                <th class="text-center ">สถานะ</th>
-                                <th class="text-center ">ยอมรับ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    </div>
+                    <div class="card-body ">
+                        <table class="table table-striped display nowrap" id="table_id">
+                            <thead class="table-navy-blue ">
+                                <tr>
+                                    <th class="text-center ">วัน/เดือน/ปี</th>
+                                    <th class="text-center ">รหัสพนักงาน</th>
+                                    <th class="text-center ">ชื่อ-นามสกุล</th>
+                                    <th class="text-center ">รายการยืม</th>
+                                    <th class="text-center ">เลขครุภัณฑ์</th>
+                                    <th class="text-center ">เวลา</th>
+                                    <th class="text-center ">ตำแหน่ง</th>
+                                    <th class="text-center ">สถานะ</th>
+                                    <th class="text-center ">ยอมรับ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,6 +51,9 @@
                 var dataTable = $('#table_id').DataTable({
                     searching: false,
                     responsive: true,
+                    initComplete: function(settings, json) {
+                        $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative;'></div>");
+                    },
                     ordering: false,
                     lengthChange: false,
                     iDisplayLength: 10,
@@ -183,15 +177,17 @@
                 });
 
                 return {
-
                     initButton: function() {
+
                         $('#table_id').on('click', '[name="accept"]', function() {
                             var data = $(this).data();
                             report_id = data.id;
-                            console.log(report_id);
                             Feature.submitNotification();
                         });
+
                     },
+
+
 
                     submitNotification: function() {
                         var url = '/notification/PostReadNotify';
@@ -224,8 +220,11 @@
                             });
                     },
 
+
                     init: function() {
                         Feature.initButton();
+                        Feature.initComplete();
+
                     }
                 }
             })();
