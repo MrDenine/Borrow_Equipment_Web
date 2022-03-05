@@ -41,18 +41,18 @@
 <script>
     // set hidden menu navber
     var user = JSON.parse('<%- JSON.stringify(udt) %>');
-        user = user.id;
+        user = user.role;
 
-        if (user === 1) {
+        if (user === "admin") {
             $('#department').hide();
-        } else if (user === 2) {
+        } else if (user === "member") {
             $('#borrow').hide();
             $('#return').hide();
             $('#report').hide();
             $('#notification').hide();
             $('#register').hide();
             $('#department').hide();
-        } else if (user === 3) {
+        } else if (user === "department") {
             $('#equipment').hide();
             $('#borrow').hide();
             $('#return').hide();
