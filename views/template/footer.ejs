@@ -1,5 +1,5 @@
     <!-- </div> -->
-    <div class="row dateTime mt-3">
+    <div class="row dateTime mt-3 px-4">
         <script>
             function display_ct5() {
                 var x = new Date()
@@ -36,3 +36,41 @@
 <script type="text/javascript" src="../../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="../../node_modules/dropzone/dist/dropzone-min.js"></script>
 <script type="text/javascript" src="../../node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script type="text/javascript" src="../../node_modules/socket.io/client-dist/socket.io.js"></script>
+
+<script>
+    // set hidden menu navber
+    var user = JSON.parse('<%- JSON.stringify(udt) %>');
+        user = user.id;
+
+        if (user === 1) {
+            $('#department').hide();
+        } else if (user === 2) {
+            $('#borrow').hide();
+            $('#return').hide();
+            $('#report').hide();
+            $('#notification').hide();
+            $('#register').hide();
+            $('#department').hide();
+        } else if (user === 3) {
+            $('#equipment').hide();
+            $('#borrow').hide();
+            $('#return').hide();
+            $('#report').hide();
+            $('#notification').hide();
+            $('#register').hide();
+        }
+        
+    let socket = io.connect("http://localhost:3000", { reconnect: true });
+        socket.on("connect", function (data) {
+        socket.emit("join", "Hello world");
+        });
+        socket.on("dataNoti", function (data) {
+        console.log(data);
+        if (data) {
+            $('#datanoti').addClass('position-absolute p-1 ms-1 bg-danger shadow-lg rounded-circle');
+        }
+        $("#clock").html(data);
+        });
+
+</script>
