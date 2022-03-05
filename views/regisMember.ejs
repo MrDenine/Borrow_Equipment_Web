@@ -122,7 +122,7 @@
         <div class="col-lg-12">
             <div class="card shadow-sm mb-3">
                 <div class="card-body">
-                    <div class="row mb-2">
+                    <div class="row">
                         <div class="col-lg-7">
                             <h5 class="pt-2">ตารางข้อมูลบุคลากร</h5>
                         </div>
@@ -133,7 +133,9 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped display nowrap mb-3" id="table_id">
+                    <hr class="mb-4">
+
+                    <table class=" display nowrap mb-3" id="table_id">
                         <thead class="table-navy-blue">
                             <tr>
                                 <th class="text-center">ลำดับ</th>
@@ -162,8 +164,8 @@
         Dropzone.autoDiscover = false;
 
         var countOrder = 0;
-        var member_password = "1234";
-        var image_file = "";
+        var member_password = "";
+        var image_file = '';
 
         var aaRfid = "";
         var aaSearch = "";
@@ -175,14 +177,14 @@
             user = user.id;
 
         var dataTable = $('#table_id').DataTable({
-            language: {emptyTable: "ไม่พบข้อมูลบุคลากร"},
+            language: {emptyTable: "ไม่พบข้อมูลบุคลากร", info: "แสดงข้อมูลบุคลากร _TOTAL_ รายการ", infoEmpty: "ไม่พบข้อมูล"},
             searching: false,
             initComplete: function (settings, json) {  
-                $("#table_id").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+                $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative; min-height: 775px; max-height: 775px; background-color: #F9F9F9; margin-bottom: 5px;'></div> ");            
             },
             ordering: false,
             lengthChange: false,
-            iDisplayLength: 10,
+            paging: false,
             bAutoWidth: false,
             columns:[
                         { 
@@ -237,7 +239,7 @@
                                     setButton = '<a class="btn btn-danger btn-sm shadow-sm" name="delete_data" data-id="' + data['id'] + '"><i class="fas fa-trash me-2"></i>ลบ</a>\
                                                  <a class="btn btn-warning btn-sm shadow-sm" name="edit_data"\
                                                     data-id="' + data['id'] + '" data-rfid="' + data['rfid'] + '" data-username="' + data['username'] + '"\
-                                                    data-firstname="' + data['firstname'] + '"data-lastname="' + data['lastname'] + '"data-gender="' + data['gender'] + '" data-telephone="' + data['telephone'] + '">\
+                                                    data-firstname="' + data['firstname'] + '"data-lastname="' + data['lastname'] + '"data-gender="' + data['gender'] + '" data-telephone="' + data['telephone'] + '" data-image_file="' + data['image_file'] + '">\
                                                  <i class="fas fa-pen me-2"></i>แก้ไข</a>'; 
                                 return setButton;
                             },
@@ -280,7 +282,7 @@
             initDropzone: function () {
                 dropzoneAdd = new Dropzone('[name=Member_image]', {
                     url: function () {
-                        return '/regisMember/PostUploadImageProfile';
+                        return '/regisMember/UploadImageProfile';
                         },
                     paramName: "file",
                     maxFiles: 1,
@@ -295,10 +297,12 @@
                         }),
                            
                         this.on("complete", function (file) {
-                            $(".dz-remove").html('<div class="btn btn-sm btn-danger shadow-sm w-100 mt-2" style="border-radius: 15px;"><i class="fa fa-trash me-2"></i>ลบรูปภาพ</div>');
+                            $(".dz-remove").html('<div class="btn btn-sm btn-danger shadow-sm w-100 mt-2"; style="border-radius: 15px;"><i class="fa fa-trash me-2"></i>ลบรูปภาพ</div>');
                             //console.log(file)
                         });
-                                
+                        this.on("processing", function (file) {
+                            $('.dz-message').hide();
+                        });  
                         this.on("maxfilesexceeded", function(file){
                             var _ref;
                             var _this = $(this.element);
@@ -315,8 +319,8 @@
                                             if ((_ref = file.previewElement) != null) {
                                             _ref.parentNode.removeChild(file.previewElement);
                                             _this.find('.dz-message').show();
-                                            has_image = 0;
-                                            // console.log(has_image);
+                                            image_file = "";
+                                            // console.log(image_file);
                                             }
                                         }
                                     } 
@@ -324,16 +328,12 @@
                             });
                         },
                         success: function (file, response) {
-                            var jsonResult = JSON.parse(response);
-                            console.log(jsonResult)
-                            if (jsonResult.result == "1") {
-                                file.previewElement.classList.add("dz-success");
-                                    var fileUrl = jsonResult["file_url"];
-                                    var file_name = jsonResult["file_name"];
-                                    file.id = 0;
-                                    has_image = 1;
-                                    image_url = file_name;
-                                    //console.log(image_url);
+                            var jsonResult = (response);
+                            // console.log(jsonResult)
+                                if (jsonResult.fieldname == "file") {
+                                    file.previewElement.classList.add("dz-success");
+                                        image_file = jsonResult.filename;
+                                        console.log(image_file);
                                 }
                                 else {
                                     file.previewElement.classList.add("dz-error");
@@ -348,7 +348,7 @@
                             Swal.fire ({
                                 icon: 'warning',
                                 title: 'กรุณายืนยันการลบ',
-                                text: 'เมื่อกด "ยืนยัน" ระบบจะทำการลบรูปภาพสินค้า',
+                                text: 'เมื่อกด "ยืนยัน" ระบบจะทำการลบรูปภาพบุคลากร',
                                 showCancelButton: true,
                                 confirmButtonText: "ยืนยัน",
                                 cancelButtonText: "ยกเลิก",
@@ -358,13 +358,14 @@
                                     if ((_ref = file.previewElement) != null) {
                                     _ref.parentNode.removeChild(file.previewElement);
                                     _this.find('.dz-message').show();
-                                    has_image = 0;
-                                    // console.log(has_image);
+                                    image_file = "";
+                                    // console.log(image_file);
                                     }
                                 }
+                                Feature.submitRemoveImage();
                             } else {
                                 _this.addClass('dz-started');
-                                has_image = 1;
+                                image_file = 1;
                             }
                         });
                     }
@@ -395,6 +396,24 @@
                             $("#member_password").prop( "disabled", true );
                             $('#member_gender').val(data.gender);
                             $('#member_tel').val(data.telephone);
+                            $('.dz-preview').remove();
+                            image_file = data.image_file;
+                            console.log(data)
+
+                            if (data.image_file != ""){
+                                var mockFile = {id: data.rfid, name: 'member.jpg', size: 102400 };
+                                    dropzoneAdd.emit('addedfile', mockFile);
+                                    var file_url = 'http://localhost:3000/profiles/' + data.image_file;
+
+                                        dropzoneAdd.emit('thumbnail', mockFile, file_url);
+                                        dropzoneAdd.emit('complete', mockFile);
+                                        dropzoneAdd.files.push(mockFile);
+                                        
+                                        var _this = $(this.element);
+                                            _this.find('.dz-message').addClass('hidden'); 
+
+                                        image_file = data.image_file;        
+                            }
                 });
                 $('#table_id').on('click', '[name="delete_data"]', function () {
                     var data = $(this).data();
@@ -420,6 +439,12 @@
                             $('#MemberForm').collapse("toggle");
                     }
                         id_update = 0;
+                        image_file = "";
+                        $('.dz-message').show();
+                        
+                        // $('.dz-preview').remove(); 
+                        $('.dz-complete').remove();
+                        $('.dz-image-preview').remove();
                         // clear value
                         $('#member_rfid').val('');
                         $('#member_firstname').val('');
@@ -432,22 +457,42 @@
                 });
                 // in form 
                 $('#submit_addMember').on('click', function (e) {
-                    if (id_update == 0) {
-                        if (($('#member_rfid').val() && $('#member_fristname').val() && $('#member_lastname').val() && $('#member_username').val() && $('#member_password').val() && $('#member_gender').val() && $('#member_tel').val()) != "" ) {
-                            member_password = $('#member_password').val();
-                            Feature.submitAddMember();
-                        } else {
-                            $("#Member_validate").addClass("was-validated");
+                        if (id_update == 0) {
+                            if (($('#member_rfid').val() && $('#member_fristname').val() && $('#member_lastname').val() && $('#member_username').val() && $('#member_password').val() && $('#member_gender').val() && $('#member_tel').val()) != "" ) {
+                                if (image_file != "") {
+                                    member_password = $('#member_password').val();
+                                    Feature.submitAddMember();
+                                } else {
+                                    Swal.fire({
+                                        title: "กรุณาเพิ่มรูปภาพ",
+                                        text: "ไม่สามารถบันทึกได้กรุณาเพิ่มรูปภาพบุคลากร แล้วลองอีกครั้ง",
+                                        icon: "warning",
+                                        confirmButtonText: "ตกลง",
+                                    });
+                                }
+                            } else {
+                                $("#Member_validate").addClass("was-validated");
+                            }
+                        } 
+                        else if (id_update > 0) {
+                            if (($('#member_rfid').val() && $('#member_fristname').val() && $('#member_lastname').val() && $('#member_username').val() && $('#member_gender').val() && $('#member_tel').val()) != "" ) {
+                                if (image_file != "") {
+                                    member_password = "";
+                                    Feature.submitUpdateMember();
+                                } else {
+                                    Swal.fire({
+                                        title: "กรุณาเพิ่มรูปภาพ",
+                                        text: "ไม่สามารถบันทึกได้กรุณาเพิ่มรูปภาพบุคลากร แล้วลองอีกครั้ง",
+                                        icon: "warning",
+                                        confirmButtonText: "ตกลง",
+                                    });
+                                }
+                            } else {
+                                $("#Member_validate").addClass("was-validated");
+                            }
                         }
-                    } 
-                    else if (id_update > 0) {
-                        if (($('#member_rfid').val() && $('#member_fristname').val() && $('#member_lastname').val() && $('#member_username').val() && $('#member_gender').val() && $('#member_tel').val()) != "" ) {
-                            member_password = "";
-                            Feature.submitUpdateMember();
-                        } else {
-                            $("#Member_validate").addClass("was-validated");
-                        }
-                    }
+                    
+                    
                 });
                 $('#cancel_addMember').on('click', function (e) {
                     if ($('#MemberForm').is('.collapse.show')) { // show
@@ -467,10 +512,11 @@
                 var getDate = new Date().toLocaleString().split(",");
                     // Date
                     dateDay = getDate[0].split("/");
-                    // Time
-                    dateTime = getDate[1].split(" ");
+                    dateDay = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1];
+                
+                var time = new Date(getDate).toLocaleTimeString('th', { timeZone: 'Asia/Jakarta', timeStyle: 'short', hour12: false });
                     // Date Now
-                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
+                    dateNow = dateDay + ' ' + time;
                 
                 var url = '/regismember/PostRegisterMember';
                     $.ajax({
@@ -483,31 +529,52 @@
                                     firstname : $('#member_firstname').val(),
                                     lastname : $('#member_lastname').val(),
                                     gender : $('#member_gender').val(),
-                                    image_file : image_file,
+                                    telephone : $('#member_tel').val(),
                                     datetime : dateNow,
                                     create_by : user,
                                   } 
                         })
                     .done(function(response) {
                         if (response.status == "Succeed") {
-                            Swal.fire({
-                                title: "สำเร็จ",
-                                text: "บันทึกการเพิ่มข้อมูลบุคลากร ",
-                                icon: "success",
-                                confirmButtonText: "ตกลง",
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    window.location.reload();
-                                }
-                            });
-                            
+                            var url = '/regismember/UploadImageProfile?post=true';
+                                 $.ajax({
+                                    type: 'POST',
+                                    url: url,
+                                    data: { 
+                                            filename : image_file,
+                                            rfid : $('#member_rfid').val(),
+                                        } 
+                                }) .done(function(response) {
+                                    Swal.fire({
+                                        title: "สำเร็จ",
+                                        text: "บันทึกการเพิ่มข้อมูลบุคลากรสำเร็จ ",
+                                        icon: "success",
+                                        confirmButtonText: "ตกลง",
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.reload();
+                                        }
+                                    });
+                                });
                         } else if (response.status == "Failed") {
-                            Swal.fire({
-                                title: "ผิดพลาด",
-                                text: "ไม่สามารถบันทึกการเพิ่มข้อมูลบุคลากรได้ กรุณาลองใหม่อีกครั้ง ",
-                                icon: "error",
-                                confirmButtonText: "ตกลง",
-                            });
+                            var response = response.data;
+                                if (response.DuplicateData == "rfid" ){
+                                    Swal.fire({
+                                        title: "ผิดพลาด",
+                                        text: "ไม่สามารถบันทึกได้ เนื่องจากมีรหัส RFID นี้แล้วในระบบ ",
+                                        icon: "error",
+                                        confirmButtonText: "ตกลง",
+                                    });
+                                }
+                                else if (response.DuplicateData == "username" ){
+                                    Swal.fire({
+                                        title: "ผิดพลาด",
+                                        text: "ไม่สามารถบันทึกได้ เนื่องจากมี 'รหัสพนักงาน' นี้แล้วในระบบ ",
+                                        icon: "error",
+                                        confirmButtonText: "ตกลง",
+                                    });
+                                }
+                           
                         }
                     });
             },
@@ -515,10 +582,11 @@
                 var getDate = new Date().toLocaleString().split(",");
                     // Date
                     dateDay = getDate[0].split("/");
-                    // Time
-                    dateTime = getDate[1].split(" ");
+                    dateDay = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1];
+                
+                var time = new Date(getDate).toLocaleTimeString('th', { timeZone: 'Asia/Jakarta', timeStyle: 'short', hour12: false });
                     // Date Now
-                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
+                    dateNow = dateDay + ' ' + time;
 
                 var url = '/regismember/PostEditMember';
                     $.ajax({
@@ -532,24 +600,33 @@
                                     firstname : $('#member_firstname').val(),
                                     lastname : $('#member_lastname').val(),
                                     gender : $('#member_gender').val(),
-                                    image_file : image_file,
+                                    telephone : $('#member_tel').val(),
                                     datetime : dateNow,
                                     update_by : user,
                                   } 
                         })
                     .done(function(response) {
                         if (response.status == "Succeed") {
-                            Swal.fire({
-                                title: "สำเร็จ",
-                                text: "บันทึกการแก้ไขข้อมูลบุคลากรสำเร็จ ",
-                                icon: "success",
-                                confirmButtonText: "ตกลง",
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    window.location.reload();
-                                }
-                            });
-                            
+                            var url = '/regismember/UploadImageProfile?post=true';
+                                 $.ajax({
+                                    type: 'POST',
+                                    url: url,
+                                    data: { 
+                                            filename : image_file,
+                                            rfid : $('#member_rfid').val(),
+                                        } 
+                                }) .done(function(response) {
+                                    Swal.fire({
+                                        title: "สำเร็จ",
+                                        text: "บันทึกการแก้ไขข้อมูลบุคลากรสำเร็จ ",
+                                        icon: "success",
+                                        confirmButtonText: "ตกลง",
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.reload();
+                                        }
+                                    });
+                                });
                         } else if (response.status == "Failed") {
                             if (response.data.DuplicateData == "rfid") {
                                 Swal.fire({
@@ -566,12 +643,13 @@
                 var getDate = new Date().toLocaleString().split(",");
                     // Date
                     dateDay = getDate[0].split("/");
-                    // Time
-                    dateTime = getDate[1].split(" ");
+                    dateDay = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1];
+                
+                var time = new Date(getDate).toLocaleTimeString('th', { timeZone: 'Asia/Jakarta', timeStyle: 'short', hour12: false });
                     // Date Now
-                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
+                    dateNow = dateDay + ' ' + time;
 
-                var url = '/regismember/PostUploadImageProfile';
+                var url = '/regismember/PostDeleteMember';
                     $.ajax({
                             type: 'POST',
                             url: url,
@@ -602,6 +680,15 @@
                             });
                         }
                     });
+            },
+            // Dropzone 
+            submitRemoveImage: function () {
+                var url = '/regismember/UploadImageProfile?clrimage='+ image_file;
+                    image_file = "";
+                    $.ajax({
+                            type: 'POST',
+                            url: url,
+                        })
             },
             init: function () {
                 Feature.initDropzone();

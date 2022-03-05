@@ -18,8 +18,8 @@
 }
 /* navbar */
 .nav-item {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 .nav-link:hover {
     border-radius: .5rem;
@@ -93,4 +93,14 @@ table.dataTable.no-footer {
 
 .swal2-popup {
     border-radius: 20px !important; 
+}
+
+.dropzone .dz-preview .dz-image {
+    border-radius: 20px;
+    overflow: hidden;
+    width: 183px;
+    height: 183px;
+    position: relative;
+    display: block;
+    z-index: 10;
 }

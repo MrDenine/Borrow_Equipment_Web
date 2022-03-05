@@ -30,7 +30,7 @@
         <div class="col-lg-12">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <table class="table table-striped display nowrap mt-1 mb-3" id="table_id">
+                    <table class="display nowrap mt-1 mb-3" id="table_id">
                         <thead class="table-navy-blue">
                             <tr>
                                 <th class="text-center">ลำดับ</th>
@@ -59,14 +59,14 @@
         var aaSearch = "";
 
         var dataTable = $('#table_id').DataTable({
-            language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์"},
+            language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์", info: "แสดงข้อมูลครุภัณฑ์ _TOTAL_ รายการ", infoEmpty: "ไม่พบข้อมูล"},
             searching: false,
             initComplete: function (settings, json) {  
-                $("#table_id").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+                $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative; max-height: 708px; background-color: #F9F9F9; margin-bottom: 5px;'></div> ");            
             },
             ordering: false,
             lengthChange: false,
-            iDisplayLength: 10,
+            paging: false,
             bAutoWidth: false,
             columns:[
                         { 

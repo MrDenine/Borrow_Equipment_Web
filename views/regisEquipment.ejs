@@ -53,10 +53,10 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-6 mb-3">
-                                            <label class="form-label">S/N </label>
+                                            <label class="form-label">Serial Number </label>
                                             <input type="text" class="form-control shadow-sm rounded-3" id="equipment_sn" required>
                                             <div class="invalid-feedback">
-                                                กรุณาระบุ S/N 
+                                                กรุณาระบุ Serial Number 
                                             </div>
                                         </div>
                                     </div>
@@ -122,7 +122,9 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped display nowrap mb-3" id="table_id">
+                    <hr class="mb-4">
+
+                    <table class=" display nowrap mb-3" id="table_id">
                         <thead class="table-navy-blue">
                             <tr>
                                 <th class="text-center">ลำดับ</th>
@@ -162,14 +164,14 @@
             user = user.id;
 
         var dataTable = $('#table_id').DataTable({
-            language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์"},
+            language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์", info: "แสดงข้อมูลครุภัณฑ์ _TOTAL_ รายการ", infoEmpty: "ไม่พบข้อมูล"},
             searching: false,
             initComplete: function (settings, json) {  
-                $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative;'></div>");            
+                $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative; min-height: 775px; max-height: 775px; background-color: #F9F9F9; margin-bottom: 5px;'></div> ");            
             },
             ordering: false,
             lengthChange: false,
-            iDisplayLength: 10,
+            paging: false,
             bAutoWidth: false,
             columns:[
                         { 
@@ -351,10 +353,11 @@
                 var getDate = new Date().toLocaleString().split(",");
                     // Date
                     dateDay = getDate[0].split("/");
-                    // Time
-                    dateTime = getDate[1].split(" ");
+                    dateDay = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1];
+                
+                var time = new Date(getDate).toLocaleTimeString('th', { timeZone: 'Asia/Jakarta', timeStyle: 'short', hour12: false });
                     // Date Now
-                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
+                    dateNow = dateDay + ' ' + time;
 
                 var url = '/regisEquipment/PostRegisterEquip';
                     $.ajax({
@@ -399,10 +402,11 @@
                 var getDate = new Date().toLocaleString().split(",");
                     // Date
                     dateDay = getDate[0].split("/");
-                    // Time
-                    dateTime = getDate[1].split(" ");
+                    dateDay = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1];
+                
+                var time = new Date(getDate).toLocaleTimeString('th', { timeZone: 'Asia/Jakarta', timeStyle: 'short', hour12: false });
                     // Date Now
-                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
+                    dateNow = dateDay + ' ' + time;
 
                 var url = '/regisEquipment/PostEditEquip';
                     $.ajax({
@@ -435,14 +439,30 @@
                             });
                             
                         } else if (response.status == "Failed") {
-                            if (response.data.DuplicateData == "rfid") {
-                                Swal.fire({
-                                    title: "ผิดพลาด",
-                                    text: "มีรหัส RFID ของครุภัณฑ์นี้ในระบบแล้ว กรุณาลองใหม่อีกครั้ง ",
-                                    icon: "error",
-                                    confirmButtonText: "ตกลง",
-                                });
-                            }
+                            if (response.DuplicateData == "rfid" ){
+                                    Swal.fire({
+                                        title: "ผิดพลาด",
+                                        text: "ไม่สามารถบันทึกได้ เนื่องจากมีรหัส RFID นี้แล้วในระบบ ",
+                                        icon: "error",
+                                        confirmButtonText: "ตกลง",
+                                    });
+                                }
+                                else if (response.DuplicateData == "equipment_number" ){
+                                    Swal.fire({
+                                        title: "ผิดพลาด",
+                                        text: "ไม่สามารถบันทึกได้ เนื่องจากมี 'รหัสครุภัณฑ์' นี้แล้วในระบบ ",
+                                        icon: "error",
+                                        confirmButtonText: "ตกลง",
+                                    });
+                                }
+                                else if (response.DuplicateData == "serial_number" ){
+                                    Swal.fire({
+                                        title: "ผิดพลาด",
+                                        text: "ไม่สามารถบันทึกได้ เนื่องจากมี 'Serial Number' นี้แล้วในระบบ ",
+                                        icon: "error",
+                                        confirmButtonText: "ตกลง",
+                                    });
+                                }
                         }
                     });
             },
@@ -450,10 +470,11 @@
                 var getDate = new Date().toLocaleString().split(",");
                     // Date
                     dateDay = getDate[0].split("/");
-                    // Time
-                    dateTime = getDate[1].split(" ");
+                    dateDay = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1];
+                
+                var time = new Date(getDate).toLocaleTimeString('th', { timeZone: 'Asia/Jakarta', timeStyle: 'short', hour12: false });
                     // Date Now
-                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
+                    dateNow = dateDay + ' ' + time;
 
                 var url = '/regisEquipment/PostDeleteEquip';
                     $.ajax({

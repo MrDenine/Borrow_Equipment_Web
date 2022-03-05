@@ -1,69 +1,70 @@
 <%- include('./template/header'); -%>
-
-<div class="row">
-    <div class="col-lg-9">
-        <div class="row px-2 mb-4">
-            <div class="card shadow-sm mb-3">
-                <div class="card-body">
-                    <h5>แสดงข้อมูลการคืน</h5>
-                    <hr class="mb-4">
-                    <table class="table table-striped display nowrap" id="table_id">
-                        <thead class="table-navy-blue">
-                            <tr>
-                                <th class="text-center">วัน / เดือน / ปี</th>
-                                <th class="text-center">รหัสพนักงาน</th>
-                                <th class="text-center">ชื่อ - นามสกุล</th>
-                                <th class="text-center">คืน</th>
-                                <th class="text-center">เลขครุภัณฑ์</th>
-                                <th class="text-center">ยี่ห้อ</th>
-                                <th class="text-center">รุ่น</th>
-                                <th class="text-center">เวลาคืน</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="row px-2 mb-1">
-            <div class="card shadow-sm mb-3">
-                <div class="card-body">
-                    <h5>ข้อมูลครุภัณฑ์ที่คืน</h5>
-                    <hr class="mb-4">
-                    <div class="row">
-                        <div class="input-group mb-3">
-                            <label class="col-form-label ms-4 mx-1 px-1">รหัส RFID : </label>
-                            <input type="text" class="form-control shadow-sm rounded-3 me-2" id="equipment_rfid" maxlength="10" >
-                            <div class="btn btn-warning shadow-sm rounded-3" id="equipment_clear">เคลียร์ Tag</div>
-                        </div>
-                        <div class="input-group mb-3">
-                            <label class="col-form-label ps-1 ms-3 me-2">ชื่อครุภัณฑ์ : </label>
-                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_name" disabled>
-                        </div>
-                        <div class="input-group mb-3">
-                            <label class="col-form-label ms-3 me-2">เลขครุภัณฑ์ : </label>
-                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_number" disabled>
-                            <label class="col-form-label mx-2">S/N : </label>
-                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_sn" disabled>
-                        </div>
-                        <div class="input-group mb-2">
-                            <label class="col-form-label ms-5 ps-3 me-2">ยีห้อ : </label>
-                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_brand" disabled>
-                            <label class="col-form-label ms-3 me-2">รุ่น : </label>
-                            <input type="text" class="form-control shadow-sm rounded-3" id="equipment_model" disabled>
-                        </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="row px-2 mb-4">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h5>แสดงข้อมูลการคืน</h5>
+                        <hr class="mb-4">
+                        <table class=" display nowrap" id="table_id">
+                            <thead class="table-navy-blue">
+                                <tr>
+                                    <th class="text-center">วัน / เดือน / ปี</th>
+                                    <th class="text-center">รหัสพนักงาน</th>
+                                    <th class="text-center">ชื่อ - นามสกุล</th>
+                                    <th class="text-center">ชื่อครุภัณฑ์ที่คืน</th>
+                                    <th class="text-center">เลขครุภัณฑ์</th>
+                                    <th class="text-center">ยี่ห้อ</th>
+                                    <th class="text-center">รุ่น</th>
+                                    <th class="text-center">เวลาคืน</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <div class="btn btn-outline-secondary shadow-sm" id="cancel_return"><i class="fas fa-times me-2"></i>ยกเลิก</div>
-                <div class="btn btn-success shadow-sm" id="submit_return"><i class="fas fa-check me-2"></i>คืนครุภัณฑ์</div>
+        <div class="col-lg-3">
+            <div class="row px-2 mb-1">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <h5>ข้อมูลครุภัณฑ์ที่คืน</h5>
+                        <hr class="mb-4">
+                        <div class="row">
+                            <div class="input-group mb-3">
+                                <label class="col-form-label ms-4 mx-1 px-1">รหัส RFID : </label>
+                                <input type="text" class="form-control shadow-sm rounded-3 me-2" id="equipment_rfid" maxlength="10" >
+                                <div class="btn btn-warning shadow-sm rounded-3" id="equipment_clear">เคลียร์ Tag</div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <label class="col-form-label ps-1 ms-3 me-2">ชื่อครุภัณฑ์ : </label>
+                                <input type="text" class="form-control shadow-sm rounded-3" id="equipment_name" disabled>
+                            </div>
+                            <div class="input-group mb-3">
+                                <label class="col-form-label ms-3 me-2">เลขครุภัณฑ์ : </label>
+                                <input type="text" class="form-control shadow-sm rounded-3" id="equipment_number" disabled>
+                                <label class="col-form-label mx-2">S/N : </label>
+                                <input type="text" class="form-control shadow-sm rounded-3" id="equipment_sn" disabled>
+                            </div>
+                            <div class="input-group mb-2">
+                                <label class="col-form-label ms-5 ps-3 me-2">ยีห้อ : </label>
+                                <input type="text" class="form-control shadow-sm rounded-3" id="equipment_brand" disabled>
+                                <label class="col-form-label ms-3 me-2">รุ่น : </label>
+                                <input type="text" class="form-control shadow-sm rounded-3" id="equipment_model" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="btn btn-outline-secondary shadow-sm" id="cancel_return"><i class="fas fa-times me-2"></i>ยกเลิก</div>
+                    <div class="btn btn-success shadow-sm" id="submit_return"><i class="fas fa-check me-2"></i>คืนครุภัณฑ์</div>
+                </div>
             </div>
         </div>
     </div>
@@ -80,13 +81,14 @@
             user = user.id;
 
             var dataTable = $('#table_id').DataTable({
-            language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์"},
+            language: {emptyTable: "ไม่พบข้อมูลการคืนครุภัณฑ์", info: "แสดงข้อมูลการคืนครุภัณฑ์ _TOTAL_ รายการ", infoEmpty: "ไม่พบข้อมูล"},
             searching: false,
-            scrollX: true,
-            scrollY: true,
+            initComplete: function (settings, json) {  
+                $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative; min-height: 708px; max-height: 708px; background-color: #F9F9F9; margin-bottom: 5px;'></div> ");            
+            },
             ordering: false,
             lengthChange: false,
-            iDisplayLength: 10,
+            paging: false,
             bAutoWidth: false,
             columns:[
                         { 
@@ -258,10 +260,11 @@
                 var getDate = new Date().toLocaleString().split(",");
                     // Date
                     dateDay = getDate[0].split("/");
-                    // Time
-                    dateTime = getDate[1].split(" ");
+                    dateDay = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1];
+                
+                var time = new Date(getDate).toLocaleTimeString('th', { timeZone: 'Asia/Jakarta', timeStyle: 'short', hour12: false });
                     // Date Now
-                    dateNow = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1] + ' ' + dateTime[1];
+                    dateNow = dateDay + ' ' + time;
 
                 var url = '/return/PostReturn';
                     $.ajax({
