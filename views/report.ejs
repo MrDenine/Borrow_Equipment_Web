@@ -10,10 +10,10 @@
                         <div class="card-body pb-0">
                             <div class="row">
 
-                                <div class="col-xxl-8 mb-3">
+                                <div class="col-9 mb-3">
 
                                     <div class="input-group rounded">
-                                        <select class="form-select me-3 rounded" aria-label=".form-select-sm example" name="typeSearch" id="typeSearch">
+                                        <select class="form-select me-2 rounded" aria-label=".form-select-sm example" name="typeSearch" id="typeSearch">
                                         <option selected value="0">เลือกรายการ...</option>
                                         <option value="1">รายการทั้งหมด</option>
                                         <option value="2">รายการยืม</option>
@@ -25,7 +25,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-xxl-4 mb-3 text-end ">
+                                <div class="col-3 mb-3 text-end">
                                     <div class="btn btn-outline-secondary " id="clear"><i class="fas fa-times me-2 "></i>ยกเลิก</div>
                                     <div class="btn btn-success " id="search"><i class="fas fa-search me-2 "></i>ค้นหา</div>
                                 </div>
@@ -74,14 +74,22 @@
                 var end_data = "";
                 console.log(end_data);
                 var dataTable = $('#table_id').DataTable({
+                    language: {
+                        emptyTable: "ไม่พบรายงานรายการยืมคืน",
+                        info: "แสดงรายการยืมคืน _TOTAL_ รายการ",
+                        infoEmpty: "ไม่พบข้อมูล"
+                    },
                     searching: false,
                     responsive: true,
                     initComplete: function(settings, json) {
-                        $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative;'></div>");
+
+                        $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative; max-height: 708px; background-color: #F9F9F9; margin-bottom: 5px;'></div> ");
+
                     },
                     ordering: false,
                     lengthChange: false,
-                    iDisplayLength: 10,
+                    paging: false,
+                    // iDisplayLength: 10,
                     bAutoWidth: false,
                     columns: [{
                         data: function(data) {

@@ -49,14 +49,21 @@
                 var startDate = $('#start_date').datepicker();
                 var endDate = $('#end_date').datepicker();
                 var dataTable = $('#table_id').DataTable({
+                    language: {
+                        emptyTable: "ไม่พบการแจ้งเตือน",
+                        info: "แสดงการแจ้งเตือน _TOTAL_ รายการ",
+                        infoEmpty: "ไม่พบข้อมูล"
+                    },
+
                     searching: false,
                     responsive: true,
                     initComplete: function(settings, json) {
-                        $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative;'></div>");
+                        $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative; max-height: 708px; background-color: #F9F9F9; margin-bottom: 5px;'></div> ");
                     },
                     ordering: false,
                     lengthChange: false,
-                    iDisplayLength: 10,
+                    paging: false,
+                    // iDisplayLength: 10,
                     bAutoWidth: false,
                     columns: [{
                         data: function(data) {
