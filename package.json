@@ -40,6 +40,7 @@
     "multer": "^1.4.4",
     "request": "^2.88.2",
     "select2": "^4.1.0-rc.0",
+    "socket.io": "^4.4.1",
     "sweetalert2": "^11.1.9"
   },
   "devDependencies": {
