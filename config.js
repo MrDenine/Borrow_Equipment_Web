@@ -9,6 +9,13 @@ config.cookie_options = {
     secure: true, // cookie must be sent over https / ssl
     path:"/"
 }
+config.logout = {
+    maxAge: 0, // 1 minute
+    httpOnly: true, // http only, prevents JavaScript cookie access
+    secure: true, // cookie must be sent over https / ssl
+    path:"/"
+}
+
 
 config.cookie_test = {
     maxAge: 60 * 1000, // 1 minute

@@ -510,15 +510,11 @@
                     });
             },
             submitAddMember: function () {
-                var getDate = new Date().toLocaleString().split(",");
-                    // Date
-                    dateDay = getDate[0].split("/");
-                    dateDay = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1];
-                
-                var time = new Date(getDate).toLocaleTimeString('th', { timeZone: 'Asia/Jakarta', timeStyle: 'short', hour12: false });
-                    // Date Now
-                    dateNow = dateDay + ' ' + time;
-                
+                const now = new Date();
+                const offsetMs = now.getTimezoneOffset() * 60 * 1000;
+                const dateLocal = new Date(now.getTime() - offsetMs);
+                const str = dateLocal.toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");
+
                 var url = '/regisMember/PostRegisterMember';
                     $.ajax({
                             type: 'POST',
@@ -531,7 +527,7 @@
                                     lastname : $('#member_lastname').val(),
                                     gender : $('#member_gender').val(),
                                     telephone : $('#member_tel').val(),
-                                    datetime : dateNow,
+                                    datetime : str,
                                     create_by : user,
                                   } 
                         })
@@ -580,6 +576,11 @@
                     });
             },
             submitUpdateMember: function () {
+                const now = new Date();
+                const offsetMs = now.getTimezoneOffset() * 60 * 1000;
+                const dateLocal = new Date(now.getTime() - offsetMs);
+                const str = dateLocal.toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");
+
                 var getDate = new Date().toLocaleString().split(",");
                     // Date
                     dateDay = getDate[0].split("/");
@@ -588,6 +589,8 @@
                 var time = new Date(getDate).toLocaleTimeString('th', { timeZone: 'Asia/Jakarta', timeStyle: 'short', hour12: false });
                     // Date Now
                     dateNow = dateDay + ' ' + time;
+                    console.log(str);
+                    
 
                 var url = '/regisMember/PostEditMember';
                     $.ajax({
@@ -602,7 +605,7 @@
                                     lastname : $('#member_lastname').val(),
                                     gender : $('#member_gender').val(),
                                     telephone : $('#member_tel').val(),
-                                    datetime : dateNow,
+                                    datetime : str,
                                     update_by : user,
                                   } 
                         })
