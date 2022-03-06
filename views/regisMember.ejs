@@ -163,6 +163,7 @@
     var Feature = (function(){
         Dropzone.autoDiscover = false;
 
+        var has_image = 0;
         var countOrder = 0;
         var member_password = "";
         var image_file = '';
@@ -304,13 +305,14 @@
                             $('.dz-message').hide();
                         });  
                         this.on("maxfilesexceeded", function(file){
+                            this.removeFile(file);
                             var _ref;
                             var _this = $(this.element);
                             _this.find('.dz-message').hide();
                                 Swal.fire ({
                                     icon: 'warning',
-                                    title: 'ไม่สามารถอับโหลดรูปมากกว่า 1 รูปได้',
-                                    text: 'กรุณากดปุ่ม"ยืนยัน"และทำการอัพโหลดรูปภาพใหม่',
+                                    title: 'คำเตือน',
+                                    text: 'ไม่สามารถอับโหลดรูปมากกว่า 1 รูปได้ กรุณาลองใหม่อีกครั้ง',
                                     confirmButtonText: "ยืนยัน",
                                     
                                 }) .then((result) => {
@@ -318,8 +320,7 @@
                                         if (file.previewElement) {
                                             if ((_ref = file.previewElement) != null) {
                                             _ref.parentNode.removeChild(file.previewElement);
-                                            _this.find('.dz-message').show();
-                                            image_file = "";
+                                            _this.find('.dz-message').hide();
                                             // console.log(image_file);
                                             }
                                         }
@@ -333,7 +334,8 @@
                                 if (jsonResult.fieldname == "file") {
                                     file.previewElement.classList.add("dz-success");
                                         image_file = jsonResult.filename;
-                                        console.log(image_file);
+                                        has_image = 1;
+                                        // console.log(image_file);
                                 }
                                 else {
                                     file.previewElement.classList.add("dz-error");
@@ -392,13 +394,11 @@
                             $('#member_firstname').val(data.firstname);
                             $('#member_lastname').val( data.lastname);
                             $('#member_username').val(data.username);
-                            $("#member_password").val('password');
-                            $("#member_password").prop( "disabled", true );
+                            $("#member_password").val('');
                             $('#member_gender').val(data.gender);
                             $('#member_tel').val(data.telephone);
                             $('.dz-preview').remove();
                             image_file = data.image_file;
-                            console.log(data)
 
                             if (data.image_file != ""){
                                 var mockFile = {id: data.rfid, name: 'member.jpg', size: 102400 };
@@ -451,7 +451,7 @@
                         $('#member_lastname').val('');
                         $('#member_username').val('');
                         $("#member_password").val('');
-                        $("#member_password").prop( "disabled", false );
+                        // $("#member_password").prop( "disabled", false );
                         $('#member_gender').val('');
                         $('#member_tel').val('');
                 });
@@ -506,7 +506,8 @@
                         $('#member_username').val('');
                         $('#member_gender').val('');
                         $('#member_tel').val('');
-                });
+
+                    });
             },
             submitAddMember: function () {
                 var getDate = new Date().toLocaleString().split(",");
@@ -518,7 +519,7 @@
                     // Date Now
                     dateNow = dateDay + ' ' + time;
                 
-                var url = '/regismember/PostRegisterMember';
+                var url = '/regisMember/PostRegisterMember';
                     $.ajax({
                             type: 'POST',
                             url: url,
@@ -536,45 +537,45 @@
                         })
                     .done(function(response) {
                         if (response.status == "Succeed") {
-                            var url = '/regismember/UploadImageProfile?post=true';
-                                 $.ajax({
-                                    type: 'POST',
-                                    url: url,
-                                    data: { 
-                                            filename : image_file,
-                                            rfid : $('#member_rfid').val(),
-                                        } 
-                                }) .done(function(response) {
-                                    Swal.fire({
-                                        title: "สำเร็จ",
-                                        text: "บันทึกการเพิ่มข้อมูลบุคลากรสำเร็จ ",
-                                        icon: "success",
-                                        confirmButtonText: "ตกลง",
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            window.location.reload();
-                                        }
-                                    });
-                                });
+                            if (has_image == 1) {
+                                Feature.submitSendImage();
+                            } else {
+                                Swal.fire({
+                                    title: "สำเร็จ",
+                                    text: "บันทึกการแก้ไขข้อมูลบุคลากรสำเร็จ ",
+                                    icon: "success",
+                                    confirmButtonText: "ตกลง",
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.reload();
+                                    }
+                                });    
+                            }
                         } else if (response.status == "Failed") {
-                            var response = response.data;
-                                if (response.DuplicateData == "rfid" ){
-                                    Swal.fire({
-                                        title: "ผิดพลาด",
-                                        text: "ไม่สามารถบันทึกได้ เนื่องจากมีรหัส RFID นี้แล้วในระบบ ",
-                                        icon: "error",
-                                        confirmButtonText: "ตกลง",
-                                    });
-                                }
-                                else if (response.DuplicateData == "username" ){
-                                    Swal.fire({
-                                        title: "ผิดพลาด",
-                                        text: "ไม่สามารถบันทึกได้ เนื่องจากมี 'รหัสพนักงาน' นี้แล้วในระบบ ",
-                                        icon: "error",
-                                        confirmButtonText: "ตกลง",
-                                    });
-                                }
-                           
+                            if (response.data.DuplicateData == "rfid" ){
+                                Swal.fire({
+                                    title: "ผิดพลาด",
+                                    text: "ไม่สามารถบันทึกได้ เนื่องจากมีรหัส RFID นี้แล้วในระบบ ",
+                                    icon: "error",
+                                    confirmButtonText: "ตกลง",
+                                });
+                            }
+                            else if (response.data.DuplicateData == "username" ){
+                                Swal.fire({
+                                    title: "ผิดพลาด",
+                                    text: "ไม่สามารถบันทึกได้ เนื่องจากมี 'รหัสพนักงาน' นี้แล้วในระบบ ",
+                                    icon: "error",
+                                    confirmButtonText: "ตกลง",
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    title: "ผิดพลาด",
+                                    text: "ไม่สามารถบันทึกได้ ข้อผิดพลาดจากระบบ : " + response.data,
+                                    icon: "error",
+                                    confirmButtonText: "ตกลง",
+                                });
+                            }
                         }
                     });
             },
@@ -588,7 +589,7 @@
                     // Date Now
                     dateNow = dateDay + ' ' + time;
 
-                var url = '/regismember/PostEditMember';
+                var url = '/regisMember/PostEditMember';
                     $.ajax({
                             type: 'POST',
                             url: url,
@@ -596,7 +597,7 @@
                                     id : id_update,
                                     rfid : $('#member_rfid').val(),
                                     username : $('#member_username').val(),
-                                    password : member_password,
+                                    password : $('#member_password').val(),
                                     firstname : $('#member_firstname').val(),
                                     lastname : $('#member_lastname').val(),
                                     gender : $('#member_gender').val(),
@@ -607,27 +608,22 @@
                         })
                     .done(function(response) {
                         if (response.status == "Succeed") {
-                            var url = '/regismember/UploadImageProfile?post=true';
-                                 $.ajax({
-                                    type: 'POST',
-                                    url: url,
-                                    data: { 
-                                            filename : image_file,
-                                            rfid : $('#member_rfid').val(),
-                                        } 
-                                }) .done(function(response) {
-                                    Swal.fire({
-                                        title: "สำเร็จ",
-                                        text: "บันทึกการแก้ไขข้อมูลบุคลากรสำเร็จ ",
-                                        icon: "success",
-                                        confirmButtonText: "ตกลง",
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            window.location.reload();
-                                        }
-                                    });
-                                });
+                            if (has_image == 1) {
+                                Feature.submitSendImage();
+                            } else {
+                                Swal.fire({
+                                    title: "สำเร็จ",
+                                    text: "บันทึกการแก้ไขข้อมูลบุคลากรสำเร็จ ",
+                                    icon: "success",
+                                    confirmButtonText: "ตกลง",
+                                }).then((result) => {
+                                    if (result.isConfirmed) {
+                                        window.location.reload();
+                                    }
+                                });    
+                            }
                         } else if (response.status == "Failed") {
+                            console.log(response);
                             if (response.data.DuplicateData == "rfid") {
                                 Swal.fire({
                                     title: "ผิดพลาด",
@@ -635,8 +631,24 @@
                                     icon: "error",
                                     confirmButtonText: "ตกลง",
                                 });
+                            } 
+                            else if (response.DuplicateData == "username" ){
+                                Swal.fire({
+                                    title: "ผิดพลาด",
+                                    text: "ไม่สามารถบันทึกได้ เนื่องจากมี 'รหัสพนักงาน' นี้แล้วในระบบ ",
+                                    icon: "error",
+                                    confirmButtonText: "ตกลง",
+                                });
                             }
-                        }
+                            else {
+                                Swal.fire({
+                                    title: "ผิดพลาด",
+                                    text: "ไม่สามารถบันทึกได้ ข้อผิดพลาดจากระบบ : " + response.data,
+                                    icon: "error",
+                                    confirmButtonText: "ตกลง",
+                                });
+                            }
+                        } 
                     });
             },
             submitRemoveMember: function () {
@@ -649,7 +661,7 @@
                     // Date Now
                     dateNow = dateDay + ' ' + time;
 
-                var url = '/regismember/PostDeleteMember';
+                var url = '/regisMember/PostDeleteMember';
                     $.ajax({
                             type: 'POST',
                             url: url,
@@ -682,8 +694,30 @@
                     });
             },
             // Dropzone 
+            submitSendImage: function () {
+                var url = '/regisMember/UploadImageProfile?post=true';
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: { 
+                                filename : image_file,
+                                rfid : $('#member_rfid').val(),
+                            } 
+                    }) .done(function(response) {
+                        Swal.fire({
+                            title: "สำเร็จ",
+                            text: "บันทึกการเพิ่มข้อมูลบุคลากรสำเร็จ ",
+                            icon: "success",
+                            confirmButtonText: "ตกลง",
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.reload();
+                            }
+                        });
+                    });
+            },
             submitRemoveImage: function () {
-                var url = '/regismember/UploadImageProfile?clrimage='+ image_file;
+                var url = '/regisMember/UploadImageProfile?clrimage='+ image_file;
                     image_file = "";
                     $.ajax({
                             type: 'POST',
