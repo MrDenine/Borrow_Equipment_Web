@@ -147,12 +147,12 @@
                             url: sSource,
                             data: aaData,
                             success: function(response) {
-                                console.log(response);
-                                console.log(response);
-                                var response = response.data;
+                                // console.log(response);
+                                // console.log(response);
+                                // var response = response.data;
                                 if (response.status === "Succeed") {
-
                                     if (response.data === "No Reverting information") {
+                                        console.log("no data");
                                         response = {
                                             "aaData": [],
                                             "iTotalRecords": 0,
@@ -160,6 +160,7 @@
                                         };
                                     } else {
                                         var response = response.data;
+                                        console.log("have data");
                                         response = {
                                             "aaData": response,
                                             "iTotalRecords": response.length,
@@ -175,6 +176,7 @@
                                     };
 
                                 }
+                                console.log(response);
                                 fnCallback(response);
 
                             }
@@ -230,7 +232,7 @@
 
                     init: function() {
                         Feature.initButton();
-                        Feature.initComplete();
+                        // Feature.initComplete();
 
                     }
                 }
