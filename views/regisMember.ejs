@@ -26,7 +26,7 @@
                                     <label class="form-label">รหัส RFID</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control shadow-sm rounded-3 me-2" id="member_rfid" maxlength="10" required>
-                                        <div class="btn btn-warning shadow-sm rounded-3">เคลียร์ Tag</div>
+                                        <div class="btn btn-warning shadow-sm rounded-3" id="clear_rfid">เคลียร์ Tag</div>
                                         <div class="invalid-feedback">
                                             กรุณาระบุ รหัส RFID 
                                         </div>
@@ -465,7 +465,7 @@
                        
 
                         if (id_update == 0) {
-                            if (($('#member_rfid').val() && $('#member_fristname').val() && $('#member_lastname').val() && $('#member_username').val() && $('#member_password').val() && $('#member_gender').val() && $('#member_tel').val()) != "" ) {
+                            if ($('#member_rfid').val() != "" && $('#member_fristname').val() != "" && $('#member_lastname').val() != "" && $('#member_username').val() != "" && $('#member_password').val() != "" && $('#member_gender').val() != "" && $('#member_tel').val()!= "" ) {
                                 if (image_file != "") {
                                     member_password = $('#member_password').val();
                                     Feature.submitAddMember();
@@ -482,7 +482,7 @@
                             }
                         } 
                         else if (id_update > 0) {
-                            if (($('#member_rfid').val() && $('#member_fristname').val() && $('#member_lastname').val() && $('#member_username').val() && $('#member_gender').val() && $('#member_tel').val()) != "" ) {
+                            if ($('#member_rfid').val()  != "" && $('#member_fristname').val() != "" && $('#member_lastname').val() != "" && $('#member_username').val() != "" && $('#member_gender').val() != "" && $('#member_tel').val() != "") {
                                 if (image_file != "") {
                                     member_password = "";
                                     Feature.submitUpdateMember();
@@ -515,6 +515,9 @@
                         $('#member_tel').val('');
 
                     });
+                $('#clear_rfid').on('click', function (e) {
+                    $('#member_rfid').val('');
+                });
             },
             submitAddMember: function () {
                 const now = new Date();
