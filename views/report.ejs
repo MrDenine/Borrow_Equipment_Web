@@ -72,7 +72,7 @@
                 var type_search = "0";
                 var start_data = "";
                 var end_data = "";
-                console.log(end_data);
+                // console.log(end_data);
                 var dataTable = $('#table_id').DataTable({
                     language: {
                         emptyTable: "ไม่พบรายงานรายการยืมคืน",
@@ -97,10 +97,10 @@
                             var time = new Date(date_data).toLocaleDateString('th', {
                                 timeZone: 'Asia/Jakarta'
                             });
-                            console.log(date_data);
-                            console.log(time);
+                            // console.log(date_data);
+                            // console.log(time);
                             return time;
-                            console.log(str);
+                            // console.log(str);
 
                         },
                         className: '',
@@ -134,7 +134,7 @@
                             });
                             var date_string = time;
                             return date_string + " " + "น.";
-                            console.log(str);
+                            // console.log(str);
                         },
                         className: 'text-center',
                     }, {
@@ -174,7 +174,7 @@
                             url: sSource,
                             data: aaData,
                             success: function(response) {
-                                console.log(response);
+                                // console.log(response);
                                 if (response.status === "Succeed") {
                                     var response = response.data;
                                     response = {
@@ -211,7 +211,7 @@
                             var eData = Date.parse(endData);
                             // console.log(sData);
                             if (sData < eData) {
-                                console.log("true");
+                                // console.log("true");
                                 type_search = select_search;
                                 var s_data = startData.split("/");
                                 start_data = s_data[2] + "-" + s_data[0] + "-" + s_data[1] + " " + "00:00:00"
