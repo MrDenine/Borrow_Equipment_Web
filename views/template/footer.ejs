@@ -3,28 +3,27 @@
         <script>
             function display_ct5() {
                 var x = new Date()
-                var month= x.getMonth()+1;
-                var day= x.getDate();
-                var year= x.getFullYear();
-                    if (month <10 ){month='0' + month;}
-                    if (day <10 ){day='0' + day;}
-                var x3= month + '/' + day + '/' + (year+543);
+                var month = x.getMonth()+1;
+                var day = x.getDate();
+                var year = x.getFullYear();
+
+                var x3 = month + '/' + day + '/' + (year+543);
 
                 // time part //
-                var hour= x.getHours();
-                var minute= x.getMinutes();
-                var second= x.getSeconds();
-                    if(hour <10 ){hour='0'+hour;}
-                    if(minute <10 ) {minute='0' + minute; }
-                    if(second<10){second='0' + second;}
+                var hour = x.getHours();
+                var minute = x.getMinutes();
+                var second = x.getSeconds();
+                    if(hour < 10 ) { hour='0' + hour; }
+                    if(minute < 10 ) { minute='0' + minute; }
+                    if(second < 10) { second='0' + second; }
                 var x3 = x3 + ' - ' +  hour +':'+ minute + ':' + second + ' น.';
                 
                 document.getElementById('ct5').innerHTML = x3;
             display_c5();
             }
             function display_c5(){
-                var refresh=1000; // Refresh rate in milli seconds
-                    mytime=setTimeout('display_ct5()',refresh)
+                var refresh = 1000; // Refresh rate in milli seconds
+                    mytime = setTimeout('display_ct5()',refresh)
             }
             display_c5()
         </script>

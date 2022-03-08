@@ -120,10 +120,10 @@
                         { 
                             data: function (data) {
                                 var date = ""
-                                    date = data['borrow_date'];
-                                    date = date.split("T");
-                                var dateDay = date[0].split("-");
-                                    dataDay = dateDay[2] + "/" + dateDay[1] + "/" + (parseInt(dateDay[0]) + 543); // set format
+                                    date = new Date(data['borrow_date']).toLocaleString();
+                                    date = date.split(",");
+                                var dateDay = date[0].split("/");
+                                    dataDay = dateDay[1] + "/" + dateDay[0] + "/" + (parseInt(dateDay[2])); // set format
                                 return dataDay;
                             },
                             className : 'text-center',
@@ -291,7 +291,7 @@
                     $("#member_name").val('');
                 });
                 $('#equipment_clear').on('click', function (e) {
-                    keyup_member = 0;
+                    keyup_equipment = 0;
                     $("#equipment_rfid").val('');
                     $("#equipment_name").val('');
                     $("#equipment_number").val('');
