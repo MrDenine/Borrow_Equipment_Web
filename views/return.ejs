@@ -94,10 +94,10 @@
                         { 
                             data: function (data) {
                                 var date = ""
-                                    date = data['return_date'];
-                                    date = date.split("T");
-                                var dateDay = date[0].split("-");
-                                    dataDay = dateDay[2] + "/" + dateDay[1] + "/" + (parseInt(dateDay[0]) + 543); // set format
+                                    date = new Date(data['return_date']).toLocaleString();
+                                    date = date.split(",");
+                                var dateDay = date[0].split("/");
+                                    dataDay = dateDay[1] + "/" + dateDay[0] + "/" + (parseInt(dateDay[2]) + 543); // set format
                                 return dataDay;
                             },
                             className : 'text-center',
@@ -224,7 +224,7 @@
             },
             initButton: function () {
                 $('#equipment_clear').on('click', function (e) {
-                keyup_member = 0;
+                    keyup_equipment = 0;
                     $("#equipment_rfid").val('');
                     $("#equipment_name").val('');
                     $("#equipment_number").val('');
@@ -260,7 +260,6 @@
                         const dateLocal = new Date(now.getTime() - offsetMs);
                         const str = dateLocal.toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");
                             dateNow = str;
-
                 var url = '/return/PostReturn';
                     $.ajax({
                             type: 'POST',
