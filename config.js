@@ -8,13 +8,13 @@ config.cookie_options = {
     maxAge: 86400 * 1000, // 24 hours
     httpOnly: true, // http only, prevents JavaScript cookie access
     secure: true, // cookie must be sent over https / ssl
-    path:"/"
+    path:"http://157.230.254.198:8000/"
 }
 config.logout = {
     maxAge: 0, // 1 minute
     httpOnly: true, // http only, prevents JavaScript cookie access
     secure: true, // cookie must be sent over https / ssl
-    path:"/"
+    path:"http://157.230.254.198:8000/"
 }
 
 
@@ -22,7 +22,7 @@ config.cookie_test = {
     maxAge: 60 * 1000, // 1 minute
     httpOnly: true, // http only, prevents JavaScript cookie access
     secure: true, // cookie must be sent over https / ssl
-    path:"/"
+    path:"http://157.230.254.198:8000/"
 }
 
 module.exports = config;
