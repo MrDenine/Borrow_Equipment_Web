@@ -77,7 +77,14 @@
                             .done(function(response) {
                                 if (response["status"] == "Succeed") {
                                     console.log(response);
-                                    window.location = '/';
+                                    // window.location = '/';
+                                    if (response["data"][0]["role"] == "admin") {
+                                        console.log("admin");
+                                        window.location = '/';
+                                    } else if (response["data"][0]["role"] == "dpm") {
+                                        console.log("dpm");
+                                        window.location = '/department';
+                                    }
                                 } else if (response["status"] == "Failed") {
                                     if (response["data"] == "Incorrect username") {
                                         Swal.fire({
