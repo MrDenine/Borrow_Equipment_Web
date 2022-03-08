@@ -78,11 +78,11 @@
                                 if (response["status"] == "Succeed") {
                                     console.log(response);
                                     // window.location = '/';
-                                    if (response["data"][0]["role"] == "admin") {
-                                        console.log("admin");
+                                    if (response["data"][0]["role"] == "admin" || response["data"][0]["role"] == "member") {
+                                        // console.log("admin and member");
                                         window.location = '/';
                                     } else if (response["data"][0]["role"] == "dpm") {
-                                        console.log("dpm");
+                                        // console.log("dpm");
                                         window.location = '/department';
                                     }
                                 } else if (response["status"] == "Failed") {
