@@ -77,19 +77,26 @@
                             .done(function(response) {
                                 if (response["status"] == "Succeed") {
                                     console.log(response);
-                                    window.location = '/';
+                                    // window.location = '/';
+                                    if (response["data"][0]["role"] == "admin" || response["data"][0]["role"] == "member") {
+                                        // console.log("admin and member");
+                                        window.location = '/';
+                                    } else if (response["data"][0]["role"] == "dpm") {
+                                        // console.log("dpm");
+                                        window.location = '/department';
+                                    }
                                 } else if (response["status"] == "Failed") {
                                     if (response["data"] == "Incorrect username") {
                                         Swal.fire({
                                             title: "ไม่สามารถเข้าสู่ระบบได้",
                                             text: "ชื่อผู้ใช้ของท่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง ",
-                                            icon: "warning "
+                                            icon: "warning"
                                         });
                                     } else if (response["data"] == "Incorrect password") {
                                         Swal.fire({
                                             title: "ไม่สามารถเข้าสู่ระบบได้ ",
                                             text: "รหัสผ่านของท่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง ",
-                                            icon: "warning "
+                                            icon: "warning"
                                         });
                                     }
 

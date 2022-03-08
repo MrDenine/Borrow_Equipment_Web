@@ -403,7 +403,7 @@
                             if (data.image_file != ""){
                                 var mockFile = {id: data.rfid, name: 'member.jpg', size: 102400 };
                                     dropzoneAdd.emit('addedfile', mockFile);
-                                    var file_url = 'http://localhost:3000/profiles/' + data.image_file;
+                                    var file_url = 'http://157.230.254.198:3000/profiles/' + data.image_file;
 
                                         dropzoneAdd.emit('thumbnail', mockFile, file_url);
                                         dropzoneAdd.emit('complete', mockFile);
