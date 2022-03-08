@@ -121,12 +121,10 @@
                             data: function (data) {
                                 var date = ""
                                     date = data['borrow_date'];
-                                    date = new Date(date).toLocaleDateString();
-                                    date = date.split("/")
-
-                                var dateYear = parseInt(date[2]);
-                                    date = date[1] + "/" + date[0] + "/" + (dateYear + 543); // set format
-                                return date;
+                                    date = date.split("T");
+                                var dateDay = date[0].split("-");
+                                    dataDay = dateDay[2] + "/" + dateDay[1] + "/" + (parseInt(dateDay[0]) + 543); // set format
+                                return dataDay;
                             },
                             className : 'text-center',
                         },
@@ -170,12 +168,11 @@
                             data: function (data) {
                                 var date = ""
                                     date = data['borrow_date'];
-                                var time_borrow = new Date(date).toLocaleTimeString('th', {
-                                        timeZone: 'Asia/Jakarta',
-                                        timeStyle: 'short',
-                                        hour12: false,
-                                    });
-                                return time_borrow + ' น.';
+                                    date = date.split("T");
+                                    date = date[1].split(".")
+                                var dateTime = date[0].split(":");
+                                    dateTime = dateTime[0] + ":" + dateTime[1] + ' น.';
+                                return dateTime;
                             },
                             className : 'text-center',
                         },

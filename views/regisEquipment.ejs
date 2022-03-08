@@ -26,7 +26,7 @@
                                     <label class="form-label">รหัส RFID </label>
                                     <div class="input-group">
                                         <input type="text" class="form-control shadow-sm rounded-3 me-2" id="equipment_rfid" maxlength="10" required>
-                                        <div class="btn btn-warning shadow-sm rounded-3">เคลียร์ Tag</div>
+                                        <div class="btn btn-warning shadow-sm rounded-3" id="clear_rfid">เคลียร์ Tag</div>
                                         <div class="invalid-feedback">
                                             กรุณาระบุ รหัส RFID 
                                         </div>
@@ -323,7 +323,7 @@
                 });
                 // in form 
                 $('#submit_addEquipment').on('click', function (e) {
-                    if (($('#equipment_rfid').val() && $('#equipment_name').val() && $('#equipment_number').val() && $('#equipment_sn').val() && $('#equipment_brand').val() && $('#equipment_model').val() && $('#equipment_description').val()) != "" ) {
+                    if ($('#equipment_rfid').val() != "" && $('#equipment_name').val() != "" && $('#equipment_number').val() != "" && $('#equipment_sn').val() != "" && $('#equipment_brand').val() != "" && $('#equipment_model').val() != "" && $('#equipment_description').val() != "") {
                         if (id_update == 0) {
                             Feature.submitAddEquipment();
                         } 
@@ -347,6 +347,9 @@
                         $('#equipment_brand').val('');
                         $('#equipment_model').val('');
                         $('#equipment_description').val('');
+                });
+                $('#clear_rfid').on('click', function (e) {
+                    $('#equipment_rfid').val('');
                 });
             },
             submitAddEquipment: function () {
@@ -435,7 +438,7 @@
                                     serial_number : $('#equipment_sn').val(),
                                     description : $('#equipment_description').val(),
                                     datetime : dateNow,
-                                    create_by : user
+                                    update_by : user
                                   } 
                         })
                     .done(function(response) {
