@@ -73,7 +73,8 @@
                             // console.log(date_data);
                             // console.log(time);
                             var year = time.getFullYear() + 543;
-                            return time.getDate().toLocaleString() - 1 + "/" + time.getMonth() + "/" + year;
+                            var month = time.getMonth() + 1;
+                            return time.getDate().toLocaleString() + "/" + month + "/" + year;
                             // console.log(str);
                         },
                         className: 'text-center',
@@ -152,7 +153,7 @@
                                 // var response = response.data;
                                 if (response.status === "Succeed") {
                                     if (response.data === "No notification information") {
-                                        console.log("no data");
+                                        // console.log("no data");
                                         response = {
                                             "aaData": [],
                                             "iTotalRecords": 0,
@@ -160,7 +161,7 @@
                                         };
                                     } else {
                                         var response = response.data;
-                                        console.log("have data");
+                                        // console.log("have data");
                                         response = {
                                             "aaData": response,
                                             "iTotalRecords": response.length,
