@@ -94,12 +94,12 @@
                     columns: [{
                         data: function(data) {
                             var date_data = data['update_at'];
-                            var time = new Date(date_data).toLocaleDateString('th', {
-                                timeZone: 'Asia/Jakarta'
-                            });
+                            var time = new Date(date_data);
+
                             // console.log(date_data);
                             // console.log(time);
-                            return time;
+                            var year = time.getFullYear() + 543;
+                            return time.getDate().toLocaleString() - 1 + "/" + time.getMonth() + "/" + year;
                             // console.log(str);
 
                         },
@@ -127,13 +127,14 @@
                     }, {
                         data: function(data) {
                             var date_data = data['update_at'];
-                            var time = new Date(date_data).toLocaleTimeString('th', {
+
+                            var time = new Date(date_data)
+                            time.setHours(time.getHours() - 7);
+                            var date_string = time;
+                            return date_string.toLocaleTimeString('th', {
                                 timeStyle: 'short',
                                 hour12: false,
-                                timeZone: 'Asia/Jakarta'
-                            });
-                            var date_string = time;
-                            return date_string + " " + "น.";
+                            }) + " " + "น.";
                             // console.log(str);
                         },
                         className: 'text-center',
