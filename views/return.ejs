@@ -94,11 +94,10 @@
                         { 
                             data: function (data) {
                                 var date = ""
-                                    date = new Date(data['return_date']).toLocaleString();
-                                    date = date.split(",");
-                                var dateDay = date[0].split("/");
-                                    dataDay = dateDay[1] + "/" + dateDay[0] + "/" + (parseInt(dateDay[2])); // set format
-                                return dataDay;
+                                    date = data['return_date'];
+                                    var time = new Date(date);
+                                    var year = time.getFullYear() + 543;
+                                return time.getDate().toLocaleString()+ "/" + (parseInt(time.getMonth())+1)  + "/" + year;
                             },
                             className : 'text-center',
                         },
