@@ -167,7 +167,7 @@
             language: {emptyTable: "ไม่พบข้อมูลครุภัณฑ์", info: "แสดงข้อมูลครุภัณฑ์ _TOTAL_ รายการ", infoEmpty: "ไม่พบข้อมูล"},
             searching: false,
             initComplete: function (settings, json) {  
-                $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative; min-height: 775px; max-height: 775px; background-color: #F9F9F9; margin-bottom: 5px;'></div> ");            
+                $("#table_id").wrap("<div style='overflow:auto; width:100%; position:relative; max-height: 775px; margin-bottom: 5px;'></div> ");            
             },
             ordering: false,
             lengthChange: false,
@@ -350,14 +350,11 @@
                 });
             },
             submitAddEquipment: function () {
-                var getDate = new Date().toLocaleString().split(",");
-                    // Date
-                    dateDay = getDate[0].split("/");
-                    dateDay = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1];
-                
-                var time = new Date(getDate).toLocaleTimeString('th', { timeZone: 'Asia/Jakarta', timeStyle: 'short', hour12: false });
-                    // Date Now
-                    dateNow = dateDay + ' ' + time;
+                const now = new Date();
+                        const offsetMs = now.getTimezoneOffset() * 60 * 1000;
+                        const dateLocal = new Date(now.getTime() - offsetMs);
+                        const str = dateLocal.toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");
+                            dateNow = str;
 
                 var url = '/regisEquipment/PostRegisterEquip';
                     $.ajax({
@@ -389,24 +386,40 @@
                             });
                             
                         } else if (response.status == "Failed") {
-                            Swal.fire({
-                                title: "ผิดพลาด",
-                                text: "ไม่สามารถบันทึกการเพิ่มข้อมูลครุภัณฑ์ได้ กรุณาลองใหม่อีกครั้ง ",
-                                icon: "error",
-                                confirmButtonText: "ตกลง",
-                            });
+                            var response = response.data;
+                            if (response.DuplicateData == "rfid" ){
+                                    Swal.fire({
+                                        title: "ผิดพลาด",
+                                        text: "ไม่สามารถบันทึกได้ เนื่องจากมีรหัส RFID นี้แล้วในระบบ ",
+                                        icon: "error",
+                                        confirmButtonText: "ตกลง",
+                                    });
+                                }
+                                else if (response.DuplicateData == "equipment_number" ){
+                                    Swal.fire({
+                                        title: "ผิดพลาด",
+                                        text: "ไม่สามารถบันทึกได้ เนื่องจากมี 'รหัสครุภัณฑ์' นี้แล้วในระบบ ",
+                                        icon: "error",
+                                        confirmButtonText: "ตกลง",
+                                    });
+                                }
+                                else if (response.DuplicateData == "serial_number" ){
+                                    Swal.fire({
+                                        title: "ผิดพลาด",
+                                        text: "ไม่สามารถบันทึกได้ เนื่องจากมี 'Serial Number' นี้แล้วในระบบ ",
+                                        icon: "error",
+                                        confirmButtonText: "ตกลง",
+                                    });
+                                }
                         }
                     });
             },
             submitUpdateEquipment: function () {
-                var getDate = new Date().toLocaleString().split(",");
-                    // Date
-                    dateDay = getDate[0].split("/");
-                    dateDay = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1];
-                
-                var time = new Date(getDate).toLocaleTimeString('th', { timeZone: 'Asia/Jakarta', timeStyle: 'short', hour12: false });
-                    // Date Now
-                    dateNow = dateDay + ' ' + time;
+                const now = new Date();
+                        const offsetMs = now.getTimezoneOffset() * 60 * 1000;
+                        const dateLocal = new Date(now.getTime() - offsetMs);
+                        const str = dateLocal.toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");
+                            dateNow = str;
 
                 var url = '/regisEquipment/PostEditEquip';
                     $.ajax({
@@ -439,6 +452,7 @@
                             });
                             
                         } else if (response.status == "Failed") {
+                            var response = response.data;
                             if (response.DuplicateData == "rfid" ){
                                     Swal.fire({
                                         title: "ผิดพลาด",
@@ -467,14 +481,11 @@
                     });
             },
             submitRemoveEquipment: function () {
-                var getDate = new Date().toLocaleString().split(",");
-                    // Date
-                    dateDay = getDate[0].split("/");
-                    dateDay = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1];
-                
-                var time = new Date(getDate).toLocaleTimeString('th', { timeZone: 'Asia/Jakarta', timeStyle: 'short', hour12: false });
-                    // Date Now
-                    dateNow = dateDay + ' ' + time;
+                const now = new Date();
+                        const offsetMs = now.getTimezoneOffset() * 60 * 1000;
+                        const dateLocal = new Date(now.getTime() - offsetMs);
+                        const str = dateLocal.toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");
+                            dateNow = str;
 
                 var url = '/regisEquipment/PostDeleteEquip';
                     $.ajax({

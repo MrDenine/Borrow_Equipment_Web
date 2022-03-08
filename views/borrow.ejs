@@ -190,7 +190,7 @@
                     data: aaData,
                     success: function (response) {
                         if (response.status === "Succeed") {
-                            if (response.data === "No Reverting information") {
+                            if (response.data === "No Borrowing information") {
                                 response = {"aaData":[], "iTotalRecords": 0, "iTotalDisplayRecords": 0};
                             } else {
                                 var response = response.data;
@@ -288,11 +288,13 @@
             },
             initButton: function () {
                 $('#member_clear').on('click', function (e) {
+                    keyup_member = 0;
                     $("#member_rfid").val('');
                     $("#member_number").val('');
                     $("#member_name").val('');
                 });
                 $('#equipment_clear').on('click', function (e) {
+                    keyup_member = 0;
                     $("#equipment_rfid").val('');
                     $("#equipment_name").val('');
                     $("#equipment_number").val('');
@@ -328,14 +330,11 @@
                 });
             },
             submitBorrow: function () {
-                var getDate = new Date().toLocaleString().split(",");
-                    // Date
-                    dateDay = getDate[0].split("/");
-                    dateDay = dateDay[2] + '-' + dateDay[0] + '-' + dateDay[1];
-                
-                var time = new Date(getDate).toLocaleTimeString('th', { timeZone: 'Asia/Jakarta', timeStyle: 'short', hour12: false });
-                    // Date Now
-                    dateNow = dateDay + ' ' + time;
+                const now = new Date();
+                        const offsetMs = now.getTimezoneOffset() * 60 * 1000;
+                        const dateLocal = new Date(now.getTime() - offsetMs);
+                        const str = dateLocal.toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");
+                            dateNow = str;
 
                 var url = '/borrow/PostBorrow';
                     $.ajax({

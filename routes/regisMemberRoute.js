@@ -20,7 +20,7 @@ router.use(bodyParser.urlencoded({extended : false}));
 router.use(bodyParser.json());
 router.use(cookieParser());
 
-router.get('/',validateCookieExist, (req, res, next) => {
+router.get('/',validateCookieExist,validateAdminRoute, (req, res, next) => {
     res.render('regisMember',{title:'ลงทะเบียนบุคลากร', udt : getUserData(req) , role : getUserRole(req) });
 })
 
@@ -35,7 +35,7 @@ router.post('/UploadImageProfile',upload.single('file'),(req,res,next)=>{
       var post_rfid = req.body.rfid;
       //post
       var form = new FormData();
-      form.append('file',fs.readFileSync('./profiles/'+post_filename) ,post_rfid +'-'+ post_filename +'.jpg');
+      form.append('file',fs.readFileSync('./profiles/'+post_filename) ,post_rfid + Date.now() +'.jpg');
       form.append('rfid',post_rfid)
       axios({
       method: 'post',
