@@ -99,7 +99,8 @@
                             // console.log(date_data);
                             // console.log(time);
                             var year = time.getFullYear() + 543;
-                            return time.getDate().toLocaleString() - 1 + "/" + time.getMonth() + "/" + year;
+                            var month = time.getMonth() + 1;
+                            return time.getDate().toLocaleString() + "/" + month + "/" + year;
                             // console.log(str);
 
                         },
