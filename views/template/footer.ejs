@@ -52,7 +52,7 @@
             $('#notification').hide();
             $('#register').hide();
             $('#department').hide();
-        } else if (user === "department") {
+        } else if (user === "dpm") {
             $('#equipment').hide();
             $('#borrow').hide();
             $('#return').hide();
@@ -61,10 +61,10 @@
             $('#register').hide();
         }
         
-    let socket = io.connect("http://localhost:3000", { reconnect: true });
-        socket.on("connect", function (data) {
-            socket.emit("join", "Hello world");
-        });
+    let socket = io.connect("http://157.230.254.198:3000", { reconnect: true });
+        // socket.on("connect", function (data) {
+        //     socket.emit("join", "Hello world");
+        // });
         socket.on("dataNoti", function (data) {
         if (data) {
             $('#datanoti').addClass('position-absolute p-1 ms-1 bg-danger shadow-lg rounded-circle');

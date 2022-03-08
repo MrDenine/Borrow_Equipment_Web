@@ -16,7 +16,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.use(cookieParser());
 
-router.get('/', validateCookieExist, (req, res, next) => {
+router.get('/', validateCookieExist,validateDpmRoute, (req, res, next) => {
     res.render('department', { title: 'department', udt: getUserData(req), role: getUserRole(req) });
 })
 

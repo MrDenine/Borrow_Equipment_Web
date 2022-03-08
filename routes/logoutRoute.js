@@ -16,7 +16,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 router.use(cookieParser());
 
-router.get('/',function(req,res,next){
+router.get('/',validateCookieExist,function(req,res,next){
     res.clearCookie("UDT");
     res.status(200).redirect(config.weburl + 'signin');
 });
