@@ -26,6 +26,7 @@ try {
             var regisMemberRoute = require('./routes/regisMemberRoute');
             var departmentRoute = require('./routes/departmentRoute');
             var notificationRoute = require('./routes/notificationRoute');
+            var logoutRoute = require('./routes/logoutRoute');
 
             //Initial Routes
             app.use('/', indexRoute);
@@ -37,6 +38,7 @@ try {
             app.use('/regisMember', regisMemberRoute);
             app.use('/department', departmentRoute);
             app.use('/notification', notificationRoute);
+            app.use('/logout',logoutRoute);
 
         }
     );
