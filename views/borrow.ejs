@@ -347,7 +347,7 @@
                         if (response.status == "Succeed") {
                             Swal.fire({
                                 title: "สำเร็จ",
-                                text: "บันทึกข้อมูลการเบิกครุภัณฑ์สำเร็จ ",
+                                text: "เบิกครุภัณฑ์สำเร็จ ",
                                 icon: "success",
                             }).then((result) => {
                                 if (result.isConfirmed) {
@@ -355,12 +355,21 @@
                                 }
                             });
                         } else if (response.status == "Failed") {
-                            Swal.fire({
-                                title: "ผิดพลาด",
-                                text: "ไม่สามารถบันทึกข้อมูลการเบิกครุภัณฑ์ได้ กรุณาลองใหม่อีกครั้ง ",
+                            if(response.data == "Insert Fail"){
+                                Swal.fire({
+                                title: "ไม่สามารถเบิกครุภัณฑ์ได้",
+                                text: "กรุณาลองใหม่อีกครั้ง",
                                 icon: "error",
                                 confirmButtonText: "ตกลง",
-                            });
+                                });
+                            } else if(response.data == "Equip is borrowed"){
+                                Swal.fire({
+                                title: "ไม่สามารถเบิกครุภัณฑ์ได้",
+                                text: "ครุภัณฑ์นี้ถูกยืมไปแล้ว กรุณาลองใหม่อีกครั้ง ",
+                                icon: "error",
+                                confirmButtonText: "ตกลง",
+                                });
+                            }
                         }
                     });
             },
