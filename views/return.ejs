@@ -273,7 +273,7 @@
                         if (response.status == "Succeed") {
                             Swal.fire({
                                 title: "สำเร็จ",
-                                text: "บันทึกข้อมูลการคืนครุภัณฑ์สำเร็จ ",
+                                text: "คืนครุภัณฑ์สำเร็จ ",
                                 icon: "success",
                                 confirmButtonText: "ตกลง",
                             }).then((result) => {
@@ -293,7 +293,7 @@
                             } else if(response.data == "Equip is not borrowed"){
                                 Swal.fire({
                                 title: "ไม่สามารถเบิกครุภัณฑ์ได้",
-                                text: "ครุภัณฑ์นี้ถูกยืมไปแล้ว กรุณาลองใหม่อีกครั้ง ",
+                                text: "ครุภัณฑ์นี้ยังไม่ถูกยืม กรุณาลองใหม่อีกครั้ง ",
                                 icon: "error",
                                 confirmButtonText: "ตกลง",
                                 });
