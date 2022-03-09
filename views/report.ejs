@@ -67,12 +67,17 @@
 
         <script>
             var Feature = (function() {
-                var startDate = $('#start_date').datepicker();
-                var endDate = $('#end_date').datepicker();
+                var startDate = $('#start_date').datepicker({
+                    format: 'dd/mm/yyyy',
+                });
+                var endDate = $('#end_date').datepicker({
+                    format: 'dd/mm/yyyy',
+                });
                 var type_search = "0";
                 var start_data = "";
                 var end_data = "";
                 // console.log(end_data);
+
                 var dataTable = $('#table_id').DataTable({
                     language: {
                         emptyTable: "ไม่พบรายงานรายการยืมคืน",
