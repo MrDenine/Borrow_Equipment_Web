@@ -94,7 +94,7 @@
                         { 
                             data: function (data) {
                                 var date = ""
-                                    date = data['return_date'];
+                                    date = (data['return_date']).split("T")[0];
                                     var time = new Date(date);
                                     var year = time.getFullYear() + 543;
                                 return time.getDate().toLocaleString()+ "/" + (parseInt(time.getMonth())+1)  + "/" + year;
