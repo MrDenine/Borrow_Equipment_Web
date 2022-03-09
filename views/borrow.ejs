@@ -120,7 +120,7 @@
                         { 
                             data: function (data) {
                                 var date = ""
-                                    date = new Date(data['borrow_date']);
+                                    date = (data['borrow_date']).split("T")[0];
                                     var time = new Date(date);
                                     var year = time.getFullYear() + 543;
                                 return time.getDate().toLocaleString()+ "/" + (parseInt(time.getMonth())+1)  + "/" + year;
