@@ -29,7 +29,7 @@
                                     <th class="text-center ">เวลา</th>
                                     <th class="text-center ">ตำแหน่ง</th>
                                     <th class="text-center ">สถานะ</th>
-                                    <th class="text-center ">ยอมรับ</th>
+                                    <th class="text-center ">รับทราบ</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -126,7 +126,7 @@
                     }, {
                         data: function(data) {
                             var setButton = ""
-                            setButton = '<div class="btn btn-success" id="accept" name="accept" data-id="' + data['report_id'] + '" > <i class = "fas fa-check me-2 "> </i>ยอมรับ</div > ';
+                            setButton = '<div class="btn btn-success" id="accept" name="accept" data-id="' + data['report_id'] + '" > <i class = "fas fa-check me-2 "> </i>รับทราบ</div > ';
                             return setButton;
                         },
                         className: 'text-center',
@@ -209,7 +209,7 @@
                                 if (response.status == "Succeed") {
                                     Swal.fire({
                                         title: "สำเร็จ",
-                                        text: "บันทึกข้อมูลการลบข้อมูลครุภัณฑ์สำเร็จ ",
+                                        text: "รับทราบข้อมูลสำเร็จ",
                                         icon: "success",
                                     }).then((result) => {
                                         if (result.isConfirmed) {
@@ -220,7 +220,6 @@
                                 } else if (response.status == "Failed") {
                                     Swal.fire({
                                         title: "ผิดพลาด",
-                                        text: "ไม่สามารถบันทึกการลบข้อมูลครุภัณฑ์ได้ กรุณาลองใหม่อีกครั้ง ",
                                         icon: "error",
                                     });
                                 }
