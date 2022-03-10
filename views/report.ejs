@@ -19,9 +19,9 @@
                                         <option value="2">รายการยืม</option>
                                         <option value="3">รายการคืน</option>
                                     </select>
-                                        <input type="datetime" id="start_date" class="form-control rounded" placeholder="เริมต้น " aria-label="start-date ">
+                                        <input type="datetime" id="start_date" class="form-control rounded" placeholder="เริมต้น" aria-label="start-date">
                                         <span class="input-group-text ">ถึง</span>
-                                        <input type="datetime " id="end_date" class="form-control " placeholder="สิ้นสุด " aria-label="enddate ">
+                                        <input type="datetime " id="end_date" class="form-control rounded" placeholder="สิ้นสุด" aria-label="end-date">
                                     </div>
                                 </div>
 
@@ -69,9 +69,11 @@
             var Feature = (function() {
                 var startDate = $('#start_date').datepicker({
                     format: 'dd/mm/yyyy',
+                    // formatDate: 'mm/dd/yyyy'
                 });
                 var endDate = $('#end_date').datepicker({
                     format: 'dd/mm/yyyy',
+                    // formatDate: 'mm/dd/yyyy'
                 });
                 var type_search = "0";
                 var start_data = "";
@@ -98,14 +100,11 @@
                     bAutoWidth: false,
                     columns: [{
                         data: function(data) {
-                            var date_data = data['update_at'];
-                            var time = new Date(date_data);
-
-                            // console.log(date_data);
-                            // console.log(time);
+                            var date = ""
+                            date = (data['update_at']).split("T")[0];
+                            var time = new Date(date);
                             var year = time.getFullYear() + 543;
-                            var month = time.getMonth() + 1;
-                            return time.getDate().toLocaleString() - 1 + "/" + month + "/" + year;
+                            return time.getDate().toLocaleString() + "/" + (parseInt(time.getMonth()) + 1) + "/" + year;
                             // console.log(str);
 
                         },
@@ -212,11 +211,15 @@
                             var select_search = $('#typeSearch').val();
                             // console.log(select_search);
                             var startData = $('#start_date').val();
+                            var dateStart = startData.split("/");
                             var endData = $('#end_date').val();
+                            var dateEnd = endData.split("/");
                             // console.log(startData);
-                            var sData = Date.parse(startData);
-                            var eData = Date.parse(endData);
+                            // console.log(endData);
+                            var sData = Date.parse(startData[1] + startData[0] + startData[2]);
+                            var eData = Date.parse(endData[1] + endData[0] + endData[2]);
                             // console.log(sData);
+                            // console.log(eData);
                             if (sData < eData) {
                                 // console.log("true");
                                 type_search = select_search;
