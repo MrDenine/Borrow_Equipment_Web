@@ -67,14 +67,11 @@
                     bAutoWidth: false,
                     columns: [{
                         data: function(data) {
-                            var date_data = data['borrow_date'];
-                            var time = new Date(date_data);
-
-                            // console.log(date_data);
-                            // console.log(time);
+                            var date = ""
+                            date = (data['borrow_date']).split("T")[0];
+                            var time = new Date(date);
                             var year = time.getFullYear() + 543;
-                            var month = time.getMonth() + 1;
-                            return time.getDate().toLocaleString() - 1 + "/" + month + "/" + year;
+                            return time.getDate().toLocaleString() + "/" + (parseInt(time.getMonth()) + 1) + "/" + year;
                             // console.log(str);
                         },
                         className: 'text-center',
