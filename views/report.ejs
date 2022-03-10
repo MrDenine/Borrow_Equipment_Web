@@ -212,14 +212,22 @@
                             // console.log(select_search);
                             var startData = $('#start_date').val();
                             var dateStart = startData.split("/");
+
+
                             var endData = $('#end_date').val();
                             var dateEnd = endData.split("/");
+
+
+                            var sd = dateStart[1] + '/' + dateStart[0] + '/' + dateStart[2];
+                            var ed = dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2];
                             // console.log(startData);
                             // console.log(endData);
-                            var sData = Date.parse(startData[1] + startData[0] + startData[2]);
-                            var eData = Date.parse(endData[1] + endData[0] + endData[2]);
-                            // console.log(sData);
-                            // console.log(eData);
+                            var sData = Date.parse(sd);
+                            var eData = Date.parse(ed);
+
+
+                            console.log(sData);
+                            console.log(eData);
                             if (sData < eData) {
                                 // console.log("true");
                                 type_search = select_search;
