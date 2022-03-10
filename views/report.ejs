@@ -10,7 +10,7 @@
                         <div class="card-body pb-0">
                             <div class="row">
 
-                                <div class="col-9 mb-3">
+                                <div class="col-xl-9 mb-3">
 
                                     <div class="input-group rounded">
                                         <select class="form-select me-2 rounded" aria-label=".form-select-sm example" name="typeSearch" id="typeSearch">
@@ -19,13 +19,13 @@
                                         <option value="2">รายการยืม</option>
                                         <option value="3">รายการคืน</option>
                                     </select>
-                                        <input type="datetime" id="start_date" class="form-control rounded" placeholder="เริมต้น " aria-label="start-date ">
+                                        <input type="datetime" id="start_date" class="form-control rounded" placeholder="เริ่มต้น" aria-label="start-date">
                                         <span class="input-group-text ">ถึง</span>
-                                        <input type="datetime " id="end_date" class="form-control " placeholder="สิ้นสุด " aria-label="enddate ">
+                                        <input type="datetime " id="end_date" class="form-control rounded" placeholder="สิ้นสุด" aria-label="end-date">
                                     </div>
                                 </div>
 
-                                <div class="col-3 mb-3 text-end">
+                                <div class="col-xl-3 mb-3 text-end">
                                     <div class="btn btn-outline-secondary " id="clear"><i class="fas fa-times me-2 "></i>ยกเลิก</div>
                                     <div class="btn btn-success " id="search"><i class="fas fa-search me-2 "></i>ค้นหา</div>
                                 </div>
@@ -69,9 +69,11 @@
             var Feature = (function() {
                 var startDate = $('#start_date').datepicker({
                     format: 'dd/mm/yyyy',
+                    // formatDate: 'mm/dd/yyyy'
                 });
                 var endDate = $('#end_date').datepicker({
                     format: 'dd/mm/yyyy',
+                    // formatDate: 'mm/dd/yyyy'
                 });
                 var type_search = "0";
                 var start_data = "";
@@ -98,21 +100,18 @@
                     bAutoWidth: false,
                     columns: [{
                         data: function(data) {
-                            var date_data = data['update_at'];
-                            var time = new Date(date_data);
-
-                            console.log(date_data);
-                            console.log(time);
+                            var date = ""
+                            date = (data['update_at']).split("T")[0];
+                            var time = new Date(date);
                             var year = time.getFullYear() + 543;
-                            var month = time.getMonth() + 1;
-                            return time.getDate() - 1 + "/" + month + "/" + year;
+                            return time.getDate().toLocaleString() + "/" + (parseInt(time.getMonth()) + 1) + "/" + year;
                             // console.log(str);
 
                         },
                         className: '',
                     }, {
                         data: function(data) {
-                            return data['id'];
+                            return data['username'];
                         },
                         className: 'text-center',
                     }, {
@@ -127,7 +126,7 @@
                         className: 'text-center',
                     }, {
                         data: function(data) {
-                            return data['equipment_number'];
+                            return data['model'];
                         },
                         className: 'text-center',
                     }, {
@@ -212,19 +211,29 @@
                             var select_search = $('#typeSearch').val();
                             // console.log(select_search);
                             var startData = $('#start_date').val();
+                            var dateStart = startData.split("/");
+
+
                             var endData = $('#end_date').val();
+                            var dateEnd = endData.split("/");
+
+
+                            var sd = dateStart[1] + '/' + dateStart[0] + '/' + dateStart[2];
+                            var ed = dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2];
                             // console.log(startData);
-                            var sData = Date.parse(startData);
-                            var eData = Date.parse(endData);
-                            // console.log(sData);
+                            // console.log(endData);
+                            var sData = Date.parse(sd);
+                            var eData = Date.parse(ed);
+
+
+                            console.log(sData);
+                            console.log(eData);
                             if (sData < eData) {
                                 // console.log("true");
                                 type_search = select_search;
-                                var s_data = startData.split("/");
-                                start_data = s_data[2] + "-" + s_data[0] + "-" + s_data[1] + " " + "00:00:00"
+                                start_data = dateStart[2] + "-" + dateStart[1] + "-" + dateStart[0] + " " + "00:00:00"
                                     // console.log(start_data);
-                                var e_data = endData.split("/");
-                                end_data = e_data[2] + "-" + e_data[0] + "-" + e_data[1] + " " + "00:00:00"
+                                end_data = dateEnd[2] + "-" + dateEnd[1] + "-" + dateEnd[0] + " " + "00:00:00"
                                     // console.log(end_data);
 
                                 // window.location = '/report?startDate=' + startData + '&endDate=' + endData;
