@@ -180,17 +180,23 @@
                                             // console.log(response);
                                             window.location = '/department';
                                         } else if (response["status"] == "Failed") {
-                                            if (response["data"] == "Incorrect username") {
+                                            if (response["data"] == "No Equip information") {
                                                 Swal.fire({
-                                                    title: "ไม่สามารถเข้าสู่ระบบได้",
-                                                    text: "ชื่อผู้ใช้ของท่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง ",
-                                                    icon: "warning "
+                                                    title: "ไม่พบข้อมูล",
+                                                    text: "ไม่พบข้อมูลรหัส RFID นี้ กรุณาลองใหม่อีกครั้ง",
+                                                    icon: "warning"
                                                 });
-                                            } else if (response["data"] == "Incorrect password") {
+                                            } else if (response["data"] == "Equip is not borrowed or reverted") {
                                                 Swal.fire({
-                                                    title: "ไม่สามารถเข้าสู่ระบบได้ ",
-                                                    text: "รหัสผ่านของท่านไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง ",
-                                                    icon: "warning "
+                                                    title: "ผิดพลาด",
+                                                    text: "ครุภัณฑ์นี้ยังไม่ถูกยืมหรือถูกคืนแล้ว กรุณาตรวจสอบอีกครั้ง",
+                                                    icon: "warning"
+                                                });
+                                            } else if (response["data"] == "Error") {
+                                                Swal.fire({
+                                                    title: "ผิดพลาด",
+                                                    text: "กรุณาลองใหม่อีกครั้ง",
+                                                    icon: "warning"
                                                 });
                                             }
 
