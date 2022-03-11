@@ -35,6 +35,7 @@
                             <tr>
                                 <th class="text-center">ลำดับ</th>
                                 <th class="text-center">ชื่อครุภัณฑ์</th>
+                                <th class="text-center">ยี่ห้อ</th>
                                 <th class="text-center">รุ่น</th>
                                 <th class="text-center">คงเหลือ</th>
                             </tr>
@@ -79,6 +80,12 @@
                         { 
                             data: function (data) {
                                 return data['equipment_name'];
+                            },
+                            className : 'text-center',
+                        },
+                        { 
+                            data: function (data) {
+                                return data['brand'];
                             },
                             className : 'text-center',
                         },
