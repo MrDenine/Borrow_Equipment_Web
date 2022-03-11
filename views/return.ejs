@@ -285,15 +285,15 @@
                         } else if (response.status == "Failed") {
                             if(response.data == "Reverting Fail"){
                                 Swal.fire({
-                                title: "ไม่สามารถเบิกครุภัณฑ์ได้",
+                                title: "ไม่สามารถคืนครุภัณฑ์ได้",
                                 text: "กรุณาลองใหม่อีกครั้ง",
                                 icon: "error",
                                 confirmButtonText: "ตกลง",
                                 });
                             } else if(response.data == "Equip is not borrowed"){
                                 Swal.fire({
-                                title: "ไม่สามารถเบิกครุภัณฑ์ได้",
-                                text: "ครุภัณฑ์นี้ยังไม่ถูกยืม กรุณาลองใหม่อีกครั้ง ",
+                                title: "ไม่สามารถคืนครุภัณฑ์ได้",
+                                text: "ครุภัณฑ์นี้ยังไม่ถูกยืมหรือถูกคืนแล้ว กรุณาตรวจสอบอีกครั้ง ",
                                 icon: "error",
                                 confirmButtonText: "ตกลง",
                                 });
