@@ -1,14 +1,18 @@
     <!-- </div> -->
-    <div class="row dateTime mt-3 px-4">
+</div>
+<!-- end container -->
+
+<% if(title == "ทำรายการยืม" || title == "ทำรายการคืน"){ %>
+    <div class="row mx-3 mb-4">
         <script>
             function display_ct5() {
                 var x = new Date()
                 var month = x.getMonth()+1;
                 var day = x.getDate();
                 var year = x.getFullYear();
-
+    
                 var x3 = day + '/' + month + '/' + (year+543);
-
+    
                 // time part //
                 var hour = x.getHours();
                 var minute = x.getMinutes();
@@ -27,12 +31,49 @@
             }
             display_c5()
         </script>
-
+    
         <span>สถานะ : เวลาปัจจุบัน <span id='ct5'></span></span>
-        
     </div>
-</div>
-<!-- end container -->
+<% } else { %>
+    <div class="mt-auto">
+        <div class="container-fluid">
+            <div class="container-xl">
+            <div class="row px-1 mb-4">
+
+            <script>
+                function display_ct5() {
+                    var x = new Date()
+                    var month = x.getMonth()+1;
+                    var day = x.getDate();
+                    var year = x.getFullYear();
+        
+                    var x3 = day + '/' + month + '/' + (year+543);
+        
+                    // time part //
+                    var hour = x.getHours();
+                    var minute = x.getMinutes();
+                    var second = x.getSeconds();
+                        if(hour < 10 ) { hour='0' + hour; }
+                        if(minute < 10 ) { minute='0' + minute; }
+                        if(second < 10) { second='0' + second; }
+                    var x3 = x3 + ' - ' +  hour +':'+ minute + ':' + second + ' น.';
+                    
+                    document.getElementById('ct5').innerHTML = x3;
+                display_c5();
+                }
+                function display_c5(){
+                    var refresh = 1000; // Refresh rate in milli seconds
+                        mytime = setTimeout('display_ct5()',refresh)
+                }
+                display_c5()
+            </script>
+        
+            <span>สถานะ : เวลาปัจจุบัน <span id='ct5'></span></span>
+        </div>
+        </div>
+    </div>
+<% } %>
+
 </body>
 <!-- end body -->
 
@@ -55,14 +96,14 @@
         user = user.role;
 
         if (user === "admin") {
-            $('#department').hide();
+            // $('#department').hide();
         } else if (user === "member") {
             $('#borrow').hide();
             $('#return').hide();
             $('#report').hide();
             $('#notification').hide();
             $('#register').hide();
-            $('#department').hide();
+            // $('#department').hide();
         } else if (user === "dpm") {
             $('#equipment').hide();
             $('#borrow').hide();
