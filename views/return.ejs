@@ -250,6 +250,7 @@
                     }
                 });
                 $('#cancel_return').on('click', function (e) {      // ปุ่ม 'ยกเลิก'
+                    keyup_equipment = 0;    // set keyup
                     // equipment
                     $("#equipment_rfid").val('');                   // ทำให้ฟอร์ม 'รหัส RFID' ว่าง
                     $("#equipment_name").val('');                   // ทำให้ฟอร์ม 'ชื่อครุภัณฑ์' ว่าง

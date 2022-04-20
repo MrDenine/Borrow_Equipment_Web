@@ -317,6 +317,8 @@
                     }
                 });
                 $('#cancel_borrow').on('click', function (e) {   // ปุ่ม 'ยกเลิก'  
+                    keyup_member = 0        // set keyup
+                    keyup_equipment = 0;    // set keyup
                     // member
                     $("#member_rfid").val('');          // ทำให้ฟอร์ม 'รหัส RFID' ว่าง
                     $("#member_number").val('');        // ทำให้ฟอร์ม 'รหัสพนักงาน' ว่าง
