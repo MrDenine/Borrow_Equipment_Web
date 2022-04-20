@@ -1,1 +1,1 @@
-# Borrow_Equipment_Web
+A Web Application for Borrow/Return Equipment
