@@ -17,7 +17,7 @@ router.use(bodyParser.json());
 router.use(cookieParser());
 
 router.get('/', validateCookieExist,validateAdminRoute,(req, res, next) => {
-    res.render('regisEquipment',{title:'ลงทะเบียนครุภัณฑ์', udt : getUserData(req).id , role : getUserRole(req)});
+    res.render('regisEquipment',{title:'ลงทะเบียนครุภัณฑ์', udt : getUserData(req) , role : getUserRole(req)});
 })
 router.post('/PostRegisterEquip',(req,res,next)=>{
     var post_rfid = req.body.rfid;
