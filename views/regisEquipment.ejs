@@ -309,6 +309,7 @@
                 // add new equipment
                 $('#add_NewEquipment').on('click', function (e) {   // ปุ่ม 'เพิ่มข้อมูลครุภัณฑ์'
                     if ($('#equipmentForm').is('.collapse:not(.show)')) { // ถ้าฟอร์มของข้อมูลครุภัณฑ์ไม่ได้แสดง
+                        $('#equipmentForm').collapse("toggle"); //แสดงฟอร์มข้อมูลครุภัณฑ์
                     }
                         id_update = 0;                              // กำหนด id ของข้อมูลครุภัณฑ์ = 0
                         // clear value
