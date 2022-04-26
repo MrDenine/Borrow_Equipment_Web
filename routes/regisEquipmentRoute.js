@@ -17,7 +17,7 @@ router.use(bodyParser.json());
 router.use(cookieParser());
 
 router.get('/', validateCookieExist,validateAdminRoute,(req, res, next) => {
-    res.render('regisEquipment',{title:'ลงทะเบียนครุภัณฑ์', udt : getUserData(req) , role : getUserRole(req)});
+    res.render('regisEquipment',{title:'ลงทะเบียนครุภัณฑ์', udt : getUserData(req).id , role : getUserRole(req)});
 })
 router.post('/PostRegisterEquip',(req,res,next)=>{
     var post_rfid = req.body.rfid;
@@ -31,6 +31,21 @@ router.post('/PostRegisterEquip',(req,res,next)=>{
     var post_create_by = req.body.create_by;
 
     if(post_rfid && post_equipment_name && post_brand && post_model && post_equipment_number && post_description &&  post_datetime && post_create_by){ 
+        //log
+        axios
+        .post(config.servurl + '/Backup',{
+            backup_type: 2,
+            admin_id: getUserData(req).id,
+            edit_data: "equipment",
+            edit_date: post_datetime,
+        })
+        .then(function(response){
+            console.log(response.data);
+        })
+        .catch(function(err){
+            console.log(error);
+        })
+        //post
         axios
         .post(config.servurl + '/Register/PostRegis',{
             type_user : 4,
@@ -69,8 +84,23 @@ router.post('/PostEditEquip',(req,res,next)=>{
     var post_description = req.body.description;
     var post_datetime = req.body.datetime;
     var post_update_by = req.body.update_by;
-
+    
     if(post_id){
+      //log
+      axios
+      .post(config.servurl + '/Backup',{
+          backup_type: 2,
+          admin_id: getUserData(req).id,
+          edit_data: "equipment",
+          edit_date: post_datetime,
+      })
+      .then(function(response){
+        console.log(response.data);
+      })
+      .catch(function(err){
+          console.log(error);
+      })
+      //post
       axios
       .post(config.servurl + '/EditData/UpdateData',{
         type_user : 4,
@@ -104,6 +134,21 @@ router.post('/PostDeleteEquip',(req,res,next)=>{
     var post_id = req.body.id;
     var post_datetime = req.body.datetime;
     if(post_id != null && post_datetime != null){
+      //log
+      axios
+      .post(config.servurl + '/Backup',{
+          backup_type: 2,
+          admin_id: getUserData(req).id,
+          edit_data: "equipment",
+          edit_date: post_datetime,
+      })
+      .then(function(response){
+        console.log(response.data);
+      })
+      .catch(function(err){
+          console.log(error);
+      })
+      //post
       axios.post(config.servurl+'/DeleteData/',{
         type_user : 4,
         id : post_id,

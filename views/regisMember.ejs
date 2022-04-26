@@ -696,6 +696,11 @@
             },
             // Dropzone 
             submitSendImage: function () {  // function submitSendImage : สำหรับการส่งข้อมูลเพื่อเพิ่มไฟล์
+                const now = new Date();                                                                     //
+                const offsetMs = now.getTimezoneOffset() * 60 * 1000;                                       //
+                const dateLocal = new Date(now.getTime() - offsetMs);                                       //  >> รับค่าวันที่และเวลา ปัจจุบัน
+                const str = dateLocal.toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");      //
+                dateNow = str;  
                 var url = '/regisMember/UploadImageProfile?post=true';  // path ส่งข้อมูล 'บันทึกข้อมูลไฟล์' (service)
                     $.ajax({                // รับ - ส่งข้อมูลโดยใช้ ajax
                         type: 'POST',       // กำหนดประเภทการส่งแบบ POST
@@ -703,6 +708,7 @@
                         data: { 
                                 filename : image_file,                  // ช้อมูล ชื่อไฟล์
                                 rfid : $('#member_rfid').val(),         // ข้อมูล รหัส RFID ของบุคลากร
+                                datetime : dateNow, 
                             } 
                     }) .done(function(response) {
                         Swal.fire({                                     //
