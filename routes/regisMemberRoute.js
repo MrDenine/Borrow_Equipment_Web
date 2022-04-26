@@ -33,6 +33,21 @@ router.post('/UploadImageProfile',upload.single('file'),(req,res,next)=>{
       //request
       var post_filename = req.body.filename;
       var post_rfid = req.body.rfid;
+      var post_datetime = req.body.datetime;
+       //log
+       axios
+       .post(config.servurl + '/Backup',{
+           backup_type: 2,
+           admin_id: getUserData(req).id,
+           edit_data: "member",
+           edit_date: post_datetime,
+       })
+       .then(function(response){
+           console.log(response.data);
+       })
+       .catch(function(err){
+           console.log(error);
+       })
       //post
       var form = new FormData();
       form.append('file',fs.readFileSync('./profiles/'+post_filename) ,post_rfid + Date.now() +'.jpg');
@@ -86,6 +101,21 @@ router.post('/PostRegisterMember',(req,res,next)=>{
     var post_create_by = req.body.create_by;
 
     if(post_rfid && post_username && post_password && post_firstname && post_lastname && post_gender && post_telephone &&  post_datetime && post_create_by){ 
+        //log
+        axios
+        .post(config.servurl + '/Backup',{
+            backup_type: 2,
+            admin_id: getUserData(req).id,
+            edit_data: "member",
+            edit_date: post_datetime,
+        })
+        .then(function(response){
+            console.log(response.data);
+        })
+        .catch(function(err){
+            console.log(error);
+        })
+        //post
         axios
         .post(config.servurl + '/Register/PostRegis',{
             type_user : 3,
@@ -126,6 +156,21 @@ router.post('/PostEditMember',(req,res,next)=>{
     var post_update_by = req.body.update_by;
 
     if(post_id){
+        //log
+        axios
+        .post(config.servurl + '/Backup',{
+            backup_type: 2,
+            admin_id: getUserData(req).id,
+            edit_data: "member",
+            edit_date: post_datetime,
+        })
+        .then(function(response){
+            console.log(response.data);
+        })
+        .catch(function(err){
+            console.log(error);
+        })
+        //post
         axios
         .post(config.servurl + '/EditData/UpdateData',{
             type_user : 3,
@@ -158,6 +203,21 @@ router.post('/PostDeleteMember',(req,res,next)=>{
     var post_id = req.body.id;
     var post_datetime = req.body.datetime;
     if(post_id != null && post_datetime != null){
+      //log
+      axios
+      .post(config.servurl + '/Backup',{
+          backup_type: 2,
+          admin_id: getUserData(req).id,
+          edit_data: "member",
+          edit_date: post_datetime,
+      })
+      .then(function(response){
+          console.log(response.data);
+      })
+      .catch(function(err){
+          console.log(error);
+      })
+      //post
       axios.post(config.servurl+'/DeleteData/',{
         type_user : 3,
         id : post_id,

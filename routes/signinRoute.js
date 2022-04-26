@@ -18,7 +18,7 @@ router.get('/',accessCookieExist, (req, res, next) => {
 router.post('/PostSignin',function(req,res,next){
     var username = req.body.Username; 
     var password = req.body.Password;
-
+    var post_datetime = req.body.datetime;
     if(username && password){
         //call postLogin
         axios
@@ -28,6 +28,20 @@ router.post('/PostSignin',function(req,res,next){
         })
         .then(function (response) {
             if(response.data.status == "Succeed"){
+                //log
+                axios
+                .post(config.servurl + '/Backup',{
+                    backup_type: 1,
+                    user_id: response.data.data[0].id,
+                    username: response.data.data[0].username,
+                    login_date: post_datetime,
+                })
+                .then(function(response){
+                    console.log(response.data);
+                })
+                .catch(function(err){
+                    console.log(error);
+                })
                 //get userdata
                 userdata = response.data.data[0];
                 

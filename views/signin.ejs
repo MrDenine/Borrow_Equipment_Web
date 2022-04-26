@@ -63,7 +63,11 @@
                     var password = $("#password").val();
                     //สิ้นสุดการรับค่า
 
-
+                    const now = new Date();                                                                     //
+                    const offsetMs = now.getTimezoneOffset() * 60 * 1000;                                       //
+                    const dateLocal = new Date(now.getTime() - offsetMs);                                       //  >> รับค่าวันที่และเวลา ปัจจุบัน
+                    const str = dateLocal.toISOString().slice(0, 19).replace(/-/g, "/").replace("T", " ");      //
+                    dateNow = str;  
 
                     if (username == '' || password == '') {
                         // ถ้า username หรือ password ไม่ได้กรอก จะ alert ในบันทัดที่ 71
@@ -79,7 +83,8 @@
                                 url: url,
                                 data: {
                                     Username: $("#username").val(),
-                                    Password: $("#password").val()
+                                    Password: $("#password").val(),
+                                    datetime : dateNow, 
                                 },
 
                             })
