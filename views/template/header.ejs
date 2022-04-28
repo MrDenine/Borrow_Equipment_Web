@@ -44,10 +44,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0"> <!-- [ (navbar-nav): สร้างโครงสำหรับการวางองค์ประกอบของเมนู, (me-auto): กำหนดระยะหว่างภายนอกแบบด้านขวาอัตโนมัติ, (mb-md-0): กำหนดระยะหว่างภายนอกแบบด้านล่าง 0px ] -->
+                        <% if(role != "dpm"){ %>
                         <li class="nav-item" id="equipment"> <!-- id: equipment [ (nav-item): กำหนดให้เป็นองค์ประกอบที่อยู่ในเมนูบาร์ ] -->
                             <a class="nav-link active" href="/">ข้อมูลครุภัณฑ์</a> <!-- href: เมื่อกดจะสั่งไปยังหน้า 'ข้อมูลครุภัณฑ์'-->
                         </li>
-                        <% if(role == "admin"){ %> <!-- เงื่อนไขถ้า role ไม่ใช่ 'Member' จะทำการแสดงเมนู : ทำรายการยืม, ทำรายการคืน, รายงาน, แจ้งเตือน -->
+                        <% } %>
+                        <% if(role == "admin"){ %> <!-- เงื่อนไขถ้า role เป็น 'admin' จะทำการแสดงเมนู : ทำรายการยืม, ทำรายการคืน, รายงาน, แจ้งเตือน -->
                         <li class="nav-item" id="borrow"> <!-- id: borrow [ (nav-item): กำหนดให้เป็นองค์ประกอบที่อยู่ในเมนูบาร์ ] -->
                             <a class="nav-link active" href="/borrow">ทำรายการยืม</a> <!-- href: เมื่อกดจะสั่งไปยังหน้า 'ทำรายการยืม' -->
                         </li>
