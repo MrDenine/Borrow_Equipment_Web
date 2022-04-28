@@ -36,9 +36,15 @@
     <div>
         <nav class="navbar navbar-expand-lg navbar-dark bg-navy-blue shadow-lg"> <!-- [ (navbar navbar-expand-lg): ทำให้ element ส่วนนี้เป็นแถบเมนูบาร์ขนาด lg, (navbar-dark): ทำให้แถบเมนูบาร์เป็นธีมมืด, (bg-navy-blue): เปลี่ยนสีพื้นหลังเป็นสีกรม, (shadow-lg): เพิ่มเงาให้แถบเมนูบาร์  ] -->
             <div class="container-fluid mx-5"> <!-- [ (container-fluid): สร้างโครงสำหรับการวางองค์ประกอบของเว็บไซต์แบบกว้าง 100%, (mx-5): ปรับความกว้างภายนอก 12px ] -->
+                <% if(role == "admin" || role == "member"){ %> 
                 <a class="navbar-brand" href="/"> <!-- href: เมื่อกดจะสั่งไปยังหน้า 'ข้อมูลครุภัณฑ์' [ (navbar-brand): กำหนดตำแหน่ง icon บนแถบเมนูบาร์ ] -->
                     <img src="../../assets/images/swu_icon.svg" class="" style="width: 40px;"> <!-- src: เรียกรูปตรามหาวิทยาลัยศรีนครินทรวิโรฒ และปรับความกว้าง ความสูง 40px -->
                 </a>
+                <% } else { %>
+                <a class="navbar-brand" href="/department"> <!-- href: เมื่อกดจะสั่งไปยังหน้า 'ข้อมูลครุภัณฑ์' [ (navbar-brand): กำหนดตำแหน่ง icon บนแถบเมนูบาร์ ] -->
+                    <img src="../../assets/images/swu_icon.svg" class="" style="width: 40px;"> <!-- src: เรียกรูปตรามหาวิทยาลัยศรีนครินทรวิโรฒ และปรับความกว้าง ความสูง 40px -->
+                </a>
+                <% } %>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span> <!-- ปุ่มสำหรับเปิด-ปิดเมนู เมื่อย่อขนาดหน้าเว็บไซต์ -->
                 </button>
